@@ -6,17 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Statistical Learning | Self-Study: An Introduction to Statistical Learning</title>
 <meta name="author" content="Michael McCarthy">
-<meta name="description" content="&lt;p&gt;Working through the second edition of the book An Introduction to Statistical
-Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&lt;/p&gt;">
+<meta name="description" content="Chapter 2 formalizes the concept of statistical learning by introducing the general statistical model used for modelling the relationship between \(Y\) and \(X = (X_1, X_2, \dots, X_p)\), which...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Statistical Learning | Self-Study: An Introduction to Statistical Learning">
 <meta property="og:type" content="book">
-<meta property="og:description" content="&lt;p&gt;Working through the second edition of the book An Introduction to Statistical
-Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&lt;/p&gt;">
+<meta property="og:description" content="Chapter 2 formalizes the concept of statistical learning by introducing the general statistical model used for modelling the relationship between \(Y\) and \(X = (X_1, X_2, \dots, X_p)\), which...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Statistical Learning | Self-Study: An Introduction to Statistical Learning">
-<meta name="twitter:description" content="&lt;p&gt;Working through the second edition of the book An Introduction to Statistical
-Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&lt;/p&gt;">
+<meta name="twitter:description" content="Chapter 2 formalizes the concept of statistical learning by introducing the general statistical model used for modelling the relationship between \(Y\) and \(X = (X_1, X_2, \dots, X_p)\), which...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -56,14 +53,73 @@ Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&
 <h1>
 <span class="header-section-number">2</span> Statistical Learning<a class="anchor" aria-label="anchor" href="#chapter-2"><i class="fas fa-link"></i></a>
 </h1>
+<p>Chapter 2 formalizes the concept of statistical learning by introducing the general statistical model used for modelling the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X = (X_1, X_2, \dots, X_p)\)</span>, which can be written as</p>
+<p><span class="math display" id="eq:gsm">\[
+Y = f(X) + \epsilon.
+\tag{2.1}
+\]</span></p>
+<p>Here:</p>
+<ul>
+<li>
+<span class="math inline">\(Y\)</span> represents the response variable in our data set</li>
+<li>
+<span class="math inline">\(X\)</span> represents the set of variables in our data set</li>
+<li>
+<span class="math inline">\(X_p\)</span> represents the <span class="math inline">\(p\)</span>th variable in our data set</li>
+<li>
+<span class="math inline">\(f(\dots)\)</span> represents a fixed but unknown function of its input(s)</li>
+<li>
+<span class="math inline">\(\epsilon\)</span> represents a random error term which is independent of <span class="math inline">\(X\)</span> and has mean zero</li>
+</ul>
+<p>The goal of statistical learning is to estimate <span class="math inline">\(f\)</span>. There are two main reasons for estimating <span class="math inline">\(f\)</span>: <em>prediction</em> and <em>inference</em>. Depending on whether our ultimate goal is prediction, inference, or some combination of the two, different methods for estimating <span class="math inline">\(f\)</span> may be appropriate. In general, there is a trade-off between prediction accuracy and model interpretability. Models that make more accurate predictions tend to be less interpretable, and models that are more interpretable tend to make less accurate predictions (although this is not always the case, due to the potential for <em>overfitting</em> in highly flexible models).</p>
+<div id="prediction" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
+</h2>
+<p>Because the error term <span class="math inline">\(\epsilon\)</span> averages to zero, the general statistical model for predicting <span class="math inline">\(Y\)</span> from <span class="math inline">\(X = (X_1, X_2, \dots, X_p)\)</span> can be written as</p>
+<p><span class="math display" id="eq:gsm-p">\[
+\hat Y = \hat f(X).
+\tag{2.2}
+\]</span></p>
+<p>Here:</p>
+<ul>
+<li>
+<span class="math inline">\(\hat Y\)</span> represents the resulting prediction for <span class="math inline">\(Y\)</span>
+</li>
+<li>
+<span class="math inline">\(\hat f\)</span> represents our estimate for <span class="math inline">\(f\)</span>
+</li>
+</ul>
+<p>When our goal is only to predict, we do not typically need to concern ourselves with the exact form of <span class="math inline">\(\hat f\)</span> provided that it accurately predicts <span class="math inline">\(Y\)</span>. The accuracy of <span class="math inline">\(\hat Y\)</span> as a prediction for <span class="math inline">\(Y\)</span> depends on two sources of error: <em>reducible error</em> and <em>irreducible error</em>. The error in our model attributable to <span class="math inline">\(\hat f\)</span> is <em>reducible</em> because we can potentially improve the accuracy of <span class="math inline">\(\hat f\)</span> for estimating <span class="math inline">\(f\)</span> by using a more appropriate statistical learning technique. However, the error in our model attributable to <span class="math inline">\(\epsilon\)</span> is <em>irreducible</em> because <span class="math inline">\(Y\)</span> is also a function of <span class="math inline">\(\epsilon\)</span>, and <span class="math inline">\(\epsilon\)</span> is independent of <span class="math inline">\(X\)</span>, so no matter how well we estimate <span class="math inline">\(f\)</span>, the variability associated with <span class="math inline">\(\epsilon\)</span> will still be present in our model. This variability may come from unmeasured variables that are useful for predicting <span class="math inline">\(Y\)</span>, or from unmeasurable variation. Irreducible error places an (often unknowable) upper bound on the accuracy of our prediction for <span class="math inline">\(Y\)</span>.</p>
+</div>
+<div id="inference" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Inference<a class="anchor" aria-label="anchor" href="#inference"><i class="fas fa-link"></i></a>
+</h2>
+<p>When our goal is to understand the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X = (X_1, X_2, \dots, X_p)\)</span>, we do need to concern ourselves with the exact form of <span class="math inline">\(\hat f\)</span>. Here the form of <span class="math inline">\(\hat f\)</span> can be used to identify:</p>
+<ul>
+<li>Which predictors are associated with the response</li>
+<li>the direction (positive or negative) and form (simple or complex) of the relationship between the response and each predictor</li>
+</ul>
+</div>
+<div id="assessing-model-accuracy" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Assessing Model Accuracy<a class="anchor" aria-label="anchor" href="#assessing-model-accuracy"><i class="fas fa-link"></i></a>
+</h2>
 
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="chapter-1.html"><span class="header-section-number">1</span> Introduction</a></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#chapter-2"><span class="header-section-number">2</span> Statistical Learning</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-2"><span class="header-section-number">2</span> Statistical Learning</a></li>
+<li><a class="nav-link" href="#prediction"><span class="header-section-number">2.1</span> Prediction</a></li>
+<li><a class="nav-link" href="#inference"><span class="header-section-number">2.2</span> Inference</a></li>
+<li><a class="nav-link" href="#assessing-model-accuracy"><span class="header-section-number">2.3</span> Assessing Model Accuracy</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -80,7 +136,7 @@ Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-11-13.</p>
+    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-11-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
