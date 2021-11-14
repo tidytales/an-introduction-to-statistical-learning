@@ -1,0 +1,5 @@
+chapter-1
+notation-and-simple-matrix-algebra
+data-sets-used-in-labs-and-exercises
+book-website
+chapter-2
