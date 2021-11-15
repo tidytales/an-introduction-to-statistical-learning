@@ -106,7 +106,91 @@ Y = f(X) + \epsilon.
 <h2>
 <span class="header-section-number">2.3</span> Assessing Model Accuracy<a class="anchor" aria-label="anchor" href="#assessing-model-accuracy"><i class="fas fa-link"></i></a>
 </h2>
+<p>No one statistical learning approach performs better than all other approaches on all possible data sets. Because of this, care needs to be taken to choose which approach to use for any given data set to produce the best results. A number of important concepts arise when selecting a statistical learning approach for a specific data set:</p>
+<ul>
+<li>Measuring the quality of fit</li>
+<li>The bias-variance trade-off</li>
+</ul>
+<div id="in-the-regression-setting" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> In the Regression Setting<a class="anchor" aria-label="anchor" href="#in-the-regression-setting"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the regression setting, the most commonly used quality of fit measure for training data is the mean squared error <span class="math inline">\(\mathit{MSE}\)</span>, given by</p>
+<p><span class="math display" id="eq:mse-training">\[
+\mathit{MSE}_{\mathrm{training}} = \frac 1 n \sum_{i = 1}^n (y_i - \hat f(x_i))^2,
+\tag{2.3}
+\]</span></p>
+<p>where <span class="math inline">\(\hat f(x_i)\)</span> represents the prediction that <span class="math inline">\(\hat f\)</span> gives for the <span class="math inline">\(i\)</span>th observation. When predicted responses are very close to true responses the <span class="math inline">\(\mathit{MSE}\)</span> will be small; When predicted responses are very far from true responses the <span class="math inline">\(\mathit{MSE}\)</span> will be large. We generally do not really care about this value because accurately predicting data we have already seen is not particularly useful.</p>
+<p>when our goal is to assess the accuracy of predictions when we apply our method to previously unseen <em>test data</em>, we can compute the mean squared error for test observations, given by</p>
+<p><span class="math display" id="eq:mse-testing">\[
+\mathit{MSE}_{\mathrm{testing}} = \frac 1 n \sum_{i = 1}^n (y_0 - \hat f(x_0))^2,
+\tag{2.4}
+\]</span></p>
+<p>where <span class="math inline">\((x_0, y_0)\)</span> is a previously unseen test observation not used to train the statistical learning model. We want to choose the model that gives the lowest <em>test</em> <span class="math inline">\(\mathit{MSE}\)</span> by minimizing the distance between <span class="math inline">\(\hat f(x_0)\)</span> and <span class="math inline">\(y_0\)</span>. When a test data set is available then we can simply evaluate Equation <a href="chapter-2.html#eq:mse-testing">(2.4)</a> and choose the statistical learning model where <span class="math inline">\(\mathit{MSE}\)</span> is the smallest. When a test data set is not available then we can use <em>cross-validation</em>, which is a method for estimating test <span class="math inline">\(\mathit{MSE}\)</span> using the training data set.</p>
+<p>The expected test <span class="math inline">\(\mathit{MSE}\)</span> for a given value <span class="math inline">\(x_0\)</span> can always be decomposed into the sum of three fundamental quantities: the <em>variance</em> of <span class="math inline">\(\hat f(x_0)\)</span>, the squared <em>bias</em> of <span class="math inline">\(\hat f(x_0)\)</span>, and the variance of the error term <span class="math inline">\(\epsilon\)</span>, written as</p>
+<p><span class="math display" id="eq:expected-test-mse">\[
+E \bigl(y_0 - \hat f(x_0) \bigr)^2 = \mathrm{Var}(\hat f(x_0)) +
+                                     [\mathrm{Bias(\hat f(x_0))}]^2 +
+                                     \mathrm{Var}(\epsilon),
+\tag{2.5}
+\]</span></p>
+<p>where the notation <span class="math inline">\(E \bigl(y_0 - \hat f(x_0) \bigr)^2\)</span> defines the expected test <span class="math inline">\(\mathit{MSE}\)</span> at <span class="math inline">\(x_0\)</span>. The overall expected test <span class="math inline">\(\mathit{MSE}\)</span> is given by averaging <span class="math inline">\(E \bigl(y_0 - \hat f(x_0) \bigr)^2\)</span> over all possible values of <span class="math inline">\(x_0\)</span> in the test data set.</p>
+<p>The variance of <span class="math inline">\(\hat f\)</span> refers to the amount by which <span class="math inline">\(\hat f\)</span> would change if we estimated it using a different training set. The bias of <span class="math inline">\(\hat f\)</span> refers to the error that is introduced by approximating a real-life problem with a much simpler model. In general, as models become more flexible, the variance will increase and the bias will decrease. The relative rate of change of the variance and bias determines whether the test <span class="math inline">\(\mathit{MSE}\)</span> increases or decreases. Because the variance and bias can change at different rates in different data sets, the challenge lies in finding a model for which both the variance and bias are lowest.</p>
+</div>
+<div id="in-the-classification-setting" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> In the Classification Setting<a class="anchor" aria-label="anchor" href="#in-the-classification-setting"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the classification setting, the most commonly used quality of fit measure for training data is the <em>error rate</em>, given by</p>
+<p><span class="math display" id="eq:er-training">\[
+\frac 1 n \sum_{i = 1}^n I(y_i \ne \hat y_i).
+\tag{2.6}
+\]</span></p>
+<p>Here:</p>
+<ul>
+<li>
+<span class="math inline">\(\hat y_i\)</span> is the predicted class label for the <span class="math inline">\(i\)</span>th observation using <span class="math inline">\(\hat f\)</span>
+</li>
+<li>
+<span class="math inline">\(I(y_i \ne \hat y_i)\)</span> is an indicator variable that equals one if <span class="math inline">\(y_i \ne \hat y_i\)</span> (incorrectly classified) and zero if <span class="math inline">\(y_i = \hat y_i\)</span> (correctly classified)</li>
+</ul>
+<p>The <em>test error rate</em> for a set of test observations <span class="math inline">\((x_0, y_0)\)</span> is given by</p>
+<p><span class="math display" id="eq:er-testing">\[
+\frac 1 n \sum_{i = 1}^n I(y_0 \ne \hat y_0),
+\tag{2.7}
+\]</span></p>
+<p>where <span class="math inline">\(\hat y_0\)</span> is the predicted class label that results from applying the classifier to the test observation with predictor <span class="math inline">\(x_0\)</span>.</p>
+<p>The bias-variance trade-off is present in the classification setting too; when variance and bias are lowest then the test error rate will be at its smallest for a given data set.</p>
+</div>
+</div>
+<div id="exercises" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises"><i class="fas fa-link"></i></a>
+</h2>
+<div id="conceptual" class="section level3 unnumbered">
+<h3>Conceptual<a class="anchor" aria-label="anchor" href="#conceptual"><i class="fas fa-link"></i></a>
+</h3>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 2.1  </strong></span>For each of parts (a) through (d), indicate whether we would generally expect the performance of a flexible statistical learning method to be better or worse than an inflexible method. Justify your answer.</p>
+<ol style="list-style-type: lower-alpha">
+<li>The sample size <span class="math inline">\(n\)</span> is extremely large, and the number of predictors <span class="math inline">\(p\)</span> is small.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>The number of predictors <span class="math inline">\(p\)</span> is extremely large, and the number of observations <span class="math inline">\(n\)</span> is small.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>The relationship between the predictors and response is highly non-linear.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>The variance of the error terms, i.e. <span class="math inline">\(\sigma^2 = \mathrm{Var}(\epsilon)\)</span>, is extremely high.</li>
+</ol>
+<p><em>Answer</em>.</p>
+</div>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -118,7 +202,15 @@ Y = f(X) + \epsilon.
 <li><a class="nav-link" href="#chapter-2"><span class="header-section-number">2</span> Statistical Learning</a></li>
 <li><a class="nav-link" href="#prediction"><span class="header-section-number">2.1</span> Prediction</a></li>
 <li><a class="nav-link" href="#inference"><span class="header-section-number">2.2</span> Inference</a></li>
-<li><a class="nav-link" href="#assessing-model-accuracy"><span class="header-section-number">2.3</span> Assessing Model Accuracy</a></li>
+<li>
+<a class="nav-link" href="#assessing-model-accuracy"><span class="header-section-number">2.3</span> Assessing Model Accuracy</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#in-the-regression-setting"><span class="header-section-number">2.3.1</span> In the Regression Setting</a></li>
+<li><a class="nav-link" href="#in-the-classification-setting"><span class="header-section-number">2.3.2</span> In the Classification Setting</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#exercises"><span class="header-section-number">2.4</span> Exercises</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#conceptual">Conceptual</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">

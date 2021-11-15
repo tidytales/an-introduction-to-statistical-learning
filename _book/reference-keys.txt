@@ -1,5 +1,11 @@
 eq:gsm
 eq:gsm-p
+eq:mse-training
+eq:mse-testing
+eq:expected-test-mse
+eq:er-training
+eq:er-testing
+exr:unlabeled-div-1
 chapter-1
 notation-and-simple-matrix-algebra
 data-sets-used-in-labs-and-exercises
@@ -8,3 +14,6 @@ chapter-2
 prediction
 inference
 assessing-model-accuracy
+in-the-regression-setting
+in-the-classification-setting
+exercises
