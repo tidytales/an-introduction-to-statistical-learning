@@ -38,11 +38,7 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">About</a></li>
-<li><a class="" href="chapter-1.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li><a class="active" href="chapter-2.html"><span class="header-section-number">2</span> Statistical Learning</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 2</span> Statistical Learning</a></li></ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/tidytales/an-introduction-to-statistical-learning">View book source <i class="fab fa-github"></i></a></p>
@@ -190,34 +186,46 @@ E \bigl(y_0 - \hat f(x_0) \bigr)^2 = \mathrm{Var}(\hat f(x_0)) +
 </ol>
 <p><em>Answer</em>. Worse. A flexible model will generally lead to overfitting of our training data when the variance of the error terms is extremely high. Because <span class="math inline">\(Y\)</span> is partly a function of <span class="math inline">\(\epsilon\)</span>, when the variance of the error terms is extremely high then the variance of <span class="math inline">\(Y\)</span> will also be extremely high, mainly due to random error. A flexible model that tries to find patterns in this noise is more likely to pick up on patterns that are caused by random chance rather than true properties of the unknown function <span class="math inline">\(f\)</span>. The bias of an inflexible model is preferable in this situation, as it will give more stable predictions in the long run, which is likely preferable to making the essentially random predictions a flexible model would give in these circumstances.</p>
 </div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 2.2  </strong></span>Explain whether each scenario is a classification or regression problem, and indicate whether we are most interested in inference or prediction. Finally, provide <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>We collect a set of data on the top 500 firms in the US. For each firm we record profit, number of employees, industry, and the CEO salary. We are interested in understanding which factors affect CEO salary.</li>
+</ol>
+<p><em>Answer</em>. Regression, inference, <span class="math inline">\(n = 500\)</span>, <span class="math inline">\(p = 3\)</span>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>We are considering launching a new product and wish to know whether it will be a <em>success</em> or <em>failure</em>. We collect data on 20 similar products that were previously launched. For each product we have recorded whether it was a success or failure, price charged for the product, marketing budget, competition price, and ten other variables.</li>
+</ol>
+<p><em>Answer</em>. Classification, prediction, <span class="math inline">\(n = 20\)</span>, <span class="math inline">\(p = 13\)</span>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>We are interested in predicting the % change in the USD/Euro exchange rate in relation to the weekly changes in the world stock markets. Hence we collect weekly data for all of 2012. For each week we record the % change in the USD/Euro, the % change in the US market, the % change in the British market, and the % change in the German market.</li>
+</ol>
+<p><em>Answer</em>. Regression, prediction, <span class="math inline">\(n = 52\)</span>, <span class="math inline">\(p = 3\)</span>.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 2.3  </strong></span>We now revisit the bias-variance decomposition.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Provide a sketch of a typical (squared) bias, variance, training error, test error, and Bayes (or irreducible) error curves, on a single plot, as we go from less flexible statistical learning methods towards more flexible approaches. The <span class="math inline">\(x\)</span>-axis should represent the amount of flexibility in the method, and the <span class="math inline">\(y\)</span>-axis should represent the values for each curve. There should be five curves. Make sure to label each one.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Explain why each of the five curves has the shape displayed in part (a).</li>
+</ol>
+<p><em>Answer</em>.</p>
+</div>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="chapter-1.html"><span class="header-section-number">1</span> Introduction</a></div>
+<div class="empty"></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#chapter-2"><span class="header-section-number">2</span> Statistical Learning</a></li>
-<li><a class="nav-link" href="#prediction"><span class="header-section-number">2.1</span> Prediction</a></li>
-<li><a class="nav-link" href="#inference"><span class="header-section-number">2.2</span> Inference</a></li>
-<li>
-<a class="nav-link" href="#assessing-model-accuracy"><span class="header-section-number">2.3</span> Assessing Model Accuracy</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#in-the-regression-setting"><span class="header-section-number">2.3.1</span> In the Regression Setting</a></li>
-<li><a class="nav-link" href="#in-the-classification-setting"><span class="header-section-number">2.3.2</span> In the Classification Setting</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#exercises"><span class="header-section-number">2.4</span> Exercises</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#conceptual">Conceptual</a></li></ul>
-</li>
-</ul>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/tidytales/an-introduction-to-statistical-learning/blob/master/02-statistical-learning.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/tidytales/an-introduction-to-statistical-learning/edit/master/02-statistical-learning.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>

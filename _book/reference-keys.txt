@@ -17,3 +17,5 @@ assessing-model-accuracy
 in-the-regression-setting
 in-the-classification-setting
 exercises
+exr:unlabeled-div-2
+exr:unlabeled-div-3
