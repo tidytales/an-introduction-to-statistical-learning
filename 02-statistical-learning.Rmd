@@ -171,3 +171,19 @@ knitr::include_graphics(
 - Test error refers to the quality of fit of the trained model to the test data. In general, test error will be U-shaped because of the bias-variance trade-off.
 - Irreducible error refers to random error that is independent of $X$. Because irreducible error is independent of $X$, it remains stable regardless of model flexibility.
 :::
+
+::: {.exercise}
+You will now think of some real-life applications for statistical learning.
+
+(a) Describe three real-life applications in which *classification* might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.
+
+*Answer*.
+
+(b) Describe three real-life applications in which *regression* might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.
+
+*Answer*.
+
+(c) Describe three real-life applications in which *cluster analysis* might be useful.
+
+*Answer*.
+:::
