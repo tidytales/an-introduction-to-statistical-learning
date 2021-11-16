@@ -6,6 +6,8 @@ eq:expected-test-mse
 eq:er-training
 eq:er-testing
 exr:unlabeled-div-1
+exr:unlabeled-div-2
+exr:unlabeled-div-3
 chapter-1
 notation-and-simple-matrix-algebra
 data-sets-used-in-labs-and-exercises
@@ -17,5 +19,3 @@ assessing-model-accuracy
 in-the-regression-setting
 in-the-classification-setting
 exercises
-exr:unlabeled-div-2
-exr:unlabeled-div-3

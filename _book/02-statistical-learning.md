@@ -155,7 +155,15 @@ We now revisit the bias-variance decomposition.
 
 *Answer*.
 
+<img src="C:/Users/Michael/Documents/R/an-introduction-to-statistical-learning/inst/images/chapter-02_exercise-3a.png" width="100%" />
+
 (b) Explain why each of the five curves has the shape displayed in part (a).
 
-*Answer*.
+*Answer*. The value of each measure in part (a) changes at different rates and in different directions as we go from less flexible statistical learning methods towards more flexible approaches. Broadly, this is why each curve has a different shape. Specifically:
+
+- Bias refers to the error that is introduced by approximating a real-life problem with a much simpler model. In general, bias will decrease as models become more flexible, because more flexibility will lead to better approximations of a real-life problem, reducing error.
+- Variance refers to the amount by which $\hat f$ would change if we estimated it using a different training set. In general, variance will increase as models become more flexible, because a more flexible model will pick up patterns in the training data better which may differ between training sets.
+- Training error refers to the quality of fit of the model to the training data. In general, training error will steadily increase as models become more flexible, because more flexibility will allow the model to closely follow the training data.
+- Test error refers to the quality of fit of the trained model to the test data. In general, test error will be U-shaped because of the bias-variance trade-off.
+- Irreducible error refers to random error that is independent of $X$. Because irreducible error is independent of $X$, it remains stable regardless of model flexibility.
 :::

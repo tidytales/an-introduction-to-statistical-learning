@@ -38,7 +38,11 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 2</span> Statistical Learning</a></li></ul>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">About</a></li>
+<li><a class="" href="chapter-1.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="active" href="chapter-2.html"><span class="header-section-number">2</span> Statistical Learning</a></li>
+</ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/tidytales/an-introduction-to-statistical-learning">View book source <i class="fab fa-github"></i></a></p>
@@ -207,25 +211,47 @@ E \bigl(y_0 - \hat f(x_0) \bigr)^2 = \mathrm{Var}(\hat f(x_0)) +
 <li>Provide a sketch of a typical (squared) bias, variance, training error, test error, and Bayes (or irreducible) error curves, on a single plot, as we go from less flexible statistical learning methods towards more flexible approaches. The <span class="math inline">\(x\)</span>-axis should represent the amount of flexibility in the method, and the <span class="math inline">\(y\)</span>-axis should represent the values for each curve. There should be five curves. Make sure to label each one.</li>
 </ol>
 <p><em>Answer</em>.</p>
+<div class="inline-figure"><img src="inst/images/chapter-02_exercise-3a.png" width="100%"></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Explain why each of the five curves has the shape displayed in part (a).</li>
 </ol>
-<p><em>Answer</em>.</p>
+<p><em>Answer</em>. The value of each measure in part (a) changes at different rates and in different directions as we go from less flexible statistical learning methods towards more flexible approaches. Broadly, this is why each curve has a different shape. Specifically:</p>
+<ul>
+<li>Bias refers to the error that is introduced by approximating a real-life problem with a much simpler model. In general, bias will decrease as models become more flexible, because more flexibility will lead to better approximations of a real-life problem, reducing error.</li>
+<li>Variance refers to the amount by which <span class="math inline">\(\hat f\)</span> would change if we estimated it using a different training set. In general, variance will increase as models become more flexible, because a more flexible model will pick up patterns in the training data better which may differ between training sets.</li>
+<li>Training error refers to the quality of fit of the model to the training data. In general, training error will steadily increase as models become more flexible, because more flexibility will allow the model to closely follow the training data.</li>
+<li>Test error refers to the quality of fit of the trained model to the test data. In general, test error will be U-shaped because of the bias-variance trade-off.</li>
+<li>Irreducible error refers to random error that is independent of <span class="math inline">\(X\)</span>. Because irreducible error is independent of <span class="math inline">\(X\)</span>, it remains stable regardless of model flexibility.</li>
+</ul>
 </div>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
+<div class="prev"><a href="chapter-1.html"><span class="header-section-number">1</span> Introduction</a></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-2"><span class="header-section-number">2</span> Statistical Learning</a></li>
+<li><a class="nav-link" href="#prediction"><span class="header-section-number">2.1</span> Prediction</a></li>
+<li><a class="nav-link" href="#inference"><span class="header-section-number">2.2</span> Inference</a></li>
+<li>
+<a class="nav-link" href="#assessing-model-accuracy"><span class="header-section-number">2.3</span> Assessing Model Accuracy</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#in-the-regression-setting"><span class="header-section-number">2.3.1</span> In the Regression Setting</a></li>
+<li><a class="nav-link" href="#in-the-classification-setting"><span class="header-section-number">2.3.2</span> In the Classification Setting</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#exercises"><span class="header-section-number">2.4</span> Exercises</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#conceptual">Conceptual</a></li></ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+<li><a id="book-source" href="https://github.com/tidytales/an-introduction-to-statistical-learning/blob/master/02-statistical-learning.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/tidytales/an-introduction-to-statistical-learning/edit/master/02-statistical-learning.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

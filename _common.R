@@ -6,3 +6,6 @@ knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE
   )
+
+# R packages used globally
+library(here)
