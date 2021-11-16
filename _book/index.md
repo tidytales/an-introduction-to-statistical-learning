@@ -1,7 +1,7 @@
 --- 
 title: "Self-Study: An Introduction to Statistical Learning"
 author: "Michael McCarthy"
-date: "2021-11-14"
+date: "2021-11-15"
 site: bookdown::bookdown_site
 documentclass: book
 # url: your book url like https://bookdown.org/yihui/bookdown

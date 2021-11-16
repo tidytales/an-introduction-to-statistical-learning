@@ -72,6 +72,7 @@ Y = f(X) + \epsilon.
 <span class="math inline">\(\epsilon\)</span> represents a random error term which is independent of <span class="math inline">\(X\)</span> and has mean zero</li>
 </ul>
 <p>The goal of statistical learning is to estimate <span class="math inline">\(f\)</span>. There are two main reasons for estimating <span class="math inline">\(f\)</span>: <em>prediction</em> and <em>inference</em>. Depending on whether our ultimate goal is prediction, inference, or some combination of the two, different methods for estimating <span class="math inline">\(f\)</span> may be appropriate. In general, there is a trade-off between prediction accuracy and model interpretability. Models that make more accurate predictions tend to be less interpretable, and models that are more interpretable tend to make less accurate predictions (although this is not always the case, due to the potential for <em>overfitting</em> in highly flexible models).</p>
+<p>The methods we use to estimate <span class="math inline">\(f\)</span> can be characterized as either <em>parametric</em> or <em>non-parametric</em>. Parametric methods involve a two-step model-based approach: First we make an assumption about the functional form of <span class="math inline">\(f\)</span> (e.g., we could assume <span class="math inline">\(f\)</span> is linear). Second we <em>fit</em> (train) the model to our training data in order to estimate the parameters. Non-parametric methods do not make any assumptions about the functional form of <span class="math inline">\(f\)</span>. Instead they try to find an estimate of <span class="math inline">\(f\)</span> that gets close to the data points without being too rough or wiggly.</p>
 <div id="prediction" class="section level2" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
@@ -175,19 +176,19 @@ E \bigl(y_0 - \hat f(x_0) \bigr)^2 = \mathrm{Var}(\hat f(x_0)) +
 <ol style="list-style-type: lower-alpha">
 <li>The sample size <span class="math inline">\(n\)</span> is extremely large, and the number of predictors <span class="math inline">\(p\)</span> is small.</li>
 </ol>
-<p><em>Answer</em>.</p>
+<p><em>Answer</em>. Better. A flexible model will generally be able to better estimate the the true <span class="math inline">\(f\)</span> and avoid overfitting when we have an extremely large sample size and a small number of predictors. The only exception would be if the true <span class="math inline">\(f\)</span> is linear, then an inflexible model would generally perform better; however, most real world relationships are not linear, so the lower bias of a flexible model will generally lead to a better quality of fit.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>The number of predictors <span class="math inline">\(p\)</span> is extremely large, and the number of observations <span class="math inline">\(n\)</span> is small.</li>
 </ol>
-<p><em>Answer</em>.</p>
+<p><em>Answer</em>. Worse. A flexible model will generally lead to overfitting of our training data when the number of predictors is large and the sample size is small. An inflexible model is less likely to lead to overfitting in this scenario, so it will generally do a better job of giving accurate predictions on new observations than the flexible but overfit model.</p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>The relationship between the predictors and response is highly non-linear.</li>
 </ol>
-<p><em>Answer</em>.</p>
+<p><em>Answer</em>. Better. A flexible model will generally be able to fit a highly non-linear relationship better than an inflexible model because the relative rate of decrease in bias tends to be much greater than the relative increase in variance when <span class="math inline">\(f\)</span> is highly non-linear. The left and right plots in Figure 2.12 on Page 36 of the book demonstrate this nicely.</p>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>The variance of the error terms, i.e. <span class="math inline">\(\sigma^2 = \mathrm{Var}(\epsilon)\)</span>, is extremely high.</li>
 </ol>
-<p><em>Answer</em>.</p>
+<p><em>Answer</em>. Worse. A flexible model will generally lead to overfitting of our training data when the variance of the error terms is extremely high. Because <span class="math inline">\(Y\)</span> is partly a function of <span class="math inline">\(\epsilon\)</span>, when the variance of the error terms is extremely high then the variance of <span class="math inline">\(Y\)</span> will also be extremely high, mainly due to random error. A flexible model that tries to find patterns in this noise is more likely to pick up on patterns that are caused by random chance rather than true properties of the unknown function <span class="math inline">\(f\)</span>. The bias of an inflexible model is preferable in this situation, as it will give more stable predictions in the long run, which is likely preferable to making the essentially random predictions a flexible model would give in these circumstances.</p>
 </div>
 
 </div>
@@ -228,7 +229,7 @@ E \bigl(y_0 - \hat f(x_0) \bigr)^2 = \mathrm{Var}(\hat f(x_0)) +
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-11-14.</p>
+    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-11-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

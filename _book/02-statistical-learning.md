@@ -17,6 +17,8 @@ Here:
 
 The goal of statistical learning is to estimate $f$. There are two main reasons for estimating $f$: *prediction* and *inference*. Depending on whether our ultimate goal is prediction, inference, or some combination of the two, different methods for estimating $f$ may be appropriate. In general, there is a trade-off between prediction accuracy and model interpretability. Models that make more accurate predictions tend to be less interpretable, and models that are more interpretable tend to make less accurate predictions (although this is not always the case, due to the potential for *overfitting* in highly flexible models).
 
+The methods we use to estimate $f$ can be characterized as either *parametric* or *non-parametric*. Parametric methods involve a two-step model-based approach: First we make an assumption about the functional form of $f$ (e.g., we could assume $f$ is linear). Second we *fit* (train) the model to our training data in order to estimate the parameters. Non-parametric methods do not make any assumptions about the functional form of $f$. Instead they try to find an estimate of $f$ that gets close to the data points without being too rough or wiggly.
+
 ## Prediction
 
 Because the error term $\epsilon$ averages to zero, the general statistical model for predicting $Y$ from $X = (X_1, X_2, \dots, X_p)$ can be written as
@@ -115,17 +117,17 @@ For each of parts (a) through (d), indicate whether we would generally expect th
 
 (a) The sample size $n$ is extremely large, and the number of predictors $p$ is small.
 
-*Answer*.
+*Answer*. Better. A flexible model will generally be able to better estimate the the true $f$ and avoid overfitting when we have an extremely large sample size and a small number of predictors. The only exception would be if the true $f$ is linear, then an inflexible model would generally perform better; however, most real world relationships are not linear, so the lower bias of a flexible model will generally lead to a better quality of fit.
 
 (b) The number of predictors $p$ is extremely large, and the number of observations $n$ is small.
 
-*Answer*.
+*Answer*. Worse. A flexible model will generally lead to overfitting of our training data when the number of predictors is large and the sample size is small. An inflexible model is less likely to lead to overfitting in this scenario, so it will generally do a better job of giving accurate predictions on new observations than the flexible but overfit model.
 
 (c) The relationship between the predictors and response is highly non-linear.
 
-*Answer*.
+*Answer*. Better. A flexible model will generally be able to fit a highly non-linear relationship better than an inflexible model because the relative rate of decrease in bias tends to be much greater than the relative increase in variance when $f$ is highly non-linear. The left and right plots in Figure 2.12 on Page 36 of the book demonstrate this nicely.
 
 (d) The variance of the error terms, i.e. $\sigma^2 = \mathrm{Var}(\epsilon)$, is extremely high.
 
-*Answer*.
+*Answer*. Worse. A flexible model will generally lead to overfitting of our training data when the variance of the error terms is extremely high. Because $Y$ is partly a function of $\epsilon$, when the variance of the error terms is extremely high then the variance of $Y$ will also be extremely high, mainly due to random error. A flexible model that tries to find patterns in this noise is more likely to pick up on patterns that are caused by random chance rather than true properties of the unknown function $f$. The bias of an inflexible model is preferable in this situation, as it will give more stable predictions in the long run, which is likely preferable to making the essentially random predictions a flexible model would give in these circumstances.
 :::

@@ -117,7 +117,7 @@ For each of parts (a) through (d), indicate whether we would generally expect th
 
 (a) The sample size $n$ is extremely large, and the number of predictors $p$ is small.
 
-*Answer*.
+*Answer*. Better. A flexible model will generally be able to better estimate the the true $f$ and avoid overfitting when we have an extremely large sample size and a small number of predictors. The only exception would be if the true $f$ is linear, then an inflexible model would generally perform better; however, most real world relationships are not linear, so the lower bias of a flexible model will generally lead to a better quality of fit.
 
 (b) The number of predictors $p$ is extremely large, and the number of observations $n$ is small.
 
@@ -129,5 +129,5 @@ For each of parts (a) through (d), indicate whether we would generally expect th
 
 (d) The variance of the error terms, i.e. $\sigma^2 = \mathrm{Var}(\epsilon)$, is extremely high.
 
-*Answer*.
+*Answer*. Worse. A flexible model will generally lead to overfitting of our training data when the variance of the error terms is extremely high. Because $Y$ is partly a function of $\epsilon$, when the variance of the error terms is extremely high then the variance of $Y$ will also be extremely high, mainly due to random error. A flexible model that tries to find patterns in this noise is more likely to pick up on patterns that are caused by random chance rather than true properties of the unknown function $f$. The bias of an inflexible model is preferable in this situation, as it will give more stable predictions in the long run, which is likely preferable to making the essentially random predictions a flexible model would give in these circumstances.
 :::
