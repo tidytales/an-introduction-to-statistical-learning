@@ -224,6 +224,118 @@ E \bigl(y_0 - \hat f(x_0) \bigr)^2 = \mathrm{Var}(\hat f(x_0)) +
 <li>Irreducible error refers to random error that is independent of <span class="math inline">\(X\)</span>. Because irreducible error is independent of <span class="math inline">\(X\)</span>, it remains stable regardless of model flexibility.</li>
 </ul>
 </div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 2.4  </strong></span>You will now think of some real-life applications for statistical learning.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Describe three real-life applications in which <em>classification</em> might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ul>
+<li><p>Predicting whether or not a customer is likely to purchase more if items are discounted on a web store. The predictor would be whether or not they are likely to purchase more items; the predictors would be purchase history of discounted and full price items, and purchase frequency. The goal would be prediction in order to determine whether to show discounts to a customer more or less frequently.</p></li>
+<li><p>Understanding what demographic groups enjoy Star Trek. The response would again be whether or not someone is a Trekkie; the predictors would be various demographic variables such as age, gender identity, ethnicity, and so on. The goal would be inference about whether Star Trek appeals to specific groups or is enjoyable to a diverse audience.</p></li>
+<li><p>Understanding what kind of people like raisin cookies. The response would be whether or not someone likes raisin cookies; the predictors would be levels of psychopathy and sadism. The goal would be inference about whether people who like raisin cookies are secretly evil.</p></li>
+</ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Describe three real-life applications in which <em>regression</em> might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ul>
+<li><p>Predicting the temperature tomorrow where you live. The response would be temperature in degrees Celsius; the predictors would be average temperature where you live in the past seven days, the latitude, longitude, and altitude of where you live, and the month of the year. The goal would be prediction in order to decide what outfit you might wear tomorrow.</p></li>
+<li><p>Understanding what aspects of a video game lead to people playing it longer. The response would be minutes spent playing a game; the predictors would be game genre, whether the game is an original or sequel, whether the game is singleplayer, multiplayer, or both, and the game developer. The goal would be inference to determine what makes a game engaging.</p></li>
+<li><p>Predicting how long it would take for an injury to heal. The response would be time to heal; the predictors would be injury severity, age, and other indicators of physical health. The goal would be prediction in order to give patients an idea the time to recovery.</p></li>
+</ul>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Describe three real-life applications in which <em>cluster analysis</em> might be useful.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ul>
+<li><p>Identifying whether brain activity is more similar within or between individuals. The predictor variable would a repeated measure of functional connectivity. The goal would be inference in order to see whether brain activity recordings cluster together by individual.</p></li>
+<li><p>Identifying whether patients with depression can be classified into subgroups. The predictor variables would be responses on a depression inventory. The goal would be inference in order to understand whether the depression inventory measures multiple types of depression.</p></li>
+<li><p>Identifying whether species in families of animals identified by biologists aligns with those species’ genomes. The predictor variable would be species genome. The goal would be understanding whether clusters identified through observation align with clusters identified through genetics.</p></li>
+</ul>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-5" class="exercise"><strong>Exercise 2.5  </strong></span>What are the advantages and disadvantages of a very flexible (versus a less flexible) approach for regression or classification? Under what circumstances might a more flexible approach be preferred to a less flexible approach? When might a less flexible approach be preferred?</p>
+<p><em>Answer</em>. The advantage of a very flexible approach is less bias, so the model better approximates reality, and typically better prediction. The disadvantage is higher variance and the potential for overfitting. A more flexible model might be preferred if the goal of statistical learning is prediction. A less flexible approach might be preferred if the goal of statistical learning is inference, as simpler models tend to be easier to understand.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Exercise 2.6  </strong></span>Describe the differences between a parametric and a non-parametric statistical learning approach. What are the advantages of a parametric approach to regression or classification (as opposed to a non-parametric approach)? What are its disadvantages?</p>
+<p><em>Answer</em>. Parametric methods involve a two-step model-based approach: First we make an assumption about the functional form of <span class="math inline">\(f\)</span> (e.g., we could assume <span class="math inline">\(f\)</span> is linear). Second we <em>fit</em> (train) the model to our training data in order to estimate the parameters. The advantage of this is that it is easier to estimate a set of parameters than it is to fit an entirely arbitrary function <span class="math inline">\(f\)</span>. The disadvantage is that the model we choose will usually not match the true unknown form of <span class="math inline">\(f\)</span>, which can lead to poor estimates if we are too far from the true <span class="math inline">\(f\)</span>.</p>
+<p>Non-parametric methods do not make any assumptions about the functional form of <span class="math inline">\(f\)</span>. Instead they try to find an estimate of <span class="math inline">\(f\)</span> that gets close to the data points without being too rough or wiggly. The advantage of this is that it becomes easier to accurately fit a wider range of possible shapes for <span class="math inline">\(f\)</span>. However, the disadvantage of this is that doing so accurately requires a much larger number of observations since the problem of estimating <span class="math inline">\(f\)</span> to a small number of parameters.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 2.7  </strong></span>The table below provides a training data set containing six observations, three predictors, and one qualitative response variable.</p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>Obs.</th>
+<th><span class="math inline">\(X_1\)</span></th>
+<th><span class="math inline">\(X_2\)</span></th>
+<th><span class="math inline">\(X_3\)</span></th>
+<th><span class="math inline">\(Y\)</span></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+<td>Red</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>Red</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0</td>
+<td>1</td>
+<td>3</td>
+<td>Red</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>Green</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>Green</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>Red</td>
+</tr>
+</tbody>
+</table></div>
+<p>Suppose we wish to use this data set to make a prediction for <span class="math inline">\(Y\)</span> when <span class="math inline">\(X1 = X2 = X3 = 0\)</span> using K-nearest neighbours.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Compute the Euclidean distance between each observation and the test point, <span class="math inline">\(X1 = X2 = X3 = 0\)</span>.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>What is our prediction with K = 1? Why?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>What is our prediction with K = 3? Why?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>If the Bayes decision boundary in this problem is highly non-linear, then would we expect the best value for K to be large or small? Why?</li>
+</ol>
+<p><em>Answer</em>.</p>
+</div>
 
 </div>
 </div>
@@ -263,7 +375,7 @@ E \bigl(y_0 - \hat f(x_0) \bigr)^2 = \mathrm{Var}(\hat f(x_0)) +
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-11-15.</p>
+    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-11-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

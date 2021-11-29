@@ -8,6 +8,10 @@ eq:er-testing
 exr:unlabeled-div-1
 exr:unlabeled-div-2
 exr:unlabeled-div-3
+exr:unlabeled-div-4
+exr:unlabeled-div-5
+exr:unlabeled-div-6
+exr:unlabeled-div-7
 chapter-1
 notation-and-simple-matrix-algebra
 data-sets-used-in-labs-and-exercises

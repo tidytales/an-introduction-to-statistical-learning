@@ -9,11 +9,11 @@ $$
 
 Here:
 
-- $Y$ represents the response variable in our data set
-- $X$ represents the set of variables in our data set
-- $X_p$ represents the $p$th variable in our data set
-- $f(\dots)$ represents a fixed but unknown function of its input(s)
-- $\epsilon$ represents a random error term which is independent of $X$ and has mean zero
+-   $Y$ represents the response variable in our data set
+-   $X$ represents the set of variables in our data set
+-   $X_p$ represents the $p$th variable in our data set
+-   $f(\dots)$ represents a fixed but unknown function of its input(s)
+-   $\epsilon$ represents a random error term which is independent of $X$ and has mean zero
 
 The goal of statistical learning is to estimate $f$. There are two main reasons for estimating $f$: *prediction* and *inference*. Depending on whether our ultimate goal is prediction, inference, or some combination of the two, different methods for estimating $f$ may be appropriate. In general, there is a trade-off between prediction accuracy and model interpretability. Models that make more accurate predictions tend to be less interpretable, and models that are more interpretable tend to make less accurate predictions (although this is not always the case, due to the potential for *overfitting* in highly flexible models).
 
@@ -30,8 +30,8 @@ $$
 
 Here:
 
-- $\hat Y$ represents the resulting prediction for $Y$
-- $\hat f$ represents our estimate for $f$
+-   $\hat Y$ represents the resulting prediction for $Y$
+-   $\hat f$ represents our estimate for $f$
 
 When our goal is only to predict, we do not typically need to concern ourselves with the exact form of $\hat f$ provided that it accurately predicts $Y$. The accuracy of $\hat Y$ as a prediction for $Y$ depends on two sources of error: *reducible error* and *irreducible error*. The error in our model attributable to $\hat f$ is *reducible* because we can potentially improve the accuracy of $\hat f$ for estimating $f$ by using a more appropriate statistical learning technique. However, the error in our model attributable to $\epsilon$ is *irreducible* because $Y$ is also a function of $\epsilon$, and $\epsilon$ is independent of $X$, so no matter how well we estimate $f$, the variability associated with $\epsilon$ will still be present in our model. This variability may come from unmeasured variables that are useful for predicting $Y$, or from unmeasurable variation. Irreducible error places an (often unknowable) upper bound on the accuracy of our prediction for $Y$.
 
@@ -39,20 +39,19 @@ When our goal is only to predict, we do not typically need to concern ourselves 
 
 When our goal is to understand the relationship between $Y$ and $X = (X_1, X_2, \dots, X_p)$, we do need to concern ourselves with the exact form of $\hat f$. Here the form of $\hat f$ can be used to identify:
 
-- Which predictors are associated with the response
-- the direction (positive or negative) and form (simple or complex) of the relationship between the response and each predictor
+-   Which predictors are associated with the response
+-   the direction (positive or negative) and form (simple or complex) of the relationship between the response and each predictor
 
 ## Assessing Model Accuracy
 
 No one statistical learning approach performs better than all other approaches on all possible data sets. Because of this, care needs to be taken to choose which approach to use for any given data set to produce the best results. A number of important concepts arise when selecting a statistical learning approach for a specific data set:
 
-- Measuring the quality of fit
-- The bias-variance trade-off
+-   Measuring the quality of fit
+-   The bias-variance trade-off
 
 ### In the Regression Setting
 
 In the regression setting, the most commonly used quality of fit measure for training data is the mean squared error $\mathit{MSE}$, given by
-
 
 $$
 \mathit{MSE}_{\mathrm{training}} = \frac 1 n \sum_{i = 1}^n (y_i - \hat f(x_i))^2,
@@ -94,8 +93,8 @@ $$
 
 Here:
 
-- $\hat y_i$ is the predicted class label for the $i$th observation using $\hat f$
-- $I(y_i \ne \hat y_i)$ is an indicator variable that equals one if $y_i \ne \hat y_i$ (incorrectly classified) and zero if $y_i = \hat y_i$ (correctly classified)
+-   $\hat y_i$ is the predicted class label for the $i$th observation using $\hat f$
+-   $I(y_i \ne \hat y_i)$ is an indicator variable that equals one if $y_i \ne \hat y_i$ (incorrectly classified) and zero if $y_i = \hat y_i$ (correctly classified)
 
 The *test error rate* for a set of test observations $(x_0, y_0)$ is given by
 
@@ -110,9 +109,9 @@ The bias-variance trade-off is present in the classification setting too; when v
 
 ## Exercises
 
-### Conceptual {-}
+### Conceptual {.unnumbered}
 
-::: {.exercise}
+::: exercise
 For each of parts (a) through (d), indicate whether we would generally expect the performance of a flexible statistical learning method to be better or worse than an inflexible method. Justify your answer.
 
 (a) The sample size $n$ is extremely large, and the number of predictors $p$ is small.
@@ -132,7 +131,7 @@ For each of parts (a) through (d), indicate whether we would generally expect th
 *Answer*. Worse. A flexible model will generally lead to overfitting of our training data when the variance of the error terms is extremely high. Because $Y$ is partly a function of $\epsilon$, when the variance of the error terms is extremely high then the variance of $Y$ will also be extremely high, mainly due to random error. A flexible model that tries to find patterns in this noise is more likely to pick up on patterns that are caused by random chance rather than true properties of the unknown function $f$. The bias of an inflexible model is preferable in this situation, as it will give more stable predictions in the long run, which is likely preferable to making the essentially random predictions a flexible model would give in these circumstances.
 :::
 
-::: {.exercise}
+::: exercise
 Explain whether each scenario is a classification or regression problem, and indicate whether we are most interested in inference or prediction. Finally, provide $n$ and $p$.
 
 (a) We collect a set of data on the top 500 firms in the US. For each firm we record profit, number of employees, industry, and the CEO salary. We are interested in understanding which factors affect CEO salary.
@@ -148,7 +147,7 @@ Explain whether each scenario is a classification or regression problem, and ind
 *Answer*. Regression, prediction, $n = 52$, $p = 3$.
 :::
 
-::: {.exercise}
+::: exercise
 We now revisit the bias-variance decomposition.
 
 (a) Provide a sketch of a typical (squared) bias, variance, training error, test error, and Bayes (or irreducible) error curves, on a single plot, as we go from less flexible statistical learning methods towards more flexible approaches. The $x$-axis should represent the amount of flexibility in the method, and the $y$-axis should represent the values for each curve. There should be five curves. Make sure to label each one.
@@ -161,9 +160,88 @@ We now revisit the bias-variance decomposition.
 
 *Answer*. The value of each measure in part (a) changes at different rates and in different directions as we go from less flexible statistical learning methods towards more flexible approaches. Broadly, this is why each curve has a different shape. Specifically:
 
-- Bias refers to the error that is introduced by approximating a real-life problem with a much simpler model. In general, bias will decrease as models become more flexible, because more flexibility will lead to better approximations of a real-life problem, reducing error.
-- Variance refers to the amount by which $\hat f$ would change if we estimated it using a different training set. In general, variance will increase as models become more flexible, because a more flexible model will pick up patterns in the training data better which may differ between training sets.
-- Training error refers to the quality of fit of the model to the training data. In general, training error will steadily increase as models become more flexible, because more flexibility will allow the model to closely follow the training data.
-- Test error refers to the quality of fit of the trained model to the test data. In general, test error will be U-shaped because of the bias-variance trade-off.
-- Irreducible error refers to random error that is independent of $X$. Because irreducible error is independent of $X$, it remains stable regardless of model flexibility.
+-   Bias refers to the error that is introduced by approximating a real-life problem with a much simpler model. In general, bias will decrease as models become more flexible, because more flexibility will lead to better approximations of a real-life problem, reducing error.
+-   Variance refers to the amount by which $\hat f$ would change if we estimated it using a different training set. In general, variance will increase as models become more flexible, because a more flexible model will pick up patterns in the training data better which may differ between training sets.
+-   Training error refers to the quality of fit of the model to the training data. In general, training error will steadily increase as models become more flexible, because more flexibility will allow the model to closely follow the training data.
+-   Test error refers to the quality of fit of the trained model to the test data. In general, test error will be U-shaped because of the bias-variance trade-off.
+-   Irreducible error refers to random error that is independent of $X$. Because irreducible error is independent of $X$, it remains stable regardless of model flexibility.
+:::
+
+::: exercise
+You will now think of some real-life applications for statistical learning.
+
+(a) Describe three real-life applications in which *classification* might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.
+
+*Answer*.
+
+-   Predicting whether or not a customer is likely to purchase more if items are discounted on a web store. The predictor would be whether or not they are likely to purchase more items; the predictors would be purchase history of discounted and full price items, and purchase frequency. The goal would be prediction in order to determine whether to show discounts to a customer more or less frequently.
+
+-   Understanding what demographic groups enjoy Star Trek. The response would again be whether or not someone is a Trekkie; the predictors would be various demographic variables such as age, gender identity, ethnicity, and so on. The goal would be inference about whether Star Trek appeals to specific groups or is enjoyable to a diverse audience.
+
+-   Understanding what kind of people like raisin cookies. The response would be whether or not someone likes raisin cookies; the predictors would be levels of psychopathy and sadism. The goal would be inference about whether people who like raisin cookies are secretly evil.
+
+(b) Describe three real-life applications in which *regression* might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.
+
+*Answer*.
+
+-   Predicting the temperature tomorrow where you live. The response would be temperature in degrees Celsius; the predictors would be average temperature where you live in the past seven days, the latitude, longitude, and altitude of where you live, and the month of the year. The goal would be prediction in order to decide what outfit you might wear tomorrow.
+
+-   Understanding what aspects of a video game lead to people playing it longer. The response would be minutes spent playing a game; the predictors would be game genre, whether the game is an original or sequel, whether the game is singleplayer, multiplayer, or both, and the game developer. The goal would be inference to determine what makes a game engaging.
+
+-   Predicting how long it would take for an injury to heal. The response would be time to heal; the predictors would be injury severity, age, and other indicators of physical health. The goal would be prediction in order to give patients an idea the time to recovery.
+
+(c) Describe three real-life applications in which *cluster analysis* might be useful.
+
+*Answer*.
+
+-   Identifying whether brain activity is more similar within or between individuals. The predictor variable would a repeated measure of functional connectivity. The goal would be inference in order to see whether brain activity recordings cluster together by individual.
+
+-   Identifying whether patients with depression can be classified into subgroups. The predictor variables would be responses on a depression inventory. The goal would be inference in order to understand whether the depression inventory measures multiple types of depression.
+
+-   Identifying whether species in families of animals identified by biologists aligns with those species' genomes. The predictor variable would be species genome. The goal would be understanding whether clusters identified through observation align with clusters identified through genetics.
+:::
+
+::: exercise
+What are the advantages and disadvantages of a very flexible (versus a less flexible) approach for regression or classification? Under what circumstances might a more flexible approach be preferred to a less flexible approach? When might a less flexible approach be preferred?
+
+*Answer*. The advantage of a very flexible approach is less bias, so the model better approximates reality, and typically better prediction. The disadvantage is higher variance and the potential for overfitting. A more flexible model might be preferred if the goal of statistical learning is prediction. A less flexible approach might be preferred if the goal of statistical learning is inference, as simpler models tend to be easier to understand.
+:::
+
+::: exercise
+Describe the differences between a parametric and a non-parametric statistical learning approach. What are the advantages of a parametric approach to regression or classification (as opposed to a non-parametric approach)? What are its disadvantages?
+
+*Answer*. Parametric methods involve a two-step model-based approach: First we make an assumption about the functional form of $f$ (e.g., we could assume $f$ is linear). Second we *fit* (train) the model to our training data in order to estimate the parameters. The advantage of this is that it is easier to estimate a set of parameters than it is to fit an entirely arbitrary function $f$. The disadvantage is that the model we choose will usually not match the true unknown form of $f$, which can lead to poor estimates if we are too far from the true $f$.
+
+Non-parametric methods do not make any assumptions about the functional form of $f$. Instead they try to find an estimate of $f$ that gets close to the data points without being too rough or wiggly. The advantage of this is that it becomes easier to accurately fit a wider range of possible shapes for $f$. However, the disadvantage of this is that doing so accurately requires a much larger number of observations since the problem of estimating $f$ to a small number of parameters.
+:::
+
+::: exercise
+The table below provides a training data set containing six observations, three predictors, and one qualitative response variable.
+
+| Obs. | $X_1$ | $X_2$ | $X_3$ | $Y$   |
+|------|-------|-------|-------|-------|
+| 1    | 0     | 3     | 0     | Red   |
+| 2    | 2     | 0     | 0     | Red   |
+| 3    | 0     | 1     | 3     | Red   |
+| 4    | 0     | 1     | 2     | Green |
+| 5    | -1    | 0     | 0     | Green |
+| 6    | 1     | 1     | 1     | Red   |
+
+Suppose we wish to use this data set to make a prediction for $Y$ when $X1 = X2 = X3 = 0$ using K-nearest neighbours.
+
+(a) Compute the Euclidean distance between each observation and the test point, $X1 = X2 = X3 = 0$.
+
+*Answer*.
+
+(b) What is our prediction with K = 1? Why?
+
+*Answer*.
+
+(c) What is our prediction with K = 3? Why?
+
+*Answer*.
+
+(d) If the Bayes decision boundary in this problem is highly non-linear, then would we expect the best value for K to be large or small? Why?
+
+*Answer*.
 :::
