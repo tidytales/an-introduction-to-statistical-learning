@@ -12,6 +12,7 @@ exr:unlabeled-div-4
 exr:unlabeled-div-5
 exr:unlabeled-div-6
 exr:unlabeled-div-7
+eq:euclidean-distance
 chapter-1
 notation-and-simple-matrix-algebra
 data-sets-used-in-labs-and-exercises

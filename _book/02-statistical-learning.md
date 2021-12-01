@@ -233,15 +233,63 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X1 = X2 
 
 *Answer*.
 
-(b) What is our prediction with K = 1? Why?
+The equation for Euclidean distance is given by
 
-*Answer*.
+$$
+d(p, q) = \sqrt{ \sum_{i = 1}^n (q_i - p_i)^2},
+(\#eq:euclidean-distance)
+$$
 
-(c) What is our prediction with K = 3? Why?
+where $d(p, q)$ represents the distance between points $p$ and $q$ in $n$ dimensional Euclidean space, and $q_i$ and $p_i$ represent Euclidean vectors, starting from the origin of the $n$ dimensional Euclidean space.
 
-*Answer*.
+This can be computed in R like so.
 
-(d) If the Bayes decision boundary in this problem is highly non-linear, then would we expect the best value for K to be large or small? Why?
 
-*Answer*.
+```r
+euclidean_distance <- function(q, p) sqrt(sum((q - p)^2))
+
+obs_test <- c( 0, 0, 0)
+
+obs_train <- list(
+  obs_01 = c( 0, 3, 0),
+  obs_02 = c( 2, 0, 0),
+  obs_03 = c( 0, 1, 3),
+  obs_04 = c( 0, 1, 2),
+  obs_05 = c(-1, 0, 0),
+  obs_06 = c( 1, 1, 1)
+)
+
+lapply(obs_train, function(x) euclidean_distance(obs_test, x))
+#> $obs_01
+#> [1] 3
+#> 
+#> $obs_02
+#> [1] 2
+#> 
+#> $obs_03
+#> [1] 3.162278
+#> 
+#> $obs_04
+#> [1] 2.236068
+#> 
+#> $obs_05
+#> [1] 1
+#> 
+#> $obs_06
+#> [1] 1.732051
+```
+
+(b) What is our prediction with $K = 1$? Why?
+
+*Answer*. When $K = 1$ our prediction for the test point will be whatever training observation is closest to the test point. Observation 5 (Green) is closest so our prediction is that the test point is Green.
+
+(c) What is our prediction with $K = 3$? Why?
+
+*Answer*. When $K = 3$ our prediction for the test point is given by the class with highest estimated probability based on the three points in the training data that are closest to the test point. Here observations 5 (Green), 6 (Red), and 2 (Red) are closest, which results in probabilities of 1/3 for the Green class and 2/3 for the Red class. So our prediction is that the test point is Red.
+
+(d) If the Bayes decision boundary in this problem is highly non-linear, then would we expect the best value for $K$ to be large or small? Why?
+
+*Answer*. We would expect a smaller value of K to give the best predictions. But not too small. When $K = 1$ the KNN decision boundary will be overly flexible, while with a large value of $K$ it will not be sufficiently flexible.
 :::
+
+### Applied {.unnumbered}
