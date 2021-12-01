@@ -109,6 +109,16 @@ The bias-variance trade-off is present in the classification setting too; when v
 
 ## Exercises
 
+### Prerequisites {.unnumbered}
+
+To access the data sets and functions used to complete the Chapter 2 exercises, load the following packages.
+
+```{r prerequisites, message=FALSE}
+library(ISLR2)
+library(tidyverse)
+library(skimr)
+```
+
 ### Conceptual {.unnumbered}
 
 ::: exercise
@@ -279,3 +289,35 @@ lapply(obs_train, function(x) euclidean_distance(obs_test, x))
 :::
 
 ### Applied {.unnumbered}
+
+::: exercise
+This exercise relates to the `ISLR2::College` data set. It contains a number of
+variables for 777 different universities and colleges in the US. The help page `?ISLR2::College` for the data set contains a description of the data set and the 18 variables it measures.
+
+(a) Load the `ISLR2::College` data set into R.
+
+```{r}
+# Make sure to preserve the row names with college names in them because they
+# might be useful later
+college <- as_tibble(College, rownames = NA)
+str(college)
+```
+
+(c) Explore the `college` data.
+
+i. Produce a numerical summary of the variables in the data set.
+
+```{r}
+skim(college)
+```
+
+ii. Produce a scatterplot matrix of the first ten columns or variables of the data.
+  
+iii. Produce side-by-side boxplots of `Outstate` versus `Private`.
+    
+iv. Create a new qualitative variable, called `Elite`, by binning the `Top10perc` variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10% of their high school classes exceeds 50%. See how many elite universities there are, then produce side-by-side boxplots of `Outstate` versus `Elite`.
+    
+v. Produce some histograms with differing numbers of bins for a few of the quantitative variables.
+    
+vi. Continue exploring the data, and provide a brief summary of what you discover.
+:::

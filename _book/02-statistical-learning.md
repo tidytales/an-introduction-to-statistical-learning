@@ -109,6 +109,17 @@ The bias-variance trade-off is present in the classification setting too; when v
 
 ## Exercises
 
+### Prerequisites {.unnumbered}
+
+To access the data sets and functions used to complete the Chapter 2 exercises, load the following packages.
+
+
+```r
+library(ISLR2)
+library(tidyverse)
+library(skimr)
+```
+
 ### Conceptual {.unnumbered}
 
 ::: exercise
@@ -293,3 +304,101 @@ lapply(obs_train, function(x) euclidean_distance(obs_test, x))
 :::
 
 ### Applied {.unnumbered}
+
+::: exercise
+This exercise relates to the `ISLR2::College` data set. It contains a number of
+variables for 777 different universities and colleges in the US. The help page `?ISLR2::College` for the data set contains a description of the data set and the 18 variables it measures.
+
+(a) Load the `ISLR2::College` data set into R.
+
+
+```r
+# Make sure to preserve the row names with college names in them because they
+# might be useful later
+college <- as_tibble(College, rownames = NA)
+str(college)
+#> tibble [777 x 18] (S3: tbl_df/tbl/data.frame)
+#>  $ Private    : Factor w/ 2 levels "No","Yes": 2 2 2 2 2 2 2 2 2 2 ...
+#>  $ Apps       : num [1:777] 1660 2186 1428 417 193 ...
+#>  $ Accept     : num [1:777] 1232 1924 1097 349 146 ...
+#>  $ Enroll     : num [1:777] 721 512 336 137 55 158 103 489 227 172 ...
+#>  $ Top10perc  : num [1:777] 23 16 22 60 16 38 17 37 30 21 ...
+#>  $ Top25perc  : num [1:777] 52 29 50 89 44 62 45 68 63 44 ...
+#>  $ F.Undergrad: num [1:777] 2885 2683 1036 510 249 ...
+#>  $ P.Undergrad: num [1:777] 537 1227 99 63 869 ...
+#>  $ Outstate   : num [1:777] 7440 12280 11250 12960 7560 ...
+#>  $ Room.Board : num [1:777] 3300 6450 3750 5450 4120 ...
+#>  $ Books      : num [1:777] 450 750 400 450 800 500 500 450 300 660 ...
+#>  $ Personal   : num [1:777] 2200 1500 1165 875 1500 ...
+#>  $ PhD        : num [1:777] 70 29 53 92 76 67 90 89 79 40 ...
+#>  $ Terminal   : num [1:777] 78 30 66 97 72 73 93 100 84 41 ...
+#>  $ S.F.Ratio  : num [1:777] 18.1 12.2 12.9 7.7 11.9 9.4 11.5 13.7 11.3 11.5 ...
+#>  $ perc.alumni: num [1:777] 12 16 30 37 2 11 26 37 23 15 ...
+#>  $ Expend     : num [1:777] 7041 10527 8735 19016 10922 ...
+#>  $ Grad.Rate  : num [1:777] 60 56 54 59 15 55 63 73 80 52 ...
+```
+
+(c) Explore the `college` data.
+
+i. Produce a numerical summary of the variables in the data set.
+
+
+```r
+skim(college)
+```
+
+
+Table: (\#tab:unnamed-chunk-3)Data summary
+
+|                         |        |
+|:------------------------|:-------|
+|Name                     |college |
+|Number of rows           |777     |
+|Number of columns        |18      |
+|_______________________  |        |
+|Column type frequency:   |        |
+|factor                   |1       |
+|numeric                  |17      |
+|________________________ |        |
+|Group variables          |None    |
+
+
+**Variable type: factor**
+
+|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts        |
+|:-------------|---------:|-------------:|:-------|--------:|:-----------------|
+|Private       |         0|             1|FALSE   |        2|Yes: 565, No: 212 |
+
+
+**Variable type: numeric**
+
+|skim_variable | n_missing| complete_rate|     mean|      sd|     p0|    p25|    p50|     p75|    p100|hist                                     |
+|:-------------|---------:|-------------:|--------:|-------:|------:|------:|------:|-------:|-------:|:----------------------------------------|
+|Apps          |         0|             1|  3001.64| 3870.20|   81.0|  776.0| 1558.0|  3624.0| 48094.0|▇▁▁▁▁ |
+|Accept        |         0|             1|  2018.80| 2451.11|   72.0|  604.0| 1110.0|  2424.0| 26330.0|▇▁▁▁▁ |
+|Enroll        |         0|             1|   779.97|  929.18|   35.0|  242.0|  434.0|   902.0|  6392.0|▇▁▁▁▁ |
+|Top10perc     |         0|             1|    27.56|   17.64|    1.0|   15.0|   23.0|    35.0|    96.0|▇▇▂▁▁ |
+|Top25perc     |         0|             1|    55.80|   19.80|    9.0|   41.0|   54.0|    69.0|   100.0|▂▆▇▅▃ |
+|F.Undergrad   |         0|             1|  3699.91| 4850.42|  139.0|  992.0| 1707.0|  4005.0| 31643.0|▇▁▁▁▁ |
+|P.Undergrad   |         0|             1|   855.30| 1522.43|    1.0|   95.0|  353.0|   967.0| 21836.0|▇▁▁▁▁ |
+|Outstate      |         0|             1| 10440.67| 4023.02| 2340.0| 7320.0| 9990.0| 12925.0| 21700.0|▃▇▆▂▂ |
+|Room.Board    |         0|             1|  4357.53| 1096.70| 1780.0| 3597.0| 4200.0|  5050.0|  8124.0|▂▇▆▂▁ |
+|Books         |         0|             1|   549.38|  165.11|   96.0|  470.0|  500.0|   600.0|  2340.0|▇▆▁▁▁ |
+|Personal      |         0|             1|  1340.64|  677.07|  250.0|  850.0| 1200.0|  1700.0|  6800.0|▇▃▁▁▁ |
+|PhD           |         0|             1|    72.66|   16.33|    8.0|   62.0|   75.0|    85.0|   103.0|▁▁▅▇▅ |
+|Terminal      |         0|             1|    79.70|   14.72|   24.0|   71.0|   82.0|    92.0|   100.0|▁▁▃▆▇ |
+|S.F.Ratio     |         0|             1|    14.09|    3.96|    2.5|   11.5|   13.6|    16.5|    39.8|▁▇▂▁▁ |
+|perc.alumni   |         0|             1|    22.74|   12.39|    0.0|   13.0|   21.0|    31.0|    64.0|▅▇▆▂▁ |
+|Expend        |         0|             1|  9660.17| 5221.77| 3186.0| 6751.0| 8377.0| 10830.0| 56233.0|▇▁▁▁▁ |
+|Grad.Rate     |         0|             1|    65.46|   17.18|   10.0|   53.0|   65.0|    78.0|   118.0|▁▅▇▅▁ |
+
+ii. Produce a scatterplot matrix of the first ten columns or variables of the data.
+  
+iii. Produce side-by-side boxplots of `Outstate` versus `Private`.
+    
+iv. Create a new qualitative variable, called `Elite`, by binning the `Top10perc` variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10% of their high school classes exceeds 50%. See how many elite universities there are, then produce side-by-side boxplots of `Outstate` versus `Elite`.
+    
+v. Produce some histograms with differing numbers of bins for a few of the quantitative variables.
+    
+vi. Continue exploring the data, and provide a brief summary of what you discover.
+:::
