@@ -114,9 +114,10 @@ The bias-variance trade-off is present in the classification setting too; when v
 To access the data sets and functions used to complete the Chapter 2 exercises, load the following packages.
 
 ```{r prerequisites, message=FALSE}
-library(ISLR2)
+# library(ISLR2)
 library(tidyverse)
 library(skimr)
+library(GGally)
 ```
 
 ### Conceptual {.unnumbered}
@@ -299,7 +300,7 @@ variables for 777 different universities and colleges in the US. The help page `
 ```{r}
 # Make sure to preserve the row names with college names in them because they
 # might be useful later
-college <- as_tibble(College, rownames = NA)
+college <- as_tibble(ISLR2::College, rownames = NA)
 str(college)
 ```
 
@@ -312,11 +313,35 @@ skim(college)
 ```
 
 ii. Produce a scatterplot matrix of the first ten columns or variables of the data.
-  
+
+```{r}
+college %>% 
+  select(1:10) %>% 
+  ggpairs()
+```
+
 iii. Produce side-by-side boxplots of `Outstate` versus `Private`.
-    
+
+```{r}
+college %>% 
+  ggplot(aes(y = Outstate)) +
+    geom_boxplot() +
+    facet_wrap(~Private) +
+    labs(title = "Private universities receive more out of state tuition")
+```
+
+
 iv. Create a new qualitative variable, called `Elite`, by binning the `Top10perc` variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10% of their high school classes exceeds 50%. See how many elite universities there are, then produce side-by-side boxplots of `Outstate` versus `Elite`.
-    
+
+```{r}
+college %>% 
+  mutate(Elite = if_else(Top10perc > 50, "Yes", "No") %>% as_factor()) %>% 
+  ggplot(aes(y = Outstate)) +
+    geom_boxplot() +
+    facet_wrap(~Elite) +
+    labs(title = "Elite universities receive more out of state tuition")
+```
+
 v. Produce some histograms with differing numbers of bins for a few of the quantitative variables.
     
 vi. Continue exploring the data, and provide a brief summary of what you discover.

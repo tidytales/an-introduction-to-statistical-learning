@@ -115,9 +115,10 @@ To access the data sets and functions used to complete the Chapter 2 exercises, 
 
 
 ```r
-library(ISLR2)
+# library(ISLR2)
 library(tidyverse)
 library(skimr)
+library(GGally)
 ```
 
 ### Conceptual {.unnumbered}
@@ -315,7 +316,7 @@ variables for 777 different universities and colleges in the US. The help page `
 ```r
 # Make sure to preserve the row names with college names in them because they
 # might be useful later
-college <- as_tibble(College, rownames = NA)
+college <- as_tibble(ISLR2::College, rownames = NA)
 str(college)
 #> tibble [777 x 18] (S3: tbl_df/tbl/data.frame)
 #>  $ Private    : Factor w/ 2 levels "No","Yes": 2 2 2 2 2 2 2 2 2 2 ...
@@ -393,11 +394,62 @@ Table: (\#tab:unnamed-chunk-3)Data summary
 |Grad.Rate     |         0|             1|    65.46|   17.18|   10.0|   53.0|   65.0|    78.0|   118.0|▁▅▇▅▁ |
 
 ii. Produce a scatterplot matrix of the first ten columns or variables of the data.
-  
+
+
+```r
+college %>% 
+  select(1:10) %>% 
+  ggpairs()
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+
 iii. Produce side-by-side boxplots of `Outstate` versus `Private`.
-    
+
+
+```r
+college %>% 
+  ggplot(aes(y = Outstate)) +
+    geom_boxplot() +
+    facet_wrap(~Private) +
+    labs(title = "Private universities receive more out of state tuition")
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+
+
 iv. Create a new qualitative variable, called `Elite`, by binning the `Top10perc` variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10% of their high school classes exceeds 50%. See how many elite universities there are, then produce side-by-side boxplots of `Outstate` versus `Elite`.
-    
+
+
+```r
+college %>% 
+  mutate(Elite = if_else(Top10perc > 50, "Yes", "No") %>% as_factor()) %>% 
+  ggplot(aes(y = Outstate)) +
+    geom_boxplot() +
+    facet_wrap(~Elite) +
+    labs(title = "Elite universities receive more out of state tuition")
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+
 v. Produce some histograms with differing numbers of bins for a few of the quantitative variables.
     
 vi. Continue exploring the data, and provide a brief summary of what you discover.
