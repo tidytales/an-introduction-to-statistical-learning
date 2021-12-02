@@ -28,3 +28,4 @@ in-the-classification-setting
 exercises
 exr:unlabeled-div-9
 exr:unlabeled-div-10
+chapter-3
