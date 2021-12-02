@@ -29,3 +29,4 @@ exercises
 exr:unlabeled-div-9
 exr:unlabeled-div-10
 chapter-3
+exercises-1

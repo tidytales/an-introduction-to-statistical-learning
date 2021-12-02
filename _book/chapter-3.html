@@ -6,17 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Linear Regression | Self-Study: An Introduction to Statistical Learning</title>
 <meta name="author" content="Michael McCarthy">
-<meta name="description" content="&lt;p&gt;Working through the second edition of the book An Introduction to Statistical
-Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&lt;/p&gt;">
+<meta name="description" content="Chapter 3 is about (ordinary least squares and polynomial) linear regression, a parametric supervised statistical learning method. Many of the more advanced statistical learning approaches are...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Linear Regression | Self-Study: An Introduction to Statistical Learning">
 <meta property="og:type" content="book">
-<meta property="og:description" content="&lt;p&gt;Working through the second edition of the book An Introduction to Statistical
-Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&lt;/p&gt;">
+<meta property="og:description" content="Chapter 3 is about (ordinary least squares and polynomial) linear regression, a parametric supervised statistical learning method. Many of the more advanced statistical learning approaches are...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Linear Regression | Self-Study: An Introduction to Statistical Learning">
-<meta name="twitter:description" content="&lt;p&gt;Working through the second edition of the book An Introduction to Statistical
-Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&lt;/p&gt;">
+<meta name="twitter:description" content="Chapter 3 is about (ordinary least squares and polynomial) linear regression, a parametric supervised statistical learning method. Many of the more advanced statistical learning approaches are...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -52,7 +49,108 @@ Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&
 <h1>
 <span class="header-section-number">3</span> Linear Regression<a class="anchor" aria-label="anchor" href="#chapter-3"><i class="fas fa-link"></i></a>
 </h1>
+<p>Chapter 3 is about (ordinary least squares and polynomial) linear regression, a parametric supervised statistical learning method. Many of the more advanced statistical learning approaches are generalizations or extensions of linear regression, so having a good grasp on linear regression is important for understanding later methods in the book.</p>
+<p>It also discusses K-nearest neighbours regression (KNN regression), a non-parametric supervised statistical learning method.</p>
+<div id="exercises-1" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Exercises<a class="anchor" aria-label="anchor" href="#exercises-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="prerequisites-1" class="section level3 unnumbered">
+<h3>Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>To access the data sets and functions used to complete the Chapter 3 exercises, load the following packages.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># library(ISLR2)</span>
+<span class="co"># library(tidyverse)</span>
+<span class="co"># library(skimr)</span>
+<span class="co"># library(GGally)</span>
+<span class="co"># library(patchwork)</span></code></pre></div>
+</div>
+<div id="conceptual-1" class="section level3 unnumbered">
+<h3>Conceptual<a class="anchor" aria-label="anchor" href="#conceptual-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 3.1  </strong></span>Describe the null hypotheses to which the p-values given in Table 3.4 correspond. Explain what conclusions you can draw based on these p-values. Your explanation should be phrased in terms of sales, TV, radio, and newspaper, rather than in terms of the coefficients of the linear model.</p>
+<div class="inline-table"><table class="table table-sm">
+<caption>Table 3.4</caption>
+<thead><tr class="header">
+<th>Term</th>
+<th>Coefficient</th>
+<th>Std. Error</th>
+<th>t-statistic</th>
+<th>p-value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>intercept</td>
+<td>2.939</td>
+<td>0.3119</td>
+<td>9.420</td>
+<td>&lt; .001</td>
+</tr>
+<tr class="even">
+<td>TV</td>
+<td>0.046</td>
+<td>0.0014</td>
+<td>32.81</td>
+<td>&lt; .0001</td>
+</tr>
+<tr class="odd">
+<td>radio</td>
+<td>0.189</td>
+<td>0.0086</td>
+<td>21.89</td>
+<td>&lt; .0001</td>
+</tr>
+<tr class="even">
+<td>newspaper</td>
+<td>-0.001</td>
+<td>0.0059</td>
+<td>-0.18</td>
+<td>.8599</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Answer</em>.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 3.2  </strong></span>Carefully explain the differences between the KNN classifier and KNN
+regression methods.</p>
+<p><em>Answer</em>.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 3.3  </strong></span>Suppose we have a data set with five predictors, <span class="math inline">\(X_1 =\)</span> GPA, <span class="math inline">\(X_2 =\)</span> IQ, <span class="math inline">\(X_3 =\)</span> Level (1 for College and 0 for High School), <span class="math inline">\(X_4 =\)</span> Interaction between GPA and IQ, and <span class="math inline">\(X_5 =\)</span> Interaction between GPA and Level. The response is starting salary after graduation (in thousands of dollars). Suppose we use least squares to fit the model, and get <span class="math inline">\(\hat \beta_0 = 50\)</span>, <span class="math inline">\(\hat \beta_1 = 20\)</span>, <span class="math inline">\(\hat \beta_2 = 0.07\)</span>, <span class="math inline">\(\hat \beta_3 = 35\)</span>, <span class="math inline">\(\hat \beta_4 = 0.01\)</span>, <span class="math inline">\(\hat \beta_5 = −10\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Which answer is correct, and why?</li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li>For a fixed value of IQ and GPA, high school graduates earn more, on average, than college graduates.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>For a fixed value of IQ and GPA, college graduates earn more, on average, than high school graduates.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>For a fixed value of IQ and GPA, high school graduates earn more, on average, than college graduates provided that the GPA is high enough.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="4" style="list-style-type: lower-roman">
+<li>For a fixed value of IQ and GPA, college graduates earn more, on average, than high school graduates provided that the GPA is high enough.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Predict the salary of a college graduate with IQ of 110 and a GPA of 4.0.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>True or false: Since the coefficient for the GPA/IQ interaction term is very small, there is very little evidence of an interaction effect. Justify your answer.</li>
+</ol>
+<p><em>Answer</em>.</p>
+</div>
 
+</div>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="empty"></div>
@@ -83,6 +181,34 @@ Learning by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.&
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>

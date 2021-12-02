@@ -1,1 +1,74 @@
 # Linear Regression {#chapter-3}
+
+Chapter 3 is about (ordinary least squares and polynomial) linear regression, a parametric supervised statistical learning method. Many of the more advanced statistical learning approaches are generalizations or extensions of linear regression, so having a good grasp on linear regression is important for understanding later methods in the book.
+
+It also discusses K-nearest neighbours regression (KNN regression), a non-parametric supervised statistical learning method.
+
+## Exercises
+
+### Prerequisites {.unnumbered}
+
+To access the data sets and functions used to complete the Chapter 3 exercises, load the following packages.
+
+
+```r
+# library(ISLR2)
+# library(tidyverse)
+# library(skimr)
+# library(GGally)
+# library(patchwork)
+```
+
+### Conceptual {.unnumbered}
+
+::: exercise
+Describe the null hypotheses to which the p-values given in Table 3.4 correspond. Explain what conclusions you can draw based on these p-values. Your explanation should be phrased in terms of sales, TV, radio, and newspaper, rather than in terms of the coefficients of the linear model.
+
+| Term      | Coefficient | Std. Error | t-statistic | p-value  |
+|-----------|-------------|------------|-------------|----------|
+| intercept | 2.939       | 0.3119     | 9.420       | \< .001  |
+| TV        | 0.046       | 0.0014     | 32.81       | \< .0001 |
+| radio     | 0.189       | 0.0086     | 21.89       | \< .0001 |
+| newspaper | -0.001      | 0.0059     | -0.18       | .8599    |
+
+: Table 3.4
+
+*Answer*.
+:::
+
+::: exercise
+Carefully explain the differences between the KNN classifier and KNN
+regression methods.
+
+*Answer*.
+:::
+
+::: exercise
+Suppose we have a data set with five predictors, $X_1 =$ GPA, $X_2 =$ IQ, $X_3 =$ Level (1 for College and 0 for High School), $X_4 =$ Interaction between GPA and IQ, and $X_5 =$ Interaction between GPA and Level. The response is starting salary after graduation (in thousands of dollars). Suppose we use least squares to fit the model, and get $\hat \beta_0 = 50$, $\hat \beta_1 = 20$, $\hat \beta_2 = 0.07$, $\hat \beta_3 = 35$, $\hat \beta_4 = 0.01$, $\hat \beta_5 = −10$.
+
+(a) Which answer is correct, and why?
+
+i. For a fixed value of IQ and GPA, high school graduates earn more, on average, than college graduates.
+
+*Answer*.
+
+ii. For a fixed value of IQ and GPA, college graduates earn more, on average, than high school graduates.
+
+*Answer*.
+
+iii. For a fixed value of IQ and GPA, high school graduates earn more, on average, than college graduates provided that the GPA is high enough.
+
+*Answer*.
+
+iv. For a fixed value of IQ and GPA, college graduates earn more, on average, than high school graduates provided that the GPA is high enough.
+
+*Answer*.
+
+(b) Predict the salary of a college graduate with IQ of 110 and a GPA of 4.0.
+
+*Answer*.
+
+(c) True or false: Since the coefficient for the GPA/IQ interaction term is very small, there is very little evidence of an interaction effect. Justify your answer.
+
+*Answer*.
+:::
