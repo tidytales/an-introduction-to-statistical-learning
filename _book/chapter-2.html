@@ -38,11 +38,7 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html">About</a></li>
-<li><a class="" href="chapter-1.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li><a class="active" href="chapter-2.html"><span class="header-section-number">2</span> Statistical Learning</a></li>
-</ul>
+        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 2</span> Statistical Learning</a></li></ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/tidytales/an-introduction-to-statistical-learning">View book source <i class="fab fa-github"></i></a></p>
@@ -176,7 +172,8 @@ E \bigl(y_0 - \hat f(x_0) \bigr)^2 = \mathrm{Var}(\hat f(x_0)) +
 <code class="sourceCode R"><span class="co"># library(ISLR2)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="conceptual" class="section level3 unnumbered">
 <h3>Conceptual<a class="anchor" aria-label="anchor" href="#conceptual"><i class="fas fa-link"></i></a>
@@ -399,26 +396,27 @@ variables for 777 different universities and colleges in the US. The help page <
 <code class="sourceCode R"><span class="co"># Make sure to preserve the row names with college names in them because they</span>
 <span class="co"># might be useful later</span>
 <span class="va">college</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu">ISLR2</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ISLR2/man/College.html">College</a></span>, rownames <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">college</span><span class="op">)</span>
-<span class="co">#&gt; tibble [777 x 18] (S3: tbl_df/tbl/data.frame)</span>
-<span class="co">#&gt;  $ Private    : Factor w/ 2 levels "No","Yes": 2 2 2 2 2 2 2 2 2 2 ...</span>
-<span class="co">#&gt;  $ Apps       : num [1:777] 1660 2186 1428 417 193 ...</span>
-<span class="co">#&gt;  $ Accept     : num [1:777] 1232 1924 1097 349 146 ...</span>
-<span class="co">#&gt;  $ Enroll     : num [1:777] 721 512 336 137 55 158 103 489 227 172 ...</span>
-<span class="co">#&gt;  $ Top10perc  : num [1:777] 23 16 22 60 16 38 17 37 30 21 ...</span>
-<span class="co">#&gt;  $ Top25perc  : num [1:777] 52 29 50 89 44 62 45 68 63 44 ...</span>
-<span class="co">#&gt;  $ F.Undergrad: num [1:777] 2885 2683 1036 510 249 ...</span>
-<span class="co">#&gt;  $ P.Undergrad: num [1:777] 537 1227 99 63 869 ...</span>
-<span class="co">#&gt;  $ Outstate   : num [1:777] 7440 12280 11250 12960 7560 ...</span>
-<span class="co">#&gt;  $ Room.Board : num [1:777] 3300 6450 3750 5450 4120 ...</span>
-<span class="co">#&gt;  $ Books      : num [1:777] 450 750 400 450 800 500 500 450 300 660 ...</span>
-<span class="co">#&gt;  $ Personal   : num [1:777] 2200 1500 1165 875 1500 ...</span>
-<span class="co">#&gt;  $ PhD        : num [1:777] 70 29 53 92 76 67 90 89 79 40 ...</span>
-<span class="co">#&gt;  $ Terminal   : num [1:777] 78 30 66 97 72 73 93 100 84 41 ...</span>
-<span class="co">#&gt;  $ S.F.Ratio  : num [1:777] 18.1 12.2 12.9 7.7 11.9 9.4 11.5 13.7 11.3 11.5 ...</span>
-<span class="co">#&gt;  $ perc.alumni: num [1:777] 12 16 30 37 2 11 26 37 23 15 ...</span>
-<span class="co">#&gt;  $ Expend     : num [1:777] 7041 10527 8735 19016 10922 ...</span>
-<span class="co">#&gt;  $ Grad.Rate  : num [1:777] 60 56 54 59 15 55 63 73 80 52 ...</span></code></pre></div>
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">college</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 777</span>
+<span class="co">#&gt; Columns: 18</span>
+<span class="co">#&gt; $ Private     &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes~</span>
+<span class="co">#&gt; $ Apps        &lt;dbl&gt; 1660, 2186, 1428, 417, 193, 587, 353, ~</span>
+<span class="co">#&gt; $ Accept      &lt;dbl&gt; 1232, 1924, 1097, 349, 146, 479, 340, ~</span>
+<span class="co">#&gt; $ Enroll      &lt;dbl&gt; 721, 512, 336, 137, 55, 158, 103, 489,~</span>
+<span class="co">#&gt; $ Top10perc   &lt;dbl&gt; 23, 16, 22, 60, 16, 38, 17, 37, 30, 21~</span>
+<span class="co">#&gt; $ Top25perc   &lt;dbl&gt; 52, 29, 50, 89, 44, 62, 45, 68, 63, 44~</span>
+<span class="co">#&gt; $ F.Undergrad &lt;dbl&gt; 2885, 2683, 1036, 510, 249, 678, 416, ~</span>
+<span class="co">#&gt; $ P.Undergrad &lt;dbl&gt; 537, 1227, 99, 63, 869, 41, 230, 32, 3~</span>
+<span class="co">#&gt; $ Outstate    &lt;dbl&gt; 7440, 12280, 11250, 12960, 7560, 13500~</span>
+<span class="co">#&gt; $ Room.Board  &lt;dbl&gt; 3300, 6450, 3750, 5450, 4120, 3335, 57~</span>
+<span class="co">#&gt; $ Books       &lt;dbl&gt; 450, 750, 400, 450, 800, 500, 500, 450~</span>
+<span class="co">#&gt; $ Personal    &lt;dbl&gt; 2200, 1500, 1165, 875, 1500, 675, 1500~</span>
+<span class="co">#&gt; $ PhD         &lt;dbl&gt; 70, 29, 53, 92, 76, 67, 90, 89, 79, 40~</span>
+<span class="co">#&gt; $ Terminal    &lt;dbl&gt; 78, 30, 66, 97, 72, 73, 93, 100, 84, 4~</span>
+<span class="co">#&gt; $ S.F.Ratio   &lt;dbl&gt; 18.1, 12.2, 12.9, 7.7, 11.9, 9.4, 11.5~</span>
+<span class="co">#&gt; $ perc.alumni &lt;dbl&gt; 12, 16, 30, 37, 2, 11, 26, 37, 23, 15,~</span>
+<span class="co">#&gt; $ Expend      &lt;dbl&gt; 7041, 10527, 8735, 19016, 10922, 9727,~</span>
+<span class="co">#&gt; $ Grad.Rate   &lt;dbl&gt; 60, 56, 54, 59, 15, 55, 63, 73, 80, 52~</span></code></pre></div>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Explore the <code>college</code> data.</li>
 </ol>
@@ -777,8 +775,172 @@ variables for 777 different universities and colleges in the US. The help page <
 <ol start="22" style="list-style-type: lower-alpha">
 <li>Produce some histograms with differing numbers of bins for a few of the quantitative variables.</li>
 </ol>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gghist</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">binwidth</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">college</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">{</span><span class="op">{</span> <span class="va">x</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="va">binwidth</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="fu">gghist</span><span class="op">(</span><span class="va">Enroll</span>, <span class="fl">300</span><span class="op">)</span> <span class="op">+</span> <span class="fu">gghist</span><span class="op">(</span><span class="va">Enroll</span>, <span class="fl">200</span><span class="op">)</span> <span class="op">+</span> <span class="fu">gghist</span><span class="op">(</span><span class="va">Enroll</span>, <span class="fl">100</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"College enrollment follows a power law distribution"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu">gghist</span><span class="op">(</span><span class="va">PhD</span>, <span class="fl">20</span><span class="op">)</span> <span class="op">+</span> <span class="fu">gghist</span><span class="op">(</span><span class="va">PhD</span>, <span class="fl">10</span><span class="op">)</span> <span class="op">+</span> <span class="fu">gghist</span><span class="op">(</span><span class="va">PhD</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"The majority of college faculty have a PhD"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-2.png" width="672"></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu">gghist</span><span class="op">(</span><span class="va">Books</span>, <span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="fu">gghist</span><span class="op">(</span><span class="va">Books</span>, <span class="fl">50</span><span class="op">)</span> <span class="op">+</span> <span class="fu">gghist</span><span class="op">(</span><span class="va">Books</span>, <span class="fl">25</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"Books cost way too much at colleges"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-3.png" width="672"></div>
 <ol start="6" style="list-style-type: lower-roman">
 <li>Continue exploring the data, and provide a brief summary of what you discover.</li>
+</ol>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-9" class="exercise"><strong>Exercise 2.9  </strong></span>This exercise involves the <code>Auto</code> data set.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">auto</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu">ISLR2</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ISLR2/man/Auto.html">Auto</a></span><span class="op">)</span></code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li>Which of the predictors are quantitative, and which are qualitative?</li>
+</ol>
+<p>All variables but <code>name</code> are quantitative.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">auto</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 392</span>
+<span class="co">#&gt; Columns: 9</span>
+<span class="co">#&gt; $ mpg          &lt;dbl&gt; 18, 15, 18, 16, 17, 15, 14, 14, 14, 1~</span>
+<span class="co">#&gt; $ cylinders    &lt;int&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8~</span>
+<span class="co">#&gt; $ displacement &lt;dbl&gt; 307, 350, 318, 304, 302, 429, 454, 44~</span>
+<span class="co">#&gt; $ horsepower   &lt;int&gt; 130, 165, 150, 150, 140, 198, 220, 21~</span>
+<span class="co">#&gt; $ weight       &lt;int&gt; 3504, 3693, 3436, 3433, 3449, 4341, 4~</span>
+<span class="co">#&gt; $ acceleration &lt;dbl&gt; 12.0, 11.5, 11.0, 12.0, 10.5, 10.0, 9~</span>
+<span class="co">#&gt; $ year         &lt;int&gt; 70, 70, 70, 70, 70, 70, 70, 70, 70, 7~</span>
+<span class="co">#&gt; $ origin       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1~</span>
+<span class="co">#&gt; $ name         &lt;fct&gt; chevrolet chevelle malibu, buick skyl~</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><p>What is the range of each quantitative predictor?</p></li>
+<li><p>What is the mean and standard deviation of each quantitative
+predictor?</p></li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">auto</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">name</span>, <span class="st">"predictor"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">predictor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    min  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,
+    max  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,
+    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,
+    sd   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="co">#&gt; # A tibble: 8 x 5</span>
+<span class="co">#&gt;   predictor      min    max    mean      sd</span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 acceleration     8   24.8   15.5    2.76 </span>
+<span class="co">#&gt; 2 cylinders        3    8      5.47   1.71 </span>
+<span class="co">#&gt; 3 displacement    68  455    194.   105.   </span>
+<span class="co">#&gt; 4 horsepower      46  230    104.    38.5  </span>
+<span class="co">#&gt; 5 mpg              9   46.6   23.4    7.81 </span>
+<span class="co">#&gt; 6 origin           1    3      1.58   0.806</span>
+<span class="co">#&gt; 7 weight        1613 5140   2978.   849.   </span>
+<span class="co">#&gt; 8 year            70   82     76.0    3.68</span></code></pre></div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">auto</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span><span class="op">:</span><span class="op">-</span><span class="fl">85</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">name</span>, <span class="st">"predictor"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">predictor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    min  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,
+    max  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,
+    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,
+    sd   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="co">#&gt; # A tibble: 8 x 5</span>
+<span class="co">#&gt;   predictor       min    max    mean      sd</span>
+<span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 acceleration    8.5   24.8   15.7    2.69 </span>
+<span class="co">#&gt; 2 cylinders       3      8      5.37   1.65 </span>
+<span class="co">#&gt; 3 displacement   68    455    187.    99.7  </span>
+<span class="co">#&gt; 4 horsepower     46    230    101.    35.7  </span>
+<span class="co">#&gt; 5 mpg            11     46.6   24.4    7.87 </span>
+<span class="co">#&gt; 6 origin          1      3      1.60   0.820</span>
+<span class="co">#&gt; 7 weight       1649   4997   2936.   811.   </span>
+<span class="co">#&gt; 8 year           70     82     77.1    3.11</span></code></pre></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.</li>
+</ol>
+<p>The plots below show relationships we would expect between the different variables based on the laws of physics. Some interesting observations:</p>
+<ul>
+<li>There appear to be two clusters of cars based on the weight by acceleration plot</li>
+<li>The relationship between weight and mpg is nonlinear</li>
+<li>Most cars have an even number of cylinders</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ggscatter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">auto</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span> <span class="va">x</span> <span class="op">}</span><span class="op">}</span>, <span class="op">{</span><span class="op">{</span> <span class="va">y</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="fu">ggscatter</span><span class="op">(</span><span class="va">weight</span>, <span class="va">acceleration</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggscatter</span><span class="op">(</span><span class="va">weight</span>, <span class="va">mpg</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"Lighter cars are more fuel efficient and accelerate faster"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu">ggscatter</span><span class="op">(</span><span class="va">cylinders</span>, <span class="va">displacement</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"Cars with more cylinders have higher displacement"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-2.png" width="672"></div>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting mpg? Justify your answer.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>The plots below suggest that mpg has nonlinear relationships with at least a few of the variables in the data set (I didn’t explore them all). In particular, weight and horsepower show very clear relationships that might be suitable for making predictions, so long as we can deal with the heteroskedasticity.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggscatter</span><span class="op">(</span><span class="va">weight</span>, <span class="va">mpg</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggscatter</span><span class="op">(</span><span class="va">acceleration</span>, <span class="va">mpg</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggscatter</span><span class="op">(</span><span class="va">horsepower</span>, <span class="va">mpg</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggscatter</span><span class="op">(</span><span class="va">displacement</span>, <span class="va">mpg</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-13-1.png" width="672"></div>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-10" class="exercise"><strong>Exercise 2.10  </strong></span>This exercise involves the <code>Boston</code> housing data set.</p>
+<ol style="list-style-type: lower-alpha">
+<li>To begin, load in the <code>Boston</code> data set. How many rows are in this data set? How many columns? What do the rows and columns represent?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>The columns represent variables that might be related to the value of houses in an area. Each row represents a suburb in Boston.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boston</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu">ISLR2</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/ISLR2/man/Boston.html">Boston</a></span><span class="op">)</span>
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">boston</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 506</span>
+<span class="co">#&gt; Columns: 13</span>
+<span class="co">#&gt; $ crim    &lt;dbl&gt; 0.00632, 0.02731, 0.02729, 0.03237, 0.0690~</span>
+<span class="co">#&gt; $ zn      &lt;dbl&gt; 18.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.5, 12.5,~</span>
+<span class="co">#&gt; $ indus   &lt;dbl&gt; 2.31, 7.07, 7.07, 2.18, 2.18, 2.18, 7.87, ~</span>
+<span class="co">#&gt; $ chas    &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~</span>
+<span class="co">#&gt; $ nox     &lt;dbl&gt; 0.538, 0.469, 0.469, 0.458, 0.458, 0.458, ~</span>
+<span class="co">#&gt; $ rm      &lt;dbl&gt; 6.575, 6.421, 7.185, 6.998, 7.147, 6.430, ~</span>
+<span class="co">#&gt; $ age     &lt;dbl&gt; 65.2, 78.9, 61.1, 45.8, 54.2, 58.7, 66.6, ~</span>
+<span class="co">#&gt; $ dis     &lt;dbl&gt; 4.0900, 4.9671, 4.9671, 6.0622, 6.0622, 6.~</span>
+<span class="co">#&gt; $ rad     &lt;int&gt; 1, 2, 2, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 4, ~</span>
+<span class="co">#&gt; $ tax     &lt;dbl&gt; 296, 242, 242, 222, 222, 222, 311, 311, 31~</span>
+<span class="co">#&gt; $ ptratio &lt;dbl&gt; 15.3, 17.8, 17.8, 18.7, 18.7, 18.7, 15.2, ~</span>
+<span class="co">#&gt; $ lstat   &lt;dbl&gt; 4.98, 9.14, 4.03, 2.94, 5.33, 5.21, 12.43,~</span>
+<span class="co">#&gt; $ medv    &lt;dbl&gt; 24.0, 21.6, 34.7, 33.4, 36.2, 28.7, 22.9, ~</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Make some pairwise scatterplots of the predictors (columns) in
+this data set. Describe your findings.</li>
 </ol>
 </div>
 
@@ -786,33 +948,15 @@ variables for 777 different universities and colleges in the US. The help page <
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="chapter-1.html"><span class="header-section-number">1</span> Introduction</a></div>
+<div class="empty"></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#chapter-2"><span class="header-section-number">2</span> Statistical Learning</a></li>
-<li><a class="nav-link" href="#prediction"><span class="header-section-number">2.1</span> Prediction</a></li>
-<li><a class="nav-link" href="#inference"><span class="header-section-number">2.2</span> Inference</a></li>
-<li>
-<a class="nav-link" href="#assessing-model-accuracy"><span class="header-section-number">2.3</span> Assessing Model Accuracy</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#in-the-regression-setting"><span class="header-section-number">2.3.1</span> In the Regression Setting</a></li>
-<li><a class="nav-link" href="#in-the-classification-setting"><span class="header-section-number">2.3.2</span> In the Classification Setting</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#exercises"><span class="header-section-number">2.4</span> Exercises</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#prerequisites">Prerequisites</a></li>
-<li><a class="nav-link" href="#conceptual">Conceptual</a></li>
-<li><a class="nav-link" href="#applied">Applied</a></li>
-</ul>
-</li>
-</ul>
+      <div id="book-on-this-page"></div>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/tidytales/an-introduction-to-statistical-learning/blob/master/02-statistical-learning.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/tidytales/an-introduction-to-statistical-learning/edit/master/02-statistical-learning.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+          
         </ul>
 </div>
     </nav>

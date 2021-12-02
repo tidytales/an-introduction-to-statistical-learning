@@ -119,6 +119,7 @@ To access the data sets and functions used to complete the Chapter 2 exercises, 
 library(tidyverse)
 library(skimr)
 library(GGally)
+library(patchwork)
 ```
 
 ### Conceptual {.unnumbered}
@@ -317,26 +318,27 @@ variables for 777 different universities and colleges in the US. The help page `
 # Make sure to preserve the row names with college names in them because they
 # might be useful later
 college <- as_tibble(ISLR2::College, rownames = NA)
-str(college)
-#> tibble [777 x 18] (S3: tbl_df/tbl/data.frame)
-#>  $ Private    : Factor w/ 2 levels "No","Yes": 2 2 2 2 2 2 2 2 2 2 ...
-#>  $ Apps       : num [1:777] 1660 2186 1428 417 193 ...
-#>  $ Accept     : num [1:777] 1232 1924 1097 349 146 ...
-#>  $ Enroll     : num [1:777] 721 512 336 137 55 158 103 489 227 172 ...
-#>  $ Top10perc  : num [1:777] 23 16 22 60 16 38 17 37 30 21 ...
-#>  $ Top25perc  : num [1:777] 52 29 50 89 44 62 45 68 63 44 ...
-#>  $ F.Undergrad: num [1:777] 2885 2683 1036 510 249 ...
-#>  $ P.Undergrad: num [1:777] 537 1227 99 63 869 ...
-#>  $ Outstate   : num [1:777] 7440 12280 11250 12960 7560 ...
-#>  $ Room.Board : num [1:777] 3300 6450 3750 5450 4120 ...
-#>  $ Books      : num [1:777] 450 750 400 450 800 500 500 450 300 660 ...
-#>  $ Personal   : num [1:777] 2200 1500 1165 875 1500 ...
-#>  $ PhD        : num [1:777] 70 29 53 92 76 67 90 89 79 40 ...
-#>  $ Terminal   : num [1:777] 78 30 66 97 72 73 93 100 84 41 ...
-#>  $ S.F.Ratio  : num [1:777] 18.1 12.2 12.9 7.7 11.9 9.4 11.5 13.7 11.3 11.5 ...
-#>  $ perc.alumni: num [1:777] 12 16 30 37 2 11 26 37 23 15 ...
-#>  $ Expend     : num [1:777] 7041 10527 8735 19016 10922 ...
-#>  $ Grad.Rate  : num [1:777] 60 56 54 59 15 55 63 73 80 52 ...
+glimpse(college)
+#> Rows: 777
+#> Columns: 18
+#> $ Private     <fct> Yes, Yes, Yes, Yes, Yes, Yes, Yes, Yes~
+#> $ Apps        <dbl> 1660, 2186, 1428, 417, 193, 587, 353, ~
+#> $ Accept      <dbl> 1232, 1924, 1097, 349, 146, 479, 340, ~
+#> $ Enroll      <dbl> 721, 512, 336, 137, 55, 158, 103, 489,~
+#> $ Top10perc   <dbl> 23, 16, 22, 60, 16, 38, 17, 37, 30, 21~
+#> $ Top25perc   <dbl> 52, 29, 50, 89, 44, 62, 45, 68, 63, 44~
+#> $ F.Undergrad <dbl> 2885, 2683, 1036, 510, 249, 678, 416, ~
+#> $ P.Undergrad <dbl> 537, 1227, 99, 63, 869, 41, 230, 32, 3~
+#> $ Outstate    <dbl> 7440, 12280, 11250, 12960, 7560, 13500~
+#> $ Room.Board  <dbl> 3300, 6450, 3750, 5450, 4120, 3335, 57~
+#> $ Books       <dbl> 450, 750, 400, 450, 800, 500, 500, 450~
+#> $ Personal    <dbl> 2200, 1500, 1165, 875, 1500, 675, 1500~
+#> $ PhD         <dbl> 70, 29, 53, 92, 76, 67, 90, 89, 79, 40~
+#> $ Terminal    <dbl> 78, 30, 66, 97, 72, 73, 93, 100, 84, 4~
+#> $ S.F.Ratio   <dbl> 18.1, 12.2, 12.9, 7.7, 11.9, 9.4, 11.5~
+#> $ perc.alumni <dbl> 12, 16, 30, 37, 2, 11, 26, 37, 23, 15,~
+#> $ Expend      <dbl> 7041, 10527, 8735, 19016, 10922, 9727,~
+#> $ Grad.Rate   <dbl> 60, 56, 54, 59, 15, 55, 63, 73, 80, 52~
 ```
 
 (c) Explore the `college` data.
@@ -451,6 +453,208 @@ college %>%
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 v. Produce some histograms with differing numbers of bins for a few of the quantitative variables.
+
+
+```r
+gghist <- function(x, binwidth) {
+  ggplot(college, aes(x = {{ x }})) +
+    geom_histogram(binwidth = binwidth)
+}
+
+gghist(Enroll, 300) + gghist(Enroll, 200) + gghist(Enroll, 100) +
+  plot_annotation(
+    title = "College enrollment follows a power law distribution"
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+```r
+
+gghist(PhD, 20) + gghist(PhD, 10) + gghist(PhD, 5) +
+  plot_annotation(
+    title = "The majority of college faculty have a PhD"
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-2.png" width="672" />
+
+```r
+
+gghist(Books, 100) + gghist(Books, 50) + gghist(Books, 25) +
+  plot_annotation(
+    title = "Books cost way too much at colleges"
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-3.png" width="672" />
     
 vi. Continue exploring the data, and provide a brief summary of what you discover.
+:::
+
+::: exercise
+This exercise involves the `Auto` data set.
+
+
+```r
+auto <- as_tibble(ISLR2::Auto)
+```
+
+(a) Which of the predictors are quantitative, and which are qualitative?
+
+All variables but `name` are quantitative.
+
+
+```r
+glimpse(auto)
+#> Rows: 392
+#> Columns: 9
+#> $ mpg          <dbl> 18, 15, 18, 16, 17, 15, 14, 14, 14, 1~
+#> $ cylinders    <int> 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8~
+#> $ displacement <dbl> 307, 350, 318, 304, 302, 429, 454, 44~
+#> $ horsepower   <int> 130, 165, 150, 150, 140, 198, 220, 21~
+#> $ weight       <int> 3504, 3693, 3436, 3433, 3449, 4341, 4~
+#> $ acceleration <dbl> 12.0, 11.5, 11.0, 12.0, 10.5, 10.0, 9~
+#> $ year         <int> 70, 70, 70, 70, 70, 70, 70, 70, 70, 7~
+#> $ origin       <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1~
+#> $ name         <fct> chevrolet chevelle malibu, buick skyl~
+```
+
+(b) What is the range of each quantitative predictor?
+
+(c) What is the mean and standard deviation of each quantitative
+predictor?
+
+
+```r
+auto %>% 
+  pivot_longer(!name, "predictor") %>% 
+  group_by(predictor) %>% 
+  summarise(
+    min  = min(value),
+    max  = max(value),
+    mean = mean(value),
+    sd   = sd(value)
+  )
+#> # A tibble: 8 x 5
+#>   predictor      min    max    mean      sd
+#>   <chr>        <dbl>  <dbl>   <dbl>   <dbl>
+#> 1 acceleration     8   24.8   15.5    2.76 
+#> 2 cylinders        3    8      5.47   1.71 
+#> 3 displacement    68  455    194.   105.   
+#> 4 horsepower      46  230    104.    38.5  
+#> 5 mpg              9   46.6   23.4    7.81 
+#> 6 origin           1    3      1.58   0.806
+#> 7 weight        1613 5140   2978.   849.   
+#> 8 year            70   82     76.0    3.68
+```
+
+(d) Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?
+
+
+```r
+auto %>% 
+  slice(-10:-85) %>% 
+  pivot_longer(!name, "predictor") %>% 
+  group_by(predictor) %>% 
+  summarise(
+    min  = min(value),
+    max  = max(value),
+    mean = mean(value),
+    sd   = sd(value)
+  )
+#> # A tibble: 8 x 5
+#>   predictor       min    max    mean      sd
+#>   <chr>         <dbl>  <dbl>   <dbl>   <dbl>
+#> 1 acceleration    8.5   24.8   15.7    2.69 
+#> 2 cylinders       3      8      5.37   1.65 
+#> 3 displacement   68    455    187.    99.7  
+#> 4 horsepower     46    230    101.    35.7  
+#> 5 mpg            11     46.6   24.4    7.87 
+#> 6 origin          1      3      1.60   0.820
+#> 7 weight       1649   4997   2936.   811.   
+#> 8 year           70     82     77.1    3.11
+```
+
+(e) Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.
+
+The plots below show relationships we would expect between the different variables based on the laws of physics. Some interesting observations:
+
+- There appear to be two clusters of cars based on the weight by acceleration plot
+- The relationship between weight and mpg is nonlinear
+- Most cars have an even number of cylinders
+
+
+```r
+ggscatter <- function(x, y) {
+  ggplot(auto, aes({{ x }}, {{ y }})) +
+    geom_point()
+}
+
+ggscatter(weight, acceleration) + ggscatter(weight, mpg) +
+  plot_annotation(
+    title = "Lighter cars are more fuel efficient and accelerate faster"
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+```r
+
+ggscatter(cylinders, displacement) +
+  labs(
+    title = "Cars with more cylinders have higher displacement"
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-12-2.png" width="672" />
+
+(f) Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting mpg? Justify your answer.
+
+*Answer*.
+
+The plots below suggest that mpg has nonlinear relationships with at least a few of the variables in the data set (I didn't explore them all). In particular, weight and horsepower show very clear relationships that might be suitable for making predictions, so long as we can deal with the heteroskedasticity.
+
+
+```r
+ggscatter(weight, mpg) + ggscatter(acceleration, mpg) +
+  ggscatter(horsepower, mpg) + ggscatter(displacement, mpg)
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+:::
+
+::: exercise
+This exercise involves the `Boston` housing data set.
+
+(a) To begin, load in the `Boston` data set. How many rows are in this data set? How many columns? What do the rows and columns represent?
+
+*Answer*.
+
+The columns represent variables that might be related to the value of houses in an area. Each row represents a suburb in Boston.
+
+
+```r
+boston <- as_tibble(ISLR2::Boston)
+glimpse(boston)
+#> Rows: 506
+#> Columns: 13
+#> $ crim    <dbl> 0.00632, 0.02731, 0.02729, 0.03237, 0.0690~
+#> $ zn      <dbl> 18.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.5, 12.5,~
+#> $ indus   <dbl> 2.31, 7.07, 7.07, 2.18, 2.18, 2.18, 7.87, ~
+#> $ chas    <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ~
+#> $ nox     <dbl> 0.538, 0.469, 0.469, 0.458, 0.458, 0.458, ~
+#> $ rm      <dbl> 6.575, 6.421, 7.185, 6.998, 7.147, 6.430, ~
+#> $ age     <dbl> 65.2, 78.9, 61.1, 45.8, 54.2, 58.7, 66.6, ~
+#> $ dis     <dbl> 4.0900, 4.9671, 4.9671, 6.0622, 6.0622, 6.~
+#> $ rad     <int> 1, 2, 2, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 4, ~
+#> $ tax     <dbl> 296, 242, 242, 222, 222, 222, 311, 311, 31~
+#> $ ptratio <dbl> 15.3, 17.8, 17.8, 18.7, 18.7, 18.7, 15.2, ~
+#> $ lstat   <dbl> 4.98, 9.14, 4.03, 2.94, 5.33, 5.21, 12.43,~
+#> $ medv    <dbl> 24.0, 21.6, 34.7, 33.4, 36.2, 28.7, 22.9, ~
+```
+
+(b) Make some pairwise scatterplots of the predictors (columns) in
+this data set. Describe your findings.
+
 :::

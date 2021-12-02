@@ -118,6 +118,7 @@ To access the data sets and functions used to complete the Chapter 2 exercises, 
 library(tidyverse)
 library(skimr)
 library(GGally)
+library(patchwork)
 ```
 
 ### Conceptual {.unnumbered}
@@ -301,7 +302,7 @@ variables for 777 different universities and colleges in the US. The help page `
 # Make sure to preserve the row names with college names in them because they
 # might be useful later
 college <- as_tibble(ISLR2::College, rownames = NA)
-str(college)
+glimpse(college)
 ```
 
 (c) Explore the `college` data.
@@ -343,6 +344,131 @@ college %>%
 ```
 
 v. Produce some histograms with differing numbers of bins for a few of the quantitative variables.
+
+```{r}
+gghist <- function(x, binwidth) {
+  ggplot(college, aes(x = {{ x }})) +
+    geom_histogram(binwidth = binwidth)
+}
+
+gghist(Enroll, 300) + gghist(Enroll, 200) + gghist(Enroll, 100) +
+  plot_annotation(
+    title = "College enrollment follows a power law distribution"
+  )
+
+gghist(PhD, 20) + gghist(PhD, 10) + gghist(PhD, 5) +
+  plot_annotation(
+    title = "The majority of college faculty have a PhD"
+  )
+
+gghist(Books, 100) + gghist(Books, 50) + gghist(Books, 25) +
+  plot_annotation(
+    title = "Books cost way too much at colleges"
+  )
+```
     
 vi. Continue exploring the data, and provide a brief summary of what you discover.
+:::
+
+::: exercise
+This exercise involves the `Auto` data set.
+
+```{r}
+auto <- as_tibble(ISLR2::Auto)
+```
+
+(a) Which of the predictors are quantitative, and which are qualitative?
+
+All variables but `name` are quantitative.
+
+```{r}
+glimpse(auto)
+```
+
+(b) What is the range of each quantitative predictor?
+
+(c) What is the mean and standard deviation of each quantitative
+predictor?
+
+```{r}
+auto %>% 
+  pivot_longer(!name, "predictor") %>% 
+  group_by(predictor) %>% 
+  summarise(
+    min  = min(value),
+    max  = max(value),
+    mean = mean(value),
+    sd   = sd(value)
+  )
+```
+
+(d) Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?
+
+```{r}
+auto %>% 
+  slice(-10:-85) %>% 
+  pivot_longer(!name, "predictor") %>% 
+  group_by(predictor) %>% 
+  summarise(
+    min  = min(value),
+    max  = max(value),
+    mean = mean(value),
+    sd   = sd(value)
+  )
+```
+
+(e) Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.
+
+The plots below show relationships we would expect between the different variables based on the laws of physics. Some interesting observations:
+
+- There appear to be two clusters of cars based on the weight by acceleration plot
+- The relationship between weight and mpg is nonlinear
+- Most cars have an even number of cylinders
+
+```{r}
+ggscatter <- function(x, y) {
+  ggplot(auto, aes({{ x }}, {{ y }})) +
+    geom_point()
+}
+
+ggscatter(weight, acceleration) + ggscatter(weight, mpg) +
+  plot_annotation(
+    title = "Lighter cars are more fuel efficient and accelerate faster"
+  )
+
+ggscatter(cylinders, displacement) +
+  labs(
+    title = "Cars with more cylinders have higher displacement"
+  )
+```
+
+(f) Suppose that we wish to predict gas mileage (mpg) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting mpg? Justify your answer.
+
+*Answer*.
+
+The plots below suggest that mpg has nonlinear relationships with at least a few of the variables in the data set (I didn't explore them all). In particular, weight and horsepower show very clear relationships that might be suitable for making predictions, so long as we can deal with the heteroskedasticity.
+
+```{r}
+ggscatter(weight, mpg) + ggscatter(acceleration, mpg) +
+  ggscatter(horsepower, mpg) + ggscatter(displacement, mpg)
+```
+:::
+
+::: exercise
+This exercise involves the `Boston` housing data set.
+
+(a) To begin, load in the `Boston` data set. How many rows are in this data set? How many columns? What do the rows and columns represent?
+
+*Answer*.
+
+The columns represent variables that might be related to the value of houses in an area. Each row represents a suburb in Boston.
+
+```{r}
+boston <- as_tibble(ISLR2::Boston)
+glimpse(boston)
+```
+
+(b) Make some pairwise scatterplots of the predictors (columns) in
+this data set. Describe your findings.
+
 :::
