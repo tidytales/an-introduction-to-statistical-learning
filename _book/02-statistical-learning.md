@@ -345,6 +345,8 @@ glimpse(college)
 
 i. Produce a numerical summary of the variables in the data set.
 
+*Answer*.
+
 
 ```r
 skim(college)
@@ -397,6 +399,8 @@ Table: (\#tab:unnamed-chunk-3)Data summary
 
 ii. Produce a scatterplot matrix of the first ten columns or variables of the data.
 
+*Answer*.
+
 
 ```r
 college %>% 
@@ -426,6 +430,8 @@ college %>%
 
 iii. Produce side-by-side boxplots of `Outstate` versus `Private`.
 
+*Answer*.
+
 
 ```r
 college %>% 
@@ -440,6 +446,8 @@ college %>%
 
 iv. Create a new qualitative variable, called `Elite`, by binning the `Top10perc` variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10% of their high school classes exceeds 50%. See how many elite universities there are, then produce side-by-side boxplots of `Outstate` versus `Elite`.
 
+*Answer*.
+
 
 ```r
 college %>% 
@@ -453,6 +461,8 @@ college %>%
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 v. Produce some histograms with differing numbers of bins for a few of the quantitative variables.
+
+*Answer*.
 
 
 ```r
@@ -490,6 +500,8 @@ gghist(Books, 100) + gghist(Books, 50) + gghist(Books, 25) +
 <img src="02-statistical-learning_files/figure-html/unnamed-chunk-7-3.png" width="672" />
     
 vi. Continue exploring the data, and provide a brief summary of what you discover.
+
+*Answer*. Passing on this one.
 :::
 
 ::: exercise
@@ -501,6 +513,8 @@ auto <- as_tibble(ISLR2::Auto)
 ```
 
 (a) Which of the predictors are quantitative, and which are qualitative?
+
+*Answer*.
 
 All variables but `name` are quantitative.
 
@@ -524,6 +538,8 @@ glimpse(auto)
 
 (c) What is the mean and standard deviation of each quantitative
 predictor?
+
+*Answer*.
 
 
 ```r
@@ -551,6 +567,8 @@ auto %>%
 
 (d) Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?
 
+*Answer*.
+
 
 ```r
 auto %>% 
@@ -577,6 +595,8 @@ auto %>%
 ```
 
 (e) Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.
+
+*Answer*.
 
 The plots below show relationships we would expect between the different variables based on the laws of physics. Some interesting observations:
 
@@ -657,4 +677,249 @@ glimpse(boston)
 (b) Make some pairwise scatterplots of the predictors (columns) in
 this data set. Describe your findings.
 
+*Answer*.
+
+I explored some other scatterplots not shown below. In general there aren't many easily interpretable relationships between variables in this data set. Some pairs have clusters of data, but no overall trend; others have floor effects where most communities have a value of zero (e.g., crime).
+
+
+```r
+ggscatter <- function(x, y) {
+  ggplot(boston, aes({{ x }}, {{ y }})) +
+    geom_point()
+}
+
+ggscatter(chas, crim) +
+  labs(
+    title = "Crime occurs more often away from the Charles River",
+    subtitle = "Or, most suburbs are away from the Charles River"
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
+```r
+
+ggscatter(zn, nox) +
+  labs(
+    title = paste0(
+      "Higher nitrogen oxide concentration in suburbs with all residential \n",
+      "land zoning below 25,000 sq.ft.")
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-2.png" width="672" />
+
+```r
+
+ggscatter(ptratio, medv) +
+  labs(
+    title = paste0(
+      "Higher pupil to teacher ratios are related to less \n",
+      "valuable owner-occupied homes"
+    )
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-3.png" width="672" />
+
+(c) Are any of the predictors associated with per capita crime rate?
+If so, explain the relationship.
+
+*Answer*.
+
+The plots below are illustrative of the relationship with crime and other variables in the dataset. More or less, crime seems to occur in a specific range of the variable its being associated with.
+
+
+```r
+ggscatter(crim, rad) +
+  labs(
+    title = "Suburbs with better access to radial highways have more crime"
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+
+```r
+
+ggscatter(crim, tax) +
+  labs(
+    title = "Suburbs with higher property tax rates have more crime"
+  )
+```
+
+<img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-2.png" width="672" />
+
+(d) Do any of the census tracts of Boston appear to have particularly high crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each predictor.
+
+*Answer*.
+
+The plots above already get at these features of the data. The range of the three predictors show some interesting patterns too. Crime per capita has a very wide range, with some having almost none and others having a lot in comparison. Tax has a similarly wide range. Although pupil-teacher ratios have a skinnier range, the differences between the minimum and maximum would be quite meaningful in a classroom---a teacher in the minimum would theoretically have twice as much time for each student compared to a teacher in the maximum.
+
+
+```r
+boston %>% 
+  select(crim, tax, ptratio) %>% 
+  pivot_longer(everything(), "predictor") %>% 
+  group_by(predictor) %>% 
+  summarise(
+    min  = min(value),
+    max  = max(value)
+  )
+#> # A tibble: 3 x 3
+#>   predictor       min   max
+#>   <chr>         <dbl> <dbl>
+#> 1 crim        0.00632  89.0
+#> 2 ptratio    12.6      22  
+#> 3 tax       187       711
+```
+
+(e) How many of the census tracts in this data set bound the Charles river?
+
+*Answer*.
+
+
+```r
+boston %>% 
+  mutate(bound = if_else(chas == 1, "Yes", "No")) %>% 
+  group_by(bound) %>% 
+  summarise(
+    n = n()
+  )
+#> # A tibble: 2 x 2
+#>   bound     n
+#>   <chr> <int>
+#> 1 No      471
+#> 2 Yes      35
+```
+
+(f) What is the median pupil-teacher ratio among the towns in this data set?
+
+*Answer*.
+
+
+```r
+boston %>% 
+  summarise(
+    median_ptratio = median(ptratio)
+  )
+#> # A tibble: 1 x 1
+#>   median_ptratio
+#>            <dbl>
+#> 1           19.0
+```
+
+(g) Which census tract of Boston has lowest median value of owner-occupied homes? What are the values of the other predictors for that census tract, and how do those values compare to the overall ranges for those predictors? Comment on your findings.
+
+*Answer*.
+
+The suburb with the lowest median value of owner-occupied homes and the values of the other predictors for it are listed here.
+
+
+```r
+boston %>% 
+  arrange(desc(medv)) %>% 
+  tail(1) %>% 
+  glimpse()
+#> Rows: 1
+#> Columns: 13
+#> $ crim    <dbl> 67.9208
+#> $ zn      <dbl> 0
+#> $ indus   <dbl> 18.1
+#> $ chas    <int> 0
+#> $ nox     <dbl> 0.693
+#> $ rm      <dbl> 5.683
+#> $ age     <dbl> 100
+#> $ dis     <dbl> 1.4254
+#> $ rad     <int> 24
+#> $ tax     <dbl> 666
+#> $ ptratio <dbl> 20.2
+#> $ lstat   <dbl> 22.98
+#> $ medv    <dbl> 5
+```
+
+In comparison to the range of those values:
+
+- `crim` is at the upper end
+- `zn` is at the minimum
+- `indus` is around two-thirds up
+- The suburb does not bound the river
+- `nox` is at the upper end
+- `rm` is near the middle
+- `age` is at the maximum
+- `dis` is almost at the minimum
+- `rad` is at the maximum
+- `tax` is near the maximum
+- `ptratio` is near the maximum
+- `lstat` is around two-thirds up
+- `medv` is at the minimum
+
+
+```r
+boston %>% 
+  pivot_longer(everything(), "predictor") %>% 
+  group_by(predictor) %>% 
+  summarise(
+    min  = min(value),
+    max  = max(value)
+  )
+#> # A tibble: 13 x 3
+#>    predictor       min     max
+#>    <chr>         <dbl>   <dbl>
+#>  1 age         2.9     100    
+#>  2 chas        0         1    
+#>  3 crim        0.00632  89.0  
+#>  4 dis         1.13     12.1  
+#>  5 indus       0.46     27.7  
+#>  6 lstat       1.73     38.0  
+#>  7 medv        5        50    
+#>  8 nox         0.385     0.871
+#>  9 ptratio    12.6      22    
+#> 10 rad         1        24    
+#> 11 rm          3.56      8.78 
+#> 12 tax       187       711    
+#> 13 zn          0       100
+```
+
+It is unsurprising that this suburb has the lowest median value of owner-occupied homes. It is an older suburb with small residential lots, high traffic and density with a resultant increase in pollution and crime, most of the land is taken up by businesses, and high taxes. Most of these characteristics are not attractive to home buyers, so there likely isn't much demand for homes in this suburb.
+
+(h) In this data set, how many of the census tracts average more than seven rooms per dwelling? More than eight rooms per dwelling? Comment on the census tracts that average more than eight rooms per dwelling.
+
+*Answer*.
+
+
+```r
+boston %>% 
+  filter(rm > 7) %>% 
+  count()
+#> # A tibble: 1 x 1
+#>       n
+#>   <int>
+#> 1    64
+```
+
+Several of these communities seem to be near each other, given the shared values between many of their variables. Most have low tax rates, low crime, smaller lots, medium to high pollution, and a high number of rooms per dwelling.
+
+
+```r
+boston %>% 
+  filter(rm > 8)
+#> # A tibble: 13 x 13
+#>      crim    zn indus  chas   nox    rm   age   dis   rad
+#>     <dbl> <dbl> <dbl> <int> <dbl> <dbl> <dbl> <dbl> <int>
+#>  1 0.121      0  2.89     0 0.445  8.07  76    3.50     2
+#>  2 1.52       0 19.6      1 0.605  8.38  93.9  2.16     5
+#>  3 0.0201    95  2.68     0 0.416  8.03  31.9  5.12     4
+#>  4 0.315      0  6.2      0 0.504  8.27  78.3  2.89     8
+#>  5 0.527      0  6.2      0 0.504  8.72  83    2.89     8
+#>  6 0.382      0  6.2      0 0.504  8.04  86.5  3.22     8
+#>  7 0.575      0  6.2      0 0.507  8.34  73.3  3.84     8
+#>  8 0.331      0  6.2      0 0.507  8.25  70.4  3.65     8
+#>  9 0.369     22  5.86     0 0.431  8.26   8.4  8.91     7
+#> 10 0.612     20  3.97     0 0.647  8.70  86.9  1.80     5
+#> 11 0.520     20  3.97     0 0.647  8.40  91.5  2.29     5
+#> 12 0.578     20  3.97     0 0.575  8.30  67    2.42     5
+#> 13 3.47       0 18.1      1 0.718  8.78  82.9  1.90    24
+#> # ... with 4 more variables: tax <dbl>, ptratio <dbl>,
+#> #   lstat <dbl>, medv <dbl>
+```
 :::

@@ -423,6 +423,7 @@ variables for 777 different universities and colleges in the US. The help page <
 <ol style="list-style-type: lower-roman">
 <li>Produce a numerical summary of the variables in the data set.</li>
 </ol>
+<p><em>Answer</em>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">college</span><span class="op">)</span></code></pre></div>
 <div class="inline-table"><table class="table table-sm">
@@ -728,6 +729,7 @@ variables for 777 different universities and colleges in the US. The help page <
 <ol start="2" style="list-style-type: lower-roman">
 <li>Produce a scatterplot matrix of the first ten columns or variables of the data.</li>
 </ol>
+<p><em>Answer</em>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">college</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -754,6 +756,7 @@ variables for 777 different universities and colleges in the US. The help page <
 <ol start="3" style="list-style-type: lower-roman">
 <li>Produce side-by-side boxplots of <code>Outstate</code> versus <code>Private</code>.</li>
 </ol>
+<p><em>Answer</em>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">college</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">Outstate</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -764,6 +767,7 @@ variables for 777 different universities and colleges in the US. The help page <
 <ol start="4" style="list-style-type: lower-roman">
 <li>Create a new qualitative variable, called <code>Elite</code>, by binning the <code>Top10perc</code> variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10% of their high school classes exceeds 50%. See how many elite universities there are, then produce side-by-side boxplots of <code>Outstate</code> versus <code>Elite</code>.</li>
 </ol>
+<p><em>Answer</em>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">college</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Elite <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Top10perc</span> <span class="op">&gt;</span> <span class="fl">50</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -775,6 +779,7 @@ variables for 777 different universities and colleges in the US. The help page <
 <ol start="22" style="list-style-type: lower-alpha">
 <li>Produce some histograms with differing numbers of bins for a few of the quantitative variables.</li>
 </ol>
+<p><em>Answer</em>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gghist</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">binwidth</span><span class="op">)</span> <span class="op">{</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">college</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">{</span><span class="op">{</span> <span class="va">x</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -803,6 +808,7 @@ variables for 777 different universities and colleges in the US. The help page <
 <ol start="6" style="list-style-type: lower-roman">
 <li>Continue exploring the data, and provide a brief summary of what you discover.</li>
 </ol>
+<p><em>Answer</em>. Passing on this one.</p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-9" class="exercise"><strong>Exercise 2.9  </strong></span>This exercise involves the <code>Auto</code> data set.</p>
@@ -811,6 +817,7 @@ variables for 777 different universities and colleges in the US. The help page <
 <ol style="list-style-type: lower-alpha">
 <li>Which of the predictors are quantitative, and which are qualitative?</li>
 </ol>
+<p><em>Answer</em>.</p>
 <p>All variables but <code>name</code> are quantitative.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">auto</span><span class="op">)</span>
@@ -830,6 +837,7 @@ variables for 777 different universities and colleges in the US. The help page <
 <li><p>What is the mean and standard deviation of each quantitative
 predictor?</p></li>
 </ol>
+<p><em>Answer</em>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">auto</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">name</span>, <span class="st">"predictor"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -854,6 +862,7 @@ predictor?</p></li>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?</li>
 </ol>
+<p><em>Answer</em>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">auto</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span><span class="op">:</span><span class="op">-</span><span class="fl">85</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -879,6 +888,7 @@ predictor?</p></li>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Using the full data set, investigate the predictors graphically, using scatterplots or other tools of your choice. Create some plots highlighting the relationships among the predictors. Comment on your findings.</li>
 </ol>
+<p><em>Answer</em>.</p>
 <p>The plots below show relationships we would expect between the different variables based on the laws of physics. Some interesting observations:</p>
 <ul>
 <li>There appear to be two clusters of cars based on the weight by acceleration plot</li>
@@ -942,6 +952,219 @@ predictor?</p></li>
 <li>Make some pairwise scatterplots of the predictors (columns) in
 this data set. Describe your findings.</li>
 </ol>
+<p><em>Answer</em>.</p>
+<p>I explored some other scatterplots not shown below. In general there aren’t many easily interpretable relationships between variables in this data set. Some pairs have clusters of data, but no overall trend; others have floor effects where most communities have a value of zero (e.g., crime).</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ggscatter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">boston</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span> <span class="va">x</span> <span class="op">}</span><span class="op">}</span>, <span class="op">{</span><span class="op">{</span> <span class="va">y</span> <span class="op">}</span><span class="op">}</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="fu">ggscatter</span><span class="op">(</span><span class="va">chas</span>, <span class="va">crim</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"Crime occurs more often away from the Charles River"</span>,
+    subtitle <span class="op">=</span> <span class="st">"Or, most suburbs are away from the Charles River"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu">ggscatter</span><span class="op">(</span><span class="va">zn</span>, <span class="va">nox</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>
+      <span class="st">"Higher nitrogen oxide concentration in suburbs with all residential \n"</span>,
+      <span class="st">"land zoning below 25,000 sq.ft."</span><span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-2.png" width="672"></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu">ggscatter</span><span class="op">(</span><span class="va">ptratio</span>, <span class="va">medv</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span>
+      <span class="st">"Higher pupil to teacher ratios are related to less \n"</span>,
+      <span class="st">"valuable owner-occupied homes"</span>
+    <span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-15-3.png" width="672"></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Are any of the predictors associated with per capita crime rate?
+If so, explain the relationship.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>The plots below are illustrative of the relationship with crime and other variables in the dataset. More or less, crime seems to occur in a specific range of the variable its being associated with.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">ggscatter</span><span class="op">(</span><span class="va">crim</span>, <span class="va">rad</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"Suburbs with better access to radial highways have more crime"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="fu">ggscatter</span><span class="op">(</span><span class="va">crim</span>, <span class="va">tax</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+    title <span class="op">=</span> <span class="st">"Suburbs with higher property tax rates have more crime"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistical-learning_files/figure-html/unnamed-chunk-16-2.png" width="672"></div>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Do any of the census tracts of Boston appear to have particularly high crime rates? Tax rates? Pupil-teacher ratios? Comment on the range of each predictor.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>The plots above already get at these features of the data. The range of the three predictors show some interesting patterns too. Crime per capita has a very wide range, with some having almost none and others having a lot in comparison. Tax has a similarly wide range. Although pupil-teacher ratios have a skinnier range, the differences between the minimum and maximum would be quite meaningful in a classroom—a teacher in the minimum would theoretically have twice as much time for each student compared to a teacher in the maximum.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boston</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">crim</span>, <span class="va">tax</span>, <span class="va">ptratio</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"predictor"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">predictor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    min  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,
+    max  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="co">#&gt; # A tibble: 3 x 3</span>
+<span class="co">#&gt;   predictor       min   max</span>
+<span class="co">#&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 crim        0.00632  89.0</span>
+<span class="co">#&gt; 2 ptratio    12.6      22  </span>
+<span class="co">#&gt; 3 tax       187       711</span></code></pre></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>How many of the census tracts in this data set bound the Charles river?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boston</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bound <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">chas</span> <span class="op">==</span> <span class="fl">1</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">bound</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="co">#&gt; # A tibble: 2 x 2</span>
+<span class="co">#&gt;   bound     n</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1 No      471</span>
+<span class="co">#&gt; 2 Yes      35</span></code></pre></div>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>What is the median pupil-teacher ratio among the towns in this data set?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boston</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    median_ptratio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">ptratio</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="co">#&gt; # A tibble: 1 x 1</span>
+<span class="co">#&gt;   median_ptratio</span>
+<span class="co">#&gt;            &lt;dbl&gt;</span>
+<span class="co">#&gt; 1           19.0</span></code></pre></div>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Which census tract of Boston has lowest median value of owner-occupied homes? What are the values of the other predictors for that census tract, and how do those values compare to the overall ranges for those predictors? Comment on your findings.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>The suburb with the lowest median value of owner-occupied homes and the values of the other predictors for it are listed here.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boston</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">medv</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 1</span>
+<span class="co">#&gt; Columns: 13</span>
+<span class="co">#&gt; $ crim    &lt;dbl&gt; 67.9208</span>
+<span class="co">#&gt; $ zn      &lt;dbl&gt; 0</span>
+<span class="co">#&gt; $ indus   &lt;dbl&gt; 18.1</span>
+<span class="co">#&gt; $ chas    &lt;int&gt; 0</span>
+<span class="co">#&gt; $ nox     &lt;dbl&gt; 0.693</span>
+<span class="co">#&gt; $ rm      &lt;dbl&gt; 5.683</span>
+<span class="co">#&gt; $ age     &lt;dbl&gt; 100</span>
+<span class="co">#&gt; $ dis     &lt;dbl&gt; 1.4254</span>
+<span class="co">#&gt; $ rad     &lt;int&gt; 24</span>
+<span class="co">#&gt; $ tax     &lt;dbl&gt; 666</span>
+<span class="co">#&gt; $ ptratio &lt;dbl&gt; 20.2</span>
+<span class="co">#&gt; $ lstat   &lt;dbl&gt; 22.98</span>
+<span class="co">#&gt; $ medv    &lt;dbl&gt; 5</span></code></pre></div>
+<p>In comparison to the range of those values:</p>
+<ul>
+<li>
+<code>crim</code> is at the upper end</li>
+<li>
+<code>zn</code> is at the minimum</li>
+<li>
+<code>indus</code> is around two-thirds up</li>
+<li>The suburb does not bound the river</li>
+<li>
+<code>nox</code> is at the upper end</li>
+<li>
+<code>rm</code> is near the middle</li>
+<li>
+<code>age</code> is at the maximum</li>
+<li>
+<code>dis</code> is almost at the minimum</li>
+<li>
+<code>rad</code> is at the maximum</li>
+<li>
+<code>tax</code> is near the maximum</li>
+<li>
+<code>ptratio</code> is near the maximum</li>
+<li>
+<code>lstat</code> is around two-thirds up</li>
+<li>
+<code>medv</code> is at the minimum</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boston</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"predictor"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">predictor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
+    min  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>,
+    max  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="co">#&gt; # A tibble: 13 x 3</span>
+<span class="co">#&gt;    predictor       min     max</span>
+<span class="co">#&gt;    &lt;chr&gt;         &lt;dbl&gt;   &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 age         2.9     100    </span>
+<span class="co">#&gt;  2 chas        0         1    </span>
+<span class="co">#&gt;  3 crim        0.00632  89.0  </span>
+<span class="co">#&gt;  4 dis         1.13     12.1  </span>
+<span class="co">#&gt;  5 indus       0.46     27.7  </span>
+<span class="co">#&gt;  6 lstat       1.73     38.0  </span>
+<span class="co">#&gt;  7 medv        5        50    </span>
+<span class="co">#&gt;  8 nox         0.385     0.871</span>
+<span class="co">#&gt;  9 ptratio    12.6      22    </span>
+<span class="co">#&gt; 10 rad         1        24    </span>
+<span class="co">#&gt; 11 rm          3.56      8.78 </span>
+<span class="co">#&gt; 12 tax       187       711    </span>
+<span class="co">#&gt; 13 zn          0       100</span></code></pre></div>
+<p>It is unsurprising that this suburb has the lowest median value of owner-occupied homes. It is an older suburb with small residential lots, high traffic and density with a resultant increase in pollution and crime, most of the land is taken up by businesses, and high taxes. Most of these characteristics are not attractive to home buyers, so there likely isn’t much demand for homes in this suburb.</p>
+<ol start="8" style="list-style-type: lower-alpha">
+<li>In this data set, how many of the census tracts average more than seven rooms per dwelling? More than eight rooms per dwelling? Comment on the census tracts that average more than eight rooms per dwelling.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boston</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">rm</span> <span class="op">&gt;</span> <span class="fl">7</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 1 x 1</span>
+<span class="co">#&gt;       n</span>
+<span class="co">#&gt;   &lt;int&gt;</span>
+<span class="co">#&gt; 1    64</span></code></pre></div>
+<p>Several of these communities seem to be near each other, given the shared values between many of their variables. Most have low tax rates, low crime, smaller lots, medium to high pollution, and a high number of rooms per dwelling.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">boston</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">rm</span> <span class="op">&gt;</span> <span class="fl">8</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 13 x 13</span>
+<span class="co">#&gt;      crim    zn indus  chas   nox    rm   age   dis   rad</span>
+<span class="co">#&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;</span>
+<span class="co">#&gt;  1 0.121      0  2.89     0 0.445  8.07  76    3.50     2</span>
+<span class="co">#&gt;  2 1.52       0 19.6      1 0.605  8.38  93.9  2.16     5</span>
+<span class="co">#&gt;  3 0.0201    95  2.68     0 0.416  8.03  31.9  5.12     4</span>
+<span class="co">#&gt;  4 0.315      0  6.2      0 0.504  8.27  78.3  2.89     8</span>
+<span class="co">#&gt;  5 0.527      0  6.2      0 0.504  8.72  83    2.89     8</span>
+<span class="co">#&gt;  6 0.382      0  6.2      0 0.504  8.04  86.5  3.22     8</span>
+<span class="co">#&gt;  7 0.575      0  6.2      0 0.507  8.34  73.3  3.84     8</span>
+<span class="co">#&gt;  8 0.331      0  6.2      0 0.507  8.25  70.4  3.65     8</span>
+<span class="co">#&gt;  9 0.369     22  5.86     0 0.431  8.26   8.4  8.91     7</span>
+<span class="co">#&gt; 10 0.612     20  3.97     0 0.647  8.70  86.9  1.80     5</span>
+<span class="co">#&gt; 11 0.520     20  3.97     0 0.647  8.40  91.5  2.29     5</span>
+<span class="co">#&gt; 12 0.578     20  3.97     0 0.575  8.30  67    2.42     5</span>
+<span class="co">#&gt; 13 3.47       0 18.1      1 0.718  8.78  82.9  1.90    24</span>
+<span class="co">#&gt; # ... with 4 more variables: tax &lt;dbl&gt;, ptratio &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   lstat &lt;dbl&gt;, medv &lt;dbl&gt;</span></code></pre></div>
 </div>
 
 </div>
