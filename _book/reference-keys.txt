@@ -15,6 +15,13 @@ exr:unlabeled-div-7
 eq:euclidean-distance
 exr:unlabeled-div-8
 tab:unnamed-chunk-3
+exr:unlabeled-div-9
+exr:unlabeled-div-10
+exr:unlabeled-div-11
+exr:unlabeled-div-12
+eq:knn-classification
+eq:knn-regression
+exr:unlabeled-div-13
 chapter-1
 notation-and-simple-matrix-algebra
 data-sets-used-in-labs-and-exercises
@@ -26,7 +33,5 @@ assessing-model-accuracy
 in-the-regression-setting
 in-the-classification-setting
 exercises
-exr:unlabeled-div-9
-exr:unlabeled-div-10
 chapter-3
 exercises-1

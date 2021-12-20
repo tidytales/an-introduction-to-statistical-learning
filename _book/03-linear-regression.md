@@ -12,8 +12,8 @@ To access the data sets and functions used to complete the Chapter 3 exercises, 
 
 
 ```r
-# library(ISLR2)
-# library(tidyverse)
+library(ISLR2)
+library(tidyverse)
 # library(skimr)
 # library(GGally)
 # library(patchwork)
@@ -34,13 +34,45 @@ Describe the null hypotheses to which the p-values given in Table 3.4 correspond
 : Table 3.4
 
 *Answer*.
+
+The null hypotheses to which the p-values in Table 3.4 correspond is that the coefficient for each term is equal to zero, $\beta_i = 0$, which we use to test whether a term is associated with the response variable. We can use the p-values in the table to infer whether the coefficients are sufficiently far from zero that we can be confident they are non-zero, and thus associated with the response variable. 
+
+Based on the p-values in Table 3.4, we can conclude that:
+
+- A $1000 increase in the TV advertising budget is associated with an average increase in product sales by 46 units while holding the advertising budgets for radio and newspaper fixed.
+- A $1000 increase in the radio advertising budget is associated with an average increase in product sales by 189 units while holding the advertising budgets for TV and newspaper fixed.
+- A $1000 increase in the newspaper advertising budget is not associated with a change in product sales.
+
+Data note: For the Advertising data sales are in thousands of units and advertising budgets in thousands of dollars.
 :::
 
 ::: exercise
-Carefully explain the differences between the KNN classifier and KNN
-regression methods.
+Carefully explain the differences between the KNN classifier and KNN regression methods.
 
 *Answer*.
+
+Given a value for $K$ and a test observation $x_0$, both the KNN classifier and KNN regression first identify the $K$ training observations that are closest to $x_0$, represented by $\mathcal N_0$. For the KNN classifier $x_0$ would be a discrete class, and for KNN regression $x_0$ would be a continuous value. The methods then diverge in what they do with $\mathcal N_0$.
+
+The KNN classifier then estimates the conditional probability that the test observation $x_0$ belongs to class $j$ as the fraction of training observations in $\mathcal N_0$ whose response value $y_i$ equals $j$:
+
+$$
+\mathrm{Pr}(Y = j|X = x_0) =  \frac{1}{K} \sum_{i \in \mathcal N_0} I(y_i = j).
+(\#eq:knn-classification)
+$$
+
+KNN regression, on the other hand, then estimates $f(x_0)$ using the average of all the training observations in $\mathcal N_0$:
+
+$$
+\hat f(x_0) = \frac{1}{K} \sum_{i \in {\mathcal N}_0} y_i.
+(\#eq:knn-regression)
+$$
+
+As can be seen in Equations \@ref(eq:knn-classification) and \@ref(eq:knn-regression), there are two main differences between the KNN classifier and KNN regression methods:
+
+- On the right side of the equation, the KNN classifier uses an indicator function $I(y_i = j)$ to determine whether a response value $y_i$ equals $j$ (if so then it equals 1, if not 0). These are summed to get the numerator of the conditional probability for each class (where the denominator is $K$). KNN regression, on the other hand, simply uses the response value $y_i$ as is, since it's a continuous value. These are also summed to get the numerator of the fraction (again with $K$ as the denominator), although it makes more sense to think of this as the average of all the training observations in $\mathcal N_0$. 
+- On the left hand side of the equation, for the KNN classifier we estimate the conditional probability that a test observation $x_0$ belongs to a class $j$. We can then use this probability to assign $x_0$ to the class $j$ with the highest probability, if we so choose (although we don't have to, the probabilities are equally useful). For KNN regression we estimate the form of $f(x_0)$, which corresponds to our prediction point for our test observation $x_0$ since $\hat Y = \hat f(X)$.
+
+Thus, the main difference between the two methods is that the KNN classifier method is used to predict what class an observation likely belongs to based on the classes of its $K$ nearest neighbours, whereas the KNN regression method is used to predict what value an observation will have on a response variable based on the response values of its $K$ nearest neighbours.
 :::
 
 ::: exercise

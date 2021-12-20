@@ -60,8 +60,8 @@
 </h3>
 <p>To access the data sets and functions used to complete the Chapter 3 exercises, load the following packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># library(ISLR2)</span>
-<span class="co"># library(tidyverse)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.statlearning.com">ISLR2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="co"># library(skimr)</span>
 <span class="co"># library(GGally)</span>
 <span class="co"># library(patchwork)</span></code></pre></div>
@@ -112,11 +112,35 @@
 </tbody>
 </table></div>
 <p><em>Answer</em>.</p>
+<p>The null hypotheses to which the p-values in Table 3.4 correspond is that the coefficient for each term is equal to zero, <span class="math inline">\(\beta_i = 0\)</span>, which we use to test whether a term is associated with the response variable. We can use the p-values in the table to infer whether the coefficients are sufficiently far from zero that we can be confident they are non-zero, and thus associated with the response variable.</p>
+<p>Based on the p-values in Table 3.4, we can conclude that:</p>
+<ul>
+<li>A $1000 increase in the TV advertising budget is associated with an average increase in product sales by 46 units while holding the advertising budgets for radio and newspaper fixed.</li>
+<li>A $1000 increase in the radio advertising budget is associated with an average increase in product sales by 189 units while holding the advertising budgets for TV and newspaper fixed.</li>
+<li>A $1000 increase in the newspaper advertising budget is not associated with a change in product sales.</li>
+</ul>
+<p>Data note: For the Advertising data sales are in thousands of units and advertising budgets in thousands of dollars.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 3.2  </strong></span>Carefully explain the differences between the KNN classifier and KNN
-regression methods.</p>
+<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 3.2  </strong></span>Carefully explain the differences between the KNN classifier and KNN regression methods.</p>
 <p><em>Answer</em>.</p>
+<p>Given a value for <span class="math inline">\(K\)</span> and a test observation <span class="math inline">\(x_0\)</span>, both the KNN classifier and KNN regression first identify the <span class="math inline">\(K\)</span> training observations that are closest to <span class="math inline">\(x_0\)</span>, represented by <span class="math inline">\(\mathcal N_0\)</span>. For the KNN classifier <span class="math inline">\(x_0\)</span> would be a discrete class, and for KNN regression <span class="math inline">\(x_0\)</span> would be a continuous value. The methods then diverge in what they do with <span class="math inline">\(\mathcal N_0\)</span>.</p>
+<p>The KNN classifier then estimates the conditional probability that the test observation <span class="math inline">\(x_0\)</span> belongs to class <span class="math inline">\(j\)</span> as the fraction of training observations in <span class="math inline">\(\mathcal N_0\)</span> whose response value <span class="math inline">\(y_i\)</span> equals <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display" id="eq:knn-classification">\[
+\mathrm{Pr}(Y = j|X = x_0) =  \frac{1}{K} \sum_{i \in \mathcal N_0} I(y_i = j).
+\tag{3.1}
+\]</span></p>
+<p>KNN regression, on the other hand, then estimates <span class="math inline">\(f(x_0)\)</span> using the average of all the training observations in <span class="math inline">\(\mathcal N_0\)</span>:</p>
+<p><span class="math display" id="eq:knn-regression">\[
+\hat f(x_0) = \frac{1}{K} \sum_{i \in {\mathcal N}_0} y_i.
+\tag{3.2}
+\]</span></p>
+<p>As can be seen in Equations <a href="chapter-3.html#eq:knn-classification">(3.1)</a> and <a href="chapter-3.html#eq:knn-regression">(3.2)</a>, there are two main differences between the KNN classifier and KNN regression methods:</p>
+<ul>
+<li>On the right side of the equation, the KNN classifier uses an indicator function <span class="math inline">\(I(y_i = j)\)</span> to determine whether a response value <span class="math inline">\(y_i\)</span> equals <span class="math inline">\(j\)</span> (if so then it equals 1, if not 0). These are summed to get the numerator of the conditional probability for each class (where the denominator is <span class="math inline">\(K\)</span>). KNN regression, on the other hand, simply uses the response value <span class="math inline">\(y_i\)</span> as is, since it’s a continuous value. These are also summed to get the numerator of the fraction (again with <span class="math inline">\(K\)</span> as the denominator), although it makes more sense to think of this as the average of all the training observations in <span class="math inline">\(\mathcal N_0\)</span>.</li>
+<li>On the left hand side of the equation, for the KNN classifier we estimate the conditional probability that a test observation <span class="math inline">\(x_0\)</span> belongs to a class <span class="math inline">\(j\)</span>. We can then use this probability to assign <span class="math inline">\(x_0\)</span> to the class <span class="math inline">\(j\)</span> with the highest probability, if we so choose (although we don’t have to, the probabilities are equally useful). For KNN regression we estimate the form of <span class="math inline">\(f(x_0)\)</span>, which corresponds to our prediction point for our test observation <span class="math inline">\(x_0\)</span> since <span class="math inline">\(\hat Y = \hat f(X)\)</span>.</li>
+</ul>
+<p>Thus, the main difference between the two methods is that the KNN classifier method is used to predict what class an observation likely belongs to based on the classes of its <span class="math inline">\(K\)</span> nearest neighbours, whereas the KNN regression method is used to predict what value an observation will have on a response variable based on the response values of its <span class="math inline">\(K\)</span> nearest neighbours.</p>
 </div>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 3.3  </strong></span>Suppose we have a data set with five predictors, <span class="math inline">\(X_1 =\)</span> GPA, <span class="math inline">\(X_2 =\)</span> IQ, <span class="math inline">\(X_3 =\)</span> Level (1 for College and 0 for High School), <span class="math inline">\(X_4 =\)</span> Interaction between GPA and IQ, and <span class="math inline">\(X_5 =\)</span> Interaction between GPA and Level. The response is starting salary after graduation (in thousands of dollars). Suppose we use least squares to fit the model, and get <span class="math inline">\(\hat \beta_0 = 50\)</span>, <span class="math inline">\(\hat \beta_1 = 20\)</span>, <span class="math inline">\(\hat \beta_2 = 0.07\)</span>, <span class="math inline">\(\hat \beta_3 = 35\)</span>, <span class="math inline">\(\hat \beta_4 = 0.01\)</span>, <span class="math inline">\(\hat \beta_5 = −10\)</span>.</p>
@@ -173,7 +197,7 @@ regression methods.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-11-30.</p>
+    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-12-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
