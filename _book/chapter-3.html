@@ -148,27 +148,46 @@
 <li>Which answer is correct, and why?</li>
 </ol>
 <ol style="list-style-type: lower-roman">
-<li>For a fixed value of IQ and GPA, high school graduates earn more, on average, than college graduates.</li>
+<li><p>For a fixed value of IQ and GPA, high school graduates earn more, on average, than college graduates.</p></li>
+<li><p>For a fixed value of IQ and GPA, college graduates earn more, on average, than high school graduates.</p></li>
+<li><p>For a fixed value of IQ and GPA, high school graduates earn more, on average, than college graduates provided that the GPA is high enough.</p></li>
+<li><p>For a fixed value of IQ and GPA, college graduates earn more, on average, than high school graduates provided that the GPA is high enough.</p></li>
 </ol>
-<p><em>Answer</em>.</p>
-<ol start="2" style="list-style-type: lower-roman">
-<li>For a fixed value of IQ and GPA, college graduates earn more, on average, than high school graduates.</li>
-</ol>
-<p><em>Answer</em>.</p>
-<ol start="3" style="list-style-type: lower-roman">
-<li>For a fixed value of IQ and GPA, high school graduates earn more, on average, than college graduates provided that the GPA is high enough.</li>
-</ol>
-<p><em>Answer</em>.</p>
-<ol start="4" style="list-style-type: lower-roman">
-<li>For a fixed value of IQ and GPA, college graduates earn more, on average, than high school graduates provided that the GPA is high enough.</li>
-</ol>
-<p><em>Answer</em>.</p>
+<p><em>Answer</em>. The fourth description is correct. The coefficient for Level is positive, so when it is included in the model (i.e., when Level is not zero) then predictions for starting salary will be higher; however, because the coefficient for the interaction between GPA and level is negative, this will only be true provided that college graduate GPA is high enough.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Predict the salary of a college graduate with IQ of 110 and a GPA of 4.0.</li>
 </ol>
 <p><em>Answer</em>.</p>
+<p>The predicted salary for this college graduate is $137,100.</p>
+<p><span class="math display">\[
+\begin{align}
+\hat y &amp;= 50 + 20(4) + 0.07(110) + 35(1) + 0.01(4*110) - 10(4*1) \\
+       &amp;= 50 + 80 + 7.7 + 35 + 4.4 - 40 \\
+       &amp;= 137.1
+\end{align}
+\]</span></p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>True or false: Since the coefficient for the GPA/IQ interaction term is very small, there is very little evidence of an interaction effect. Justify your answer.</li>
+</ol>
+<p><em>Answer</em>. False. The size of the coefficient does not provide evidence for or against an interaction effect. We use the p-value associated with the coefficient to determine whether it is sufficiently far from zero that we can be confident it is non-zero, and thus associated with the response variable. If our estimates are precise enough we can find a small coefficient and be confident that it is non-zero. But we cannot make a decision about this based on the coefficient alone.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 3.4  </strong></span>I collect a set of data (n = 100 observations) containing a single predictor and a quantitative response. I then fit a linear regression model to the data, as well as a separate cubic regression, i.e. <span class="math inline">\(Y = \beta_0 + \beta_1X + \beta_2X^2 + \beta_3X^3 + \epsilon\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Suppose that the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is linear,
+i.e. <span class="math inline">\(Y = \beta_0 + \beta_1X + \epsilon\)</span>. Consider the training residual sum of squares (RSS) for the linear regression, and also the training RSS for the cubic regression. Would we expect one to be lower than the other, would we expect them to be the same, or is there not enough information to tell? Justify your answer.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Answer (a) using test rather than training RSS.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Suppose that the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is not linear, but we don’t know how far it is from linear. Consider the training RSS for the linear regression, and also the training RSS for the cubic regression. Would we expect one to be lower than the other, would we expect them to be the same, or is there not enough information to tell? Justify your answer.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Answer (c) using test rather than training RSS.</li>
 </ol>
 <p><em>Answer</em>.</p>
 </div>
