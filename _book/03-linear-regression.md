@@ -14,6 +14,7 @@ To access the data sets and functions used to complete the Chapter 3 exercises, 
 ```r
 library(ISLR2)
 library(tidyverse)
+library(tidymodels)
 # library(skimr)
 # library(GGally)
 # library(patchwork)
@@ -327,8 +328,8 @@ data set.
 
 
 ```r
-lm(mpg ~ horsepower, data = Auto) %>% 
-  summary()
+auto_model <- lm(mpg ~ horsepower, data = Auto)
+summary(auto_model)
 #> 
 #> Call:
 #> lm(formula = mpg ~ horsepower, data = Auto)
@@ -350,5 +351,66 @@ lm(mpg ~ horsepower, data = Auto) %>%
 #> F-statistic: 599.7 on 1 and 390 DF,  p-value: < 2.2e-16
 ```
 
+From the output above we can see that:
 
+- There is a relationship between horsepower and mpg such that a one horsepower increase is associated with an average decrease in fuel economy of 0.157845 miles per gallon.
+- Horsepower explains 60.59% of the variability in mpg.
+
+If we make some predictions based on a few common horsepower values for different classes of vehicles (small car, average car, SUV) we can see that this model is misspecified.
+
+
+```r
+auto_model %>%
+  predict(
+    tibble(horsepower = c(98, 180, 300)),
+    type = "response",
+    interval = "confidence"
+  )
+#>         fit      lwr       upr
+#> 1 24.467077 23.97308 24.961075
+#> 2 11.523809 10.44983 12.597792
+#> 3 -7.417559 -9.94281 -4.892308
+```
+
+When a vehicle has 300 horsepower our model predicts that it will have a fuel economy that falls somewhere between -9.94281 mpg and -4.892308 mpg. This implies that vehicles with high horsepower *produce* fuel during travel, rather than consuming it. It's a nonsense statistic that indicates this model is misspecified in a fairly severe way.
+
+(b) Plot the response and the predictor. Display the least squares regression line using an reference line (abline).
+
+
+```r
+ggplot(Auto, aes(x = horsepower, y = mpg)) +
+  geom_point(alpha = 0.5) +
+  geom_abline(
+    slope = coef(auto_model)["horsepower"],
+    intercept = coef(auto_model)["(Intercept)"],
+    colour = "blue"
+  ) +
+  coord_cartesian(ylim = c(0, 50))
+```
+
+<img src="03-linear-regression_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+
+This plot gives some good evidence our model is misspecified. The relationship between horsepower and mpg is clearly nonlinear in our data. We also see that the range of horsepower in our data is limited in comparison to the amount of horsepower we might be interested in making predictions for.
+
+(c) Produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.
+
+
+```r
+auto_model %>% 
+  augment() %>% 
+  ggplot(aes(x = .fitted, y = .resid)) +
+    geom_point()
+```
+
+<img src="03-linear-regression_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+
+The diagnostic plot clearly shows problems with the fit:
+
+- The U-shape of the residuals gives a strong indication of nonlinearity (and we know there is nonlinearity in the data already).
+- The non-constant variance of the residuals is a sign of heteroscedasticity.
+- There are at least a couple outliers.
+:::
+
+::: exercise
+This question involves the use of multiple linear regression on the `Auto` data set.
 :::
