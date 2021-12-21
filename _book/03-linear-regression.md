@@ -117,16 +117,238 @@ i.e. $Y = \beta_0 + \beta_1X + \epsilon$. Consider the training residual sum of 
 
 *Answer*.
 
+Given that the true relationship between $X$ and $Y$ is linear we would expect the residual sum of squares to be lower for the linear regression than the cubic regression because:
+
+- The least squares line minimizes RSS, and
+- The linear regression matches the true form of $f(X)$, so
+- The linear regression will fit better and thus have a smaller RSS.
+
 (b) Answer (a) using test rather than training RSS.
 
 *Answer*.
+
+We would expect the same outcome with the test RSS as with the training RSS.
 
 (c) Suppose that the true relationship between $X$ and $Y$ is not linear, but we don’t know how far it is from linear. Consider the training RSS for the linear regression, and also the training RSS for the cubic regression. Would we expect one to be lower than the other, would we expect them to be the same, or is there not enough information to tell? Justify your answer.
 
 *Answer*.
 
+Given that we don't know how far the true relationship between $X$ and $Y$ is from linear, it's hard to say for sure. If the true relationship is far from linear we would expect training RSS to be lower for the cubic regression than the linear regression because the bias-variance trade off would be poorer for the linear regression. We would expect the same if the true relationship was cubic because the cubic regression would match the true form of $f(X)$. However, if the true relationship was only slightly nonlinear then it's hard to say which would have lower training RSS, if any. There are likely situations where one or the other is better and where they are the same; although in general the cubic regression might overfit and thus have a lower RSS.
+
 (d) Answer (c) using test rather than training RSS.
 
 *Answer*.
+
+Again, it's hard to say for sure. If the true relationship between $X$ and $Y$ is slightly nonlinear, we might expect the cubic regression to have overfit the training data, so the bias of the linear regression may lead to better predictions (and a lower RSS) in the test data. If the true relationship is cubic then the cubic regression would have a lower test RSS since it would match the true form of $f(X)$. If the true relationship is far from linear then we would expect the cubic regression to have lower RSS since it would have a better bias-variance trade off than the linear regression. 
+:::
+
+::: exercise
+Consider the fitted values that result from performing linear regression without an intercept. In this setting, the $i$th fitted value takes the form
+
+$$
+\hat y_i = \hat \beta x_i,
+$$
+
+where
+
+$$
+\hat \beta = \bigg(\sum_{i = 1}^n x_i y_i \bigg) / \bigg(\sum_{i' = 1}^n x_{i'}^2 \bigg).
+$$
+
+Show that we can write 
+
+$$
+\hat y_i = \sum_{i' = 1}^n a_{i'} y_{i'}.
+$$
+
+What is $a_{i'}$?
+
+*Answer*.
+
+We can get to the solution by:
+
+1. Plugging the expression for $\hat \beta$ into the formula for the $i$th fitted value.
+2. Moving the constant $x_i$ into the numerator summation expression and changing the numerator summation dummy variable to $i'$, since $x_i$ is independent of $i'$.
+3. Moving the summation for $i'$ out of the numerator.
+4. Moving $y_{i'}$ out of the numerator.
+
+Which looks like
+
+$$
+\begin{align}
+\hat y_i &= x_i \hat \beta \\
+         &= x_i \frac{\sum_{i = 1}^n x_i y_i}{\sum_{i' = 1}^n x_{i'}^2} \\
+         &= \frac{\sum_{i' = 1}^n x_i x_{i'} y_{i'}}{\sum_{i'' = 1}^n x_{i''}^2} \\
+         &= \sum_{i' = 1}^n \frac{x_i x_{i'} y_{i'}}{\sum_{i'' = 1}^n x_{i''}^2} \\
+         &= \sum_{i' = 1}^n \frac{x_i x_{i'}}{\sum_{i'' = 1}^n x_{i''}^2} y_{i'} \\
+         &= \sum_{i' = 1}^n a_{i'} y_{i'},
+\end{align}
+$$
+
+where
+
+$$
+a_{i'} = \frac{x_i x_{i'}}{\sum_{i'' = 1}^n x_{i''}^2}.
+$$
+
+*Note*: We interpret this result by saying that the fitted values from linear regression are linear combinations of the response values.
+:::
+
+::: exercise
+Using the least squares coefficient estimates equation, argue that in the case of simple linear regression, the least squares line always passes through the point $(\bar x, \bar y)$.
+
+*Answer*.
+
+The the least squares coefficient estimates are given by
+
+$$
+\begin{align}
+\hat \beta_1 &= \frac{\sum_{i = 1}^n (x_i - \bar x)(y_i - \bar y)}
+                     {\sum_{i = 1}^n (x_i - \bar x)^2}, \\
+\hat \beta_0 &= \bar y - \hat \beta_1 \bar x.
+\end{align}
+$$
+
+The least squares line is given by
+
+$$
+\hat y = \hat \beta_0 + \hat \beta_1 x.
+$$
+
+When $x = \bar x$ then $\hat y = \bar y$ on the least squares line. This can be demonstrated by substituting the least squares coefficient estimate equation for the intercept into the least squares line equation,
+
+$$
+\begin{align}
+\hat y &= \hat \beta_0 + \hat \beta_1 \bar x \\
+       &= \bar y - \hat \beta_1 \bar x + \hat \beta_1 \bar x \\
+       &= \bar y.
+\end{align}
+$$
+
+Since the least squares line passes through all values of $X$, it will always pass through the mean of the predictor $\bar x$, which exists somewhere between the smallest and largest values of $x$. As shown above, when $x = \bar x$ then $\hat y = \bar y$ on the least squares line, thus the least squares line always passes through the point $(\bar x, \bar y)$.
+:::
+
+::: exercise
+It is claimed in the text that in the case of simple linear regression of $Y$ onto $X$, the $R^2$ statistic is equal to the square of the correlation between $X$ and $Y$. Prove that this is the case. For simplicity, you may assume that  $\bar x = \bar y = 0$.
+
+*Answer*.
+
+Skipping this one.
+<!--
+The $R^2$ statistic is given by
+
+$$
+R^2 = \frac{\mathrm{TSS} - \mathrm{RSS}}{\mathrm{TSS}}
+    = 1 - \frac{\mathrm{RSS}}{\mathrm{TSS}},
+$$
+
+where $\mathrm{TSS} = \sum_{i = 1}^n (y_i - \bar y)^2$ and $\mathrm{RSS} = \sum_{i = 1}^n (y_i - \hat y_i)^2$. So
+
+$$
+R^2 = \frac{
+  \sum_{i = 1}^n (y_i - \bar y)^2 - \sum_{i = 1}^n (y_i - \hat y_i)^2
+}{
+  \sum_{i = 1}^n (y_i - \bar y)^2
+} = 1 - \frac{
+  \sum_{i = 1}^n (y_i - \hat y_i)^2
+}{
+\sum_{i = 1}^n (y_i - \bar y)^2
+}
+$$
+
+The correlation between $X$ and $Y$.
+
+$$
+\mathrm{Cor}(X,Y) = \frac{
+  \sum_{i = 1}^n (x_i - \bar x)(y_i - \bar y)
+}{
+  \sqrt{\sum_{i = 1}^n (x_i - \bar x)^2} \sqrt{\sum_{i = 1}^n (y_i - \bar y)^2}
+}
+$$
+
+Since $\bar x = \bar y = 0$ these can be simplified to
+
+$$
+R^2 = \frac{
+  \sum_{i = 1}^n y_i^2 - \sum_{i = 1}^n (y_i - \hat y_i)^2
+}{
+  \sum_{i = 1}^n y_i^2
+} = 1 - \frac{
+  \sum_{i = 1}^n (y_i - \hat y_i)^2
+}{
+\sum_{i = 1}^n y_i^2
+},
+$$
+
+and
+
+$$
+\mathrm{Cor}(X,Y) = \frac{
+  \sum_{i = 1}^n x_i y_i
+}{
+  \sqrt{\sum_{i = 1}^n x_i^2 y_i^2}
+}.
+$$
+RSS can also be simplified using the least squares coefficient estimates
+
+$$
+\begin{align}
+\mathrm{RSS} &= \sum_{i = 1}^n (y_i - \hat y_i)^2 \\
+  &= \sum_{i = 1}^n (y_i - \hat y_i)(y_i - \hat y_i) \\
+  &= \sum_{i = 1}^n y_i^2 - 2 y_i \hat y_i + \hat y_i^2 \\
+  &= \sum_{i = 1}^n y_i^2 - 2 y_i (\hat \beta_0 + \hat \beta_1 x_i) +
+     (\hat \beta_0 + \hat \beta_1 x_i)^2 \\
+  &= \sum_{i = 1}^n y_i^2 - 2 x_i y_i \hat \beta_1 + (\hat \beta_1 x_i)^2 \\
+  &= \sum_{i = 1}^n y_i^2 - 2 x_i y_i
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg) +
+     x_i^2 
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg)^2 \\
+  &= \sum_{i = 1}^n y_i^2 - 2
+     (\sum_{i = 1}^n x_i y_i)
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg) +
+     x_i^2 
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg)^2 \\
+     &= \sum_{i = 1}^n y_i^2 - 2
+     \frac{(\sum_{i = 1}^n x_i y_i)^2}{\sum_{i = 1}^n x_i^2} +
+     x_i^2 
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg)^2 \\
+\end{align}
+$$
+-->
+:::
+
+### Applied {.unnumbered}
+
+::: exercise
+This question involves the use of simple linear regression on the `ISLR2::Auto`
+data set.
+
+(a) Use the `lm()` function to perform a simple linear regression with `mpg` as the response and `horsepower` as the predictor. Use the `summary()` function to print the results. Comment on the output.
+
+
+```r
+lm(mpg ~ horsepower, data = Auto) %>% 
+  summary()
+#> 
+#> Call:
+#> lm(formula = mpg ~ horsepower, data = Auto)
+#> 
+#> Residuals:
+#>      Min       1Q   Median       3Q      Max 
+#> -13.5710  -3.2592  -0.3435   2.7630  16.9240 
+#> 
+#> Coefficients:
+#>              Estimate Std. Error t value Pr(>|t|)    
+#> (Intercept) 39.935861   0.717499   55.66   <2e-16 ***
+#> horsepower  -0.157845   0.006446  -24.49   <2e-16 ***
+#> ---
+#> Signif. codes:  
+#> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Residual standard error: 4.906 on 390 degrees of freedom
+#> Multiple R-squared:  0.6059,	Adjusted R-squared:  0.6049 
+#> F-statistic: 599.7 on 1 and 390 DF,  p-value: < 2.2e-16
+```
+
 
 :::

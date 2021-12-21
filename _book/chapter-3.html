@@ -178,18 +178,210 @@
 i.e. <span class="math inline">\(Y = \beta_0 + \beta_1X + \epsilon\)</span>. Consider the training residual sum of squares (RSS) for the linear regression, and also the training RSS for the cubic regression. Would we expect one to be lower than the other, would we expect them to be the same, or is there not enough information to tell? Justify your answer.</li>
 </ol>
 <p><em>Answer</em>.</p>
+<p>Given that the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is linear we would expect the residual sum of squares to be lower for the linear regression than the cubic regression because:</p>
+<ul>
+<li>The least squares line minimizes RSS, and</li>
+<li>The linear regression matches the true form of <span class="math inline">\(f(X)\)</span>, so</li>
+<li>The linear regression will fit better and thus have a smaller RSS.</li>
+</ul>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Answer (a) using test rather than training RSS.</li>
 </ol>
 <p><em>Answer</em>.</p>
+<p>We would expect the same outcome with the test RSS as with the training RSS.</p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Suppose that the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is not linear, but we don’t know how far it is from linear. Consider the training RSS for the linear regression, and also the training RSS for the cubic regression. Would we expect one to be lower than the other, would we expect them to be the same, or is there not enough information to tell? Justify your answer.</li>
 </ol>
 <p><em>Answer</em>.</p>
+<p>Given that we don’t know how far the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is from linear, it’s hard to say for sure. If the true relationship is far from linear we would expect training RSS to be lower for the cubic regression than the linear regression because the bias-variance trade off would be poorer for the linear regression. We would expect the same if the true relationship was cubic because the cubic regression would match the true form of <span class="math inline">\(f(X)\)</span>. However, if the true relationship was only slightly nonlinear then it’s hard to say which would have lower training RSS, if any. There are likely situations where one or the other is better and where they are the same; although in general the cubic regression might overfit and thus have a lower RSS.</p>
 <ol start="4" style="list-style-type: lower-alpha">
 <li>Answer (c) using test rather than training RSS.</li>
 </ol>
 <p><em>Answer</em>.</p>
+<p>Again, it’s hard to say for sure. If the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is slightly nonlinear, we might expect the cubic regression to have overfit the training data, so the bias of the linear regression may lead to better predictions (and a lower RSS) in the test data. If the true relationship is cubic then the cubic regression would have a lower test RSS since it would match the true form of <span class="math inline">\(f(X)\)</span>. If the true relationship is far from linear then we would expect the cubic regression to have lower RSS since it would have a better bias-variance trade off than the linear regression.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-5" class="exercise"><strong>Exercise 3.5  </strong></span>Consider the fitted values that result from performing linear regression without an intercept. In this setting, the <span class="math inline">\(i\)</span>th fitted value takes the form</p>
+<p><span class="math display">\[
+\hat y_i = \hat \beta x_i,
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\hat \beta = \bigg(\sum_{i = 1}^n x_i y_i \bigg) / \bigg(\sum_{i' = 1}^n x_{i'}^2 \bigg).
+\]</span></p>
+<p>Show that we can write</p>
+<p><span class="math display">\[
+\hat y_i = \sum_{i' = 1}^n a_{i'} y_{i'}.
+\]</span></p>
+<p>What is <span class="math inline">\(a_{i'}\)</span>?</p>
+<p><em>Answer</em>.</p>
+<p>We can get to the solution by:</p>
+<ol style="list-style-type: decimal">
+<li>Plugging the expression for <span class="math inline">\(\hat \beta\)</span> into the formula for the <span class="math inline">\(i\)</span>th fitted value.</li>
+<li>Moving the constant <span class="math inline">\(x_i\)</span> into the numerator summation expression and changing the numerator summation dummy variable to <span class="math inline">\(i'\)</span>, since <span class="math inline">\(x_i\)</span> is independent of <span class="math inline">\(i'\)</span>.</li>
+<li>Moving the summation for <span class="math inline">\(i'\)</span> out of the numerator.</li>
+<li>Moving <span class="math inline">\(y_{i'}\)</span> out of the numerator.</li>
+</ol>
+<p>Which looks like</p>
+<p><span class="math display">\[
+\begin{align}
+\hat y_i &amp;= x_i \hat \beta \\
+         &amp;= x_i \frac{\sum_{i = 1}^n x_i y_i}{\sum_{i' = 1}^n x_{i'}^2} \\
+         &amp;= \frac{\sum_{i' = 1}^n x_i x_{i'} y_{i'}}{\sum_{i'' = 1}^n x_{i''}^2} \\
+         &amp;= \sum_{i' = 1}^n \frac{x_i x_{i'} y_{i'}}{\sum_{i'' = 1}^n x_{i''}^2} \\
+         &amp;= \sum_{i' = 1}^n \frac{x_i x_{i'}}{\sum_{i'' = 1}^n x_{i''}^2} y_{i'} \\
+         &amp;= \sum_{i' = 1}^n a_{i'} y_{i'},
+\end{align}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+a_{i'} = \frac{x_i x_{i'}}{\sum_{i'' = 1}^n x_{i''}^2}.
+\]</span></p>
+<p><em>Note</em>: We interpret this result by saying that the fitted values from linear regression are linear combinations of the response values.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Exercise 3.6  </strong></span>Using the least squares coefficient estimates equation, argue that in the case of simple linear regression, the least squares line always passes through the point <span class="math inline">\((\bar x, \bar y)\)</span>.</p>
+<p><em>Answer</em>.</p>
+<p>The the least squares coefficient estimates are given by</p>
+<p><span class="math display">\[
+\begin{align}
+\hat \beta_1 &amp;= \frac{\sum_{i = 1}^n (x_i - \bar x)(y_i - \bar y)}
+                     {\sum_{i = 1}^n (x_i - \bar x)^2}, \\
+\hat \beta_0 &amp;= \bar y - \hat \beta_1 \bar x.
+\end{align}
+\]</span></p>
+<p>The least squares line is given by</p>
+<p><span class="math display">\[
+\hat y = \hat \beta_0 + \hat \beta_1 x.
+\]</span></p>
+<p>When <span class="math inline">\(x = \bar x\)</span> then <span class="math inline">\(\hat y = \bar y\)</span> on the least squares line. This can be demonstrated by substituting the least squares coefficient estimate equation for the intercept into the least squares line equation,</p>
+<p><span class="math display">\[
+\begin{align}
+\hat y &amp;= \hat \beta_0 + \hat \beta_1 \bar x \\
+       &amp;= \bar y - \hat \beta_1 \bar x + \hat \beta_1 \bar x \\
+       &amp;= \bar y.
+\end{align}
+\]</span></p>
+<p>Since the least squares line passes through all values of <span class="math inline">\(X\)</span>, it will always pass through the mean of the predictor <span class="math inline">\(\bar x\)</span>, which exists somewhere between the smallest and largest values of <span class="math inline">\(x\)</span>. As shown above, when <span class="math inline">\(x = \bar x\)</span> then <span class="math inline">\(\hat y = \bar y\)</span> on the least squares line, thus the least squares line always passes through the point <span class="math inline">\((\bar x, \bar y)\)</span>.</p>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 3.7  </strong></span>It is claimed in the text that in the case of simple linear regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>, the <span class="math inline">\(R^2\)</span> statistic is equal to the square of the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Prove that this is the case. For simplicity, you may assume that <span class="math inline">\(\bar x = \bar y = 0\)</span>.</p>
+<p><em>Answer</em>.</p>
+<p>Skipping this one.
+<!--
+The $R^2$ statistic is given by
+
+$$
+R^2 = \frac{\mathrm{TSS} - \mathrm{RSS}}{\mathrm{TSS}}
+    = 1 - \frac{\mathrm{RSS}}{\mathrm{TSS}},
+$$
+
+where $\mathrm{TSS} = \sum_{i = 1}^n (y_i - \bar y)^2$ and $\mathrm{RSS} = \sum_{i = 1}^n (y_i - \hat y_i)^2$. So
+
+$$
+R^2 = \frac{
+  \sum_{i = 1}^n (y_i - \bar y)^2 - \sum_{i = 1}^n (y_i - \hat y_i)^2
+}{
+  \sum_{i = 1}^n (y_i - \bar y)^2
+} = 1 - \frac{
+  \sum_{i = 1}^n (y_i - \hat y_i)^2
+}{
+\sum_{i = 1}^n (y_i - \bar y)^2
+}
+$$
+
+The correlation between $X$ and $Y$.
+
+$$
+\mathrm{Cor}(X,Y) = \frac{
+  \sum_{i = 1}^n (x_i - \bar x)(y_i - \bar y)
+}{
+  \sqrt{\sum_{i = 1}^n (x_i - \bar x)^2} \sqrt{\sum_{i = 1}^n (y_i - \bar y)^2}
+}
+$$
+
+Since $\bar x = \bar y = 0$ these can be simplified to
+
+$$
+R^2 = \frac{
+  \sum_{i = 1}^n y_i^2 - \sum_{i = 1}^n (y_i - \hat y_i)^2
+}{
+  \sum_{i = 1}^n y_i^2
+} = 1 - \frac{
+  \sum_{i = 1}^n (y_i - \hat y_i)^2
+}{
+\sum_{i = 1}^n y_i^2
+},
+$$
+
+and
+
+$$
+\mathrm{Cor}(X,Y) = \frac{
+  \sum_{i = 1}^n x_i y_i
+}{
+  \sqrt{\sum_{i = 1}^n x_i^2 y_i^2}
+}.
+$$
+RSS can also be simplified using the least squares coefficient estimates
+
+$$
+\begin{align}
+\mathrm{RSS} &= \sum_{i = 1}^n (y_i - \hat y_i)^2 \\
+  &= \sum_{i = 1}^n (y_i - \hat y_i)(y_i - \hat y_i) \\
+  &= \sum_{i = 1}^n y_i^2 - 2 y_i \hat y_i + \hat y_i^2 \\
+  &= \sum_{i = 1}^n y_i^2 - 2 y_i (\hat \beta_0 + \hat \beta_1 x_i) +
+     (\hat \beta_0 + \hat \beta_1 x_i)^2 \\
+  &= \sum_{i = 1}^n y_i^2 - 2 x_i y_i \hat \beta_1 + (\hat \beta_1 x_i)^2 \\
+  &= \sum_{i = 1}^n y_i^2 - 2 x_i y_i
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg) +
+     x_i^2 
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg)^2 \\
+  &= \sum_{i = 1}^n y_i^2 - 2
+     (\sum_{i = 1}^n x_i y_i)
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg) +
+     x_i^2 
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg)^2 \\
+     &= \sum_{i = 1}^n y_i^2 - 2
+     \frac{(\sum_{i = 1}^n x_i y_i)^2}{\sum_{i = 1}^n x_i^2} +
+     x_i^2 
+     \bigg(\frac{\sum_{i = 1}^n x_i y_i}{\sum_{i = 1}^n x_i^2}\bigg)^2 \\
+\end{align}
+$$
+--></p>
+</div>
+</div>
+<div id="applied-1" class="section level3 unnumbered">
+<h3>Applied<a class="anchor" aria-label="anchor" href="#applied-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 3.8  </strong></span>This question involves the use of simple linear regression on the <code><a href="https://rdrr.io/pkg/ISLR2/man/Auto.html">ISLR2::Auto</a></code>
+data set.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to perform a simple linear regression with <code>mpg</code> as the response and <code>horsepower</code> as the predictor. Use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to print the results. Comment on the output.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">horsepower</span>, data <span class="op">=</span> <span class="va">Auto</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ horsepower, data = Auto)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
+<span class="co">#&gt; -13.5710  -3.2592  -0.3435   2.7630  16.9240 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;              Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept) 39.935861   0.717499   55.66   &lt;2e-16 ***</span>
+<span class="co">#&gt; horsepower  -0.157845   0.006446  -24.49   &lt;2e-16 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 4.906 on 390 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.6059, Adjusted R-squared:  0.6049 </span>
+<span class="co">#&gt; F-statistic: 599.7 on 1 and 390 DF,  p-value: &lt; 2.2e-16</span></code></pre></div>
 </div>
 
 </div>
