@@ -38,7 +38,12 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 3</span> Linear Regression</a></li></ul>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">About</a></li>
+<li><a class="" href="chapter-1.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="chapter-2.html"><span class="header-section-number">2</span> Statistical Learning</a></li>
+<li><a class="active" href="chapter-3.html"><span class="header-section-number">3</span> Linear Regression</a></li>
+</ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/tidytales/an-introduction-to-statistical-learning">View book source <i class="fab fa-github"></i></a></p>
@@ -59,7 +64,7 @@
 <h3>Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>To access the data sets and functions used to complete the Chapter 3 exercises, load the following packages.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.statlearning.com">ISLR2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span>
@@ -71,7 +76,7 @@
 <h3>Conceptual<a class="anchor" aria-label="anchor" href="#conceptual-1"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-1" class="exercise"><strong>Exercise 3.1  </strong></span>Describe the null hypotheses to which the p-values given in Table 3.4 correspond. Explain what conclusions you can draw based on these p-values. Your explanation should be phrased in terms of sales, TV, radio, and newspaper, rather than in terms of the coefficients of the linear model.</p>
+<p><span id="exr:unlabeled-div-11" class="exercise"><strong>Exercise 3.1  </strong></span>Describe the null hypotheses to which the p-values given in Table 3.4 correspond. Explain what conclusions you can draw based on these p-values. Your explanation should be phrased in terms of sales, TV, radio, and newspaper, rather than in terms of the coefficients of the linear model.</p>
 <div class="inline-table"><table class="table table-sm">
 <caption>Table 3.4</caption>
 <thead><tr class="header">
@@ -123,7 +128,7 @@
 <p>Data note: For the Advertising data sales are in thousands of units and advertising budgets in thousands of dollars.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-2" class="exercise"><strong>Exercise 3.2  </strong></span>Carefully explain the differences between the KNN classifier and KNN regression methods.</p>
+<p><span id="exr:unlabeled-div-12" class="exercise"><strong>Exercise 3.2  </strong></span>Carefully explain the differences between the KNN classifier and KNN regression methods.</p>
 <p><em>Answer</em>.</p>
 <p>Given a value for <span class="math inline">\(K\)</span> and a test observation <span class="math inline">\(x_0\)</span>, both the KNN classifier and KNN regression first identify the <span class="math inline">\(K\)</span> training observations that are closest to <span class="math inline">\(x_0\)</span>, represented by <span class="math inline">\(\mathcal N_0\)</span>. For the KNN classifier <span class="math inline">\(x_0\)</span> would be a discrete class, and for KNN regression <span class="math inline">\(x_0\)</span> would be a continuous value. The methods then diverge in what they do with <span class="math inline">\(\mathcal N_0\)</span>.</p>
 <p>The KNN classifier then estimates the conditional probability that the test observation <span class="math inline">\(x_0\)</span> belongs to class <span class="math inline">\(j\)</span> as the fraction of training observations in <span class="math inline">\(\mathcal N_0\)</span> whose response value <span class="math inline">\(y_i\)</span> equals <span class="math inline">\(j\)</span>:</p>
@@ -144,7 +149,7 @@
 <p>Thus, the main difference between the two methods is that the KNN classifier method is used to predict what class an observation likely belongs to based on the classes of its <span class="math inline">\(K\)</span> nearest neighbours, whereas the KNN regression method is used to predict what value an observation will have on a response variable based on the response values of its <span class="math inline">\(K\)</span> nearest neighbours.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-3" class="exercise"><strong>Exercise 3.3  </strong></span>Suppose we have a data set with five predictors, <span class="math inline">\(X_1 =\)</span> GPA, <span class="math inline">\(X_2 =\)</span> IQ, <span class="math inline">\(X_3 =\)</span> Level (1 for College and 0 for High School), <span class="math inline">\(X_4 =\)</span> Interaction between GPA and IQ, and <span class="math inline">\(X_5 =\)</span> Interaction between GPA and Level. The response is starting salary after graduation (in thousands of dollars). Suppose we use least squares to fit the model, and get <span class="math inline">\(\hat \beta_0 = 50\)</span>, <span class="math inline">\(\hat \beta_1 = 20\)</span>, <span class="math inline">\(\hat \beta_2 = 0.07\)</span>, <span class="math inline">\(\hat \beta_3 = 35\)</span>, <span class="math inline">\(\hat \beta_4 = 0.01\)</span>, <span class="math inline">\(\hat \beta_5 = −10\)</span>.</p>
+<p><span id="exr:unlabeled-div-13" class="exercise"><strong>Exercise 3.3  </strong></span>Suppose we have a data set with five predictors, <span class="math inline">\(X_1 =\)</span> GPA, <span class="math inline">\(X_2 =\)</span> IQ, <span class="math inline">\(X_3 =\)</span> Level (1 for College and 0 for High School), <span class="math inline">\(X_4 =\)</span> Interaction between GPA and IQ, and <span class="math inline">\(X_5 =\)</span> Interaction between GPA and Level. The response is starting salary after graduation (in thousands of dollars). Suppose we use least squares to fit the model, and get <span class="math inline">\(\hat \beta_0 = 50\)</span>, <span class="math inline">\(\hat \beta_1 = 20\)</span>, <span class="math inline">\(\hat \beta_2 = 0.07\)</span>, <span class="math inline">\(\hat \beta_3 = 35\)</span>, <span class="math inline">\(\hat \beta_4 = 0.01\)</span>, <span class="math inline">\(\hat \beta_5 = −10\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Which answer is correct, and why?</li>
 </ol>
@@ -173,7 +178,7 @@
 <p><em>Answer</em>. False. The size of the coefficient does not provide evidence for or against an interaction effect. We use the p-value associated with the coefficient to determine whether it is sufficiently far from zero that we can be confident it is non-zero, and thus associated with the response variable. If our estimates are precise enough we can find a small coefficient and be confident that it is non-zero. But we cannot make a decision about this based on the coefficient alone.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-4" class="exercise"><strong>Exercise 3.4  </strong></span>I collect a set of data (n = 100 observations) containing a single predictor and a quantitative response. I then fit a linear regression model to the data, as well as a separate cubic regression, i.e. <span class="math inline">\(Y = \beta_0 + \beta_1X + \beta_2X^2 + \beta_3X^3 + \epsilon\)</span>.</p>
+<p><span id="exr:unlabeled-div-14" class="exercise"><strong>Exercise 3.4  </strong></span>I collect a set of data (n = 100 observations) containing a single predictor and a quantitative response. I then fit a linear regression model to the data, as well as a separate cubic regression, i.e. <span class="math inline">\(Y = \beta_0 + \beta_1X + \beta_2X^2 + \beta_3X^3 + \epsilon\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Suppose that the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is linear,
 i.e. <span class="math inline">\(Y = \beta_0 + \beta_1X + \epsilon\)</span>. Consider the training residual sum of squares (RSS) for the linear regression, and also the training RSS for the cubic regression. Would we expect one to be lower than the other, would we expect them to be the same, or is there not enough information to tell? Justify your answer.</li>
@@ -202,7 +207,7 @@ i.e. <span class="math inline">\(Y = \beta_0 + \beta_1X + \epsilon\)</span>. Co
 <p>Again, it’s hard to say for sure. If the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is slightly nonlinear, we might expect the cubic regression to have overfit the training data, so the bias of the linear regression may lead to better predictions (and a lower RSS) in the test data. If the true relationship is cubic then the cubic regression would have a lower test RSS since it would match the true form of <span class="math inline">\(f(X)\)</span>. If the true relationship is far from linear then we would expect the cubic regression to have lower RSS since it would have a better bias-variance trade off than the linear regression.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-5" class="exercise"><strong>Exercise 3.5  </strong></span>Consider the fitted values that result from performing linear regression without an intercept. In this setting, the <span class="math inline">\(i\)</span>th fitted value takes the form</p>
+<p><span id="exr:unlabeled-div-15" class="exercise"><strong>Exercise 3.5  </strong></span>Consider the fitted values that result from performing linear regression without an intercept. In this setting, the <span class="math inline">\(i\)</span>th fitted value takes the form</p>
 <p><span class="math display">\[
 \hat y_i = \hat \beta x_i,
 \]</span></p>
@@ -241,7 +246,7 @@ a_{i'} = \frac{x_i x_{i'}}{\sum_{i'' = 1}^n x_{i''}^2}.
 <p><em>Note</em>: We interpret this result by saying that the fitted values from linear regression are linear combinations of the response values.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-6" class="exercise"><strong>Exercise 3.6  </strong></span>Using the least squares coefficient estimates equation, argue that in the case of simple linear regression, the least squares line always passes through the point <span class="math inline">\((\bar x, \bar y)\)</span>.</p>
+<p><span id="exr:unlabeled-div-16" class="exercise"><strong>Exercise 3.6  </strong></span>Using the least squares coefficient estimates equation, argue that in the case of simple linear regression, the least squares line always passes through the point <span class="math inline">\((\bar x, \bar y)\)</span>.</p>
 <p><em>Answer</em>.</p>
 <p>The the least squares coefficient estimates are given by</p>
 <p><span class="math display">\[
@@ -266,7 +271,7 @@ a_{i'} = \frac{x_i x_{i'}}{\sum_{i'' = 1}^n x_{i''}^2}.
 <p>Since the least squares line passes through all values of <span class="math inline">\(X\)</span>, it will always pass through the mean of the predictor <span class="math inline">\(\bar x\)</span>, which exists somewhere between the smallest and largest values of <span class="math inline">\(x\)</span>. As shown above, when <span class="math inline">\(x = \bar x\)</span> then <span class="math inline">\(\hat y = \bar y\)</span> on the least squares line, thus the least squares line always passes through the point <span class="math inline">\((\bar x, \bar y)\)</span>.</p>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-7" class="exercise"><strong>Exercise 3.7  </strong></span>It is claimed in the text that in the case of simple linear regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>, the <span class="math inline">\(R^2\)</span> statistic is equal to the square of the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Prove that this is the case. For simplicity, you may assume that <span class="math inline">\(\bar x = \bar y = 0\)</span>.</p>
+<p><span id="exr:unlabeled-div-17" class="exercise"><strong>Exercise 3.7  </strong></span>It is claimed in the text that in the case of simple linear regression of <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>, the <span class="math inline">\(R^2\)</span> statistic is equal to the square of the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Prove that this is the case. For simplicity, you may assume that <span class="math inline">\(\bar x = \bar y = 0\)</span>.</p>
 <p><em>Answer</em>.</p>
 <p>Skipping this one.
 <!--
@@ -356,12 +361,13 @@ $$
 <h3>Applied<a class="anchor" aria-label="anchor" href="#applied-1"><i class="fas fa-link"></i></a>
 </h3>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-8" class="exercise"><strong>Exercise 3.8  </strong></span>This question involves the use of simple linear regression on the <code><a href="https://rdrr.io/pkg/ISLR2/man/Auto.html">ISLR2::Auto</a></code>
+<p><span id="exr:unlabeled-div-18" class="exercise"><strong>Exercise 3.8  </strong></span>This question involves the use of simple linear regression on the <code><a href="https://rdrr.io/pkg/ISLR2/man/Auto.html">ISLR2::Auto</a></code>
 data set.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to perform a simple linear regression with <code>mpg</code> as the response and <code>horsepower</code> as the predictor. Use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to print the results. Comment on the output.</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">auto_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">horsepower</span>, data <span class="op">=</span> <span class="va">Auto</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">auto_model</span><span class="op">)</span>
 <span class="co">#&gt; </span>
@@ -389,7 +395,7 @@ data set.</p>
 <li>Horsepower explains 60.59% of the variability in mpg.</li>
 </ul>
 <p>If we make some predictions based on a few common horsepower values for different classes of vehicles (small car, average car, SUV) we can see that this model is misspecified.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">auto_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span>
     <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>horsepower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">98</span>, <span class="fl">180</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span>,
@@ -400,11 +406,12 @@ data set.</p>
 <span class="co">#&gt; 1 24.467077 23.97308 24.961075</span>
 <span class="co">#&gt; 2 11.523809 10.44983 12.597792</span>
 <span class="co">#&gt; 3 -7.417559 -9.94281 -4.892308</span></code></pre></div>
-<p>When a vehicle has 300 horsepower our model predicts that it will have a fuel economy that falls somewhere between -9.94281 mpg and -4.892308 mpg. This implies that vehicles with high horsepower <em>produce</em> fuel during travel, rather than consuming it. It’s a nonsense statistic that indicates this model is misspecified in a fairly severe way.</p>
+<p>When a vehicle has 300 horsepower our model predicts that it will have a fuel economy that falls somewhere between -9.94281 mpg and -4.892308 mpg. This implies that vehicles with high horsepower <em>produce</em> fuel during travel, rather than consuming it. It’s a nonsense statistic that indicates this model is misspecified in a fairly severe way. Or perhaps that we have a data quality issue.</p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Plot the response and the predictor. Display the least squares regression line using an reference line (abline).</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Auto</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">horsepower</span>, y <span class="op">=</span> <span class="va">mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>
@@ -418,7 +425,8 @@ data set.</p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">auto_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">augment</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.fitted</span>, y <span class="op">=</span> <span class="va">.resid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -432,22 +440,466 @@ data set.</p>
 </ul>
 </div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-9" class="exercise"><strong>Exercise 3.9  </strong></span>This question involves the use of multiple linear regression on the <code>Auto</code> data set.</p>
+<p><span id="exr:unlabeled-div-19" class="exercise"><strong>Exercise 3.9  </strong></span>This question involves the use of multiple linear regression on the <code>Auto</code> data set.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Produce a scatterplot matrix which includes all of the variables
+in the data set.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Auto</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="03-linear-regression_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Compute the matrix of correlations between the variables.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Auto</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt;                     mpg  cylinders displacement horsepower</span>
+<span class="co">#&gt; mpg           1.0000000 -0.7776175   -0.8051269 -0.7784268</span>
+<span class="co">#&gt; cylinders    -0.7776175  1.0000000    0.9508233  0.8429834</span>
+<span class="co">#&gt; displacement -0.8051269  0.9508233    1.0000000  0.8972570</span>
+<span class="co">#&gt; horsepower   -0.7784268  0.8429834    0.8972570  1.0000000</span>
+<span class="co">#&gt; weight       -0.8322442  0.8975273    0.9329944  0.8645377</span>
+<span class="co">#&gt; acceleration  0.4233285 -0.5046834   -0.5438005 -0.6891955</span>
+<span class="co">#&gt; year          0.5805410 -0.3456474   -0.3698552 -0.4163615</span>
+<span class="co">#&gt; origin        0.5652088 -0.5689316   -0.6145351 -0.4551715</span>
+<span class="co">#&gt;                  weight acceleration       year     origin</span>
+<span class="co">#&gt; mpg          -0.8322442    0.4233285  0.5805410  0.5652088</span>
+<span class="co">#&gt; cylinders     0.8975273   -0.5046834 -0.3456474 -0.5689316</span>
+<span class="co">#&gt; displacement  0.9329944   -0.5438005 -0.3698552 -0.6145351</span>
+<span class="co">#&gt; horsepower    0.8645377   -0.6891955 -0.4163615 -0.4551715</span>
+<span class="co">#&gt; weight        1.0000000   -0.4168392 -0.3091199 -0.5850054</span>
+<span class="co">#&gt; acceleration -0.4168392    1.0000000  0.2903161  0.2127458</span>
+<span class="co">#&gt; year         -0.3091199    0.2903161  1.0000000  0.1815277</span>
+<span class="co">#&gt; origin       -0.5850054    0.2127458  0.1815277  1.0000000</span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to perform a multiple linear regression with <code>mpg</code> as the response and all other variables except <code>name</code> and <code>origin</code> as the predictors. Use the summary() function to print the results. Comment on the output.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">auto_model</span> <span class="op">&lt;-</span> <span class="va">Auto</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">as_factor</span><span class="op">)</span>,
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>
+      <span class="va">origin</span>,
+      <span class="op">~</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span><span class="op">(</span><span class="va">.x</span>, American <span class="op">=</span> <span class="st">"1"</span>, European <span class="op">=</span> <span class="st">"2"</span>, Japanese <span class="op">=</span> <span class="st">"3"</span><span class="op">)</span>
+    <span class="op">)</span>
+  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+    <span class="va">mpg</span> <span class="op">~</span> <span class="va">cylinders</span> <span class="op">+</span> <span class="va">displacement</span> <span class="op">+</span> <span class="va">horsepower</span> <span class="op">+</span> <span class="va">weight</span> <span class="op">+</span>
+    <span class="va">acceleration</span> <span class="op">+</span> <span class="va">year</span> <span class="op">+</span> <span class="va">origin</span>,
+    data <span class="op">=</span> <span class="va">.</span>
+  <span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">auto_model</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ cylinders + displacement + horsepower + weight + </span>
+<span class="co">#&gt;     acceleration + year + origin, data = .)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
+<span class="co">#&gt; -9.0095 -2.0785 -0.0982  1.9856 13.3608 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                  Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)    -1.795e+01  4.677e+00  -3.839 0.000145 ***</span>
+<span class="co">#&gt; cylinders      -4.897e-01  3.212e-01  -1.524 0.128215    </span>
+<span class="co">#&gt; displacement    2.398e-02  7.653e-03   3.133 0.001863 ** </span>
+<span class="co">#&gt; horsepower     -1.818e-02  1.371e-02  -1.326 0.185488    </span>
+<span class="co">#&gt; weight         -6.710e-03  6.551e-04 -10.243  &lt; 2e-16 ***</span>
+<span class="co">#&gt; acceleration    7.910e-02  9.822e-02   0.805 0.421101    </span>
+<span class="co">#&gt; year            7.770e-01  5.178e-02  15.005  &lt; 2e-16 ***</span>
+<span class="co">#&gt; originEuropean  2.630e+00  5.664e-01   4.643 4.72e-06 ***</span>
+<span class="co">#&gt; originJapanese  2.853e+00  5.527e-01   5.162 3.93e-07 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 3.307 on 383 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.8242, Adjusted R-squared:  0.8205 </span>
+<span class="co">#&gt; F-statistic: 224.5 on 8 and 383 DF,  p-value: &lt; 2.2e-16</span></code></pre></div>
+<p>From the output above we can see that:</p>
+<ul>
+<li>The F-statistic indicates at least one predictor is non-zero.</li>
+<li>American vehicles have an average fuel economy of -17.9546021 miles per gallon when all other variables are 0. This is a nonsense statistic, as are holding most of the other variables at 0. Centring might help here.</li>
+<li>European vehicles have an average fuel economy 2.63 miles per gallon higher than American vehicles while holding all other variables fixed.</li>
+<li>Japanese vehicles have an average fuel economy 2.85 miles per gallon higher than American vehicles while holding all other variables fixed.</li>
+<li>A one year increase in vehicle model is associated with an average increase in fuel economy of 0.78 miles per gallon for American vehicles. So newer American vehicles are expected to have higher fuel economy.</li>
+<li>All other predictors except for cylinders, horsepower, and acceleration, have a statistically significant relationship with mpg.</li>
+</ul>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Produce diagnostic plots of the linear regression fit. Comment on any problems you see with the fit. Do the residual plots suggest any unusually large outliers? Does the leverage plot identify any observations with unusually high
+leverage?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">auto_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">augment</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.fitted</span>, y <span class="op">=</span> <span class="va">.resid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="03-linear-regression_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+<p>The diagnostic plot clearly shows problems with the fit:</p>
+<ul>
+<li>The U-shape of the residuals gives a strong indication of nonlinearity (and we know there is nonlinearity in the data already).</li>
+<li>The non-constant variance of the residuals is a sign of heteroscedasticity.</li>
+</ul>
+<p>The leverage plot shows one or two high leverage points. We can also see some possible outliers whose standardized residual value is greater than three.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">auto_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">augment</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="co"># The standardized residual returned by augment() is equivalent to the</span>
+  <span class="co"># "internally studentized residuals", which the textbook refers to simply as</span>
+  <span class="co"># "studentized residuals".</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.hat</span>, y <span class="op">=</span> <span class="va">.std.resid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Auto</span><span class="op">)</span><span class="op">)</span>, nudge_x <span class="op">=</span> <span class="op">-</span><span class="fl">0.007</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"leverage"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="03-linear-regression_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Use the * and : symbols to fit linear regression models with interaction effects. Do any interactions appear to be statistically significant?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>In a model with interactions between all predictors there are a number of statistically significant interactions (not shown because its output is really long).</p>
+<p>Some simpler models show some interesting interactions. For example, here we see that the average effect of a one horsepower increase on fuel economy depends on a vehicle’s country of origin (although not by a meaningful amount it seems).</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">Auto</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">origin</span>, <span class="va">as_factor</span><span class="op">)</span>,
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>
+      <span class="va">origin</span>,
+      <span class="op">~</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span><span class="op">(</span><span class="va">.x</span>, American <span class="op">=</span> <span class="st">"1"</span>, European <span class="op">=</span> <span class="st">"2"</span>, Japanese <span class="op">=</span> <span class="st">"3"</span><span class="op">)</span>
+    <span class="op">)</span>
+  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+    <span class="va">mpg</span> <span class="op">~</span> <span class="va">horsepower</span><span class="op">*</span><span class="va">origin</span>,
+    data <span class="op">=</span> <span class="va">.</span>
+  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ horsepower * origin, data = .)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
+<span class="co">#&gt; -10.7415  -2.9547  -0.6389   2.3978  14.2495 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                            Estimate Std. Error t value</span>
+<span class="co">#&gt; (Intercept)               34.476496   0.890665  38.709</span>
+<span class="co">#&gt; horsepower                -0.121320   0.007095 -17.099</span>
+<span class="co">#&gt; originEuropean            10.997230   2.396209   4.589</span>
+<span class="co">#&gt; originJapanese            14.339718   2.464293   5.819</span>
+<span class="co">#&gt; horsepower:originEuropean -0.100515   0.027723  -3.626</span>
+<span class="co">#&gt; horsepower:originJapanese -0.108723   0.028980  -3.752</span>
+<span class="co">#&gt;                           Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)                &lt; 2e-16 ***</span>
+<span class="co">#&gt; horsepower                 &lt; 2e-16 ***</span>
+<span class="co">#&gt; originEuropean            6.02e-06 ***</span>
+<span class="co">#&gt; originJapanese            1.24e-08 ***</span>
+<span class="co">#&gt; horsepower:originEuropean 0.000327 ***</span>
+<span class="co">#&gt; horsepower:originJapanese 0.000203 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 4.422 on 386 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.6831, Adjusted R-squared:  0.679 </span>
+<span class="co">#&gt; F-statistic: 166.4 on 5 and 386 DF,  p-value: &lt; 2.2e-16</span></code></pre></div>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>Try a few different transformations of the variables, such as <span class="math inline">\(\mathrm{log}(X)\)</span>, <span class="math inline">\(\sqrt X\)</span>, <span class="math inline">\(X^2\)</span>. Comment on your findings.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>Here I’ll fit the same model with the different transformations. I chose the predictors that have a nonlinear relationship with mpg. As can be seen from the output of the models, the transformations affect all aspects of the model fits and parameter estimates.</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">auto_model_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">mpg</span> <span class="op">~</span> <span class="va">displacement</span> <span class="op">+</span> <span class="va">horsepower</span> <span class="op">+</span> <span class="va">weight</span>,
+  data <span class="op">=</span> <span class="va">Auto</span>
+<span class="op">)</span>
+
+<span class="va">auto_model_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">displacement</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">horsepower</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,
+  data <span class="op">=</span> <span class="va">Auto</span>
+<span class="op">)</span>
+
+<span class="va">auto_model_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">displacement</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">horsepower</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>,
+  data <span class="op">=</span> <span class="va">Auto</span>
+<span class="op">)</span>
+
+<span class="va">auto_model_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+  <span class="va">mpg</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">displacement</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">horsepower</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">weight</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>,
+  data <span class="op">=</span> <span class="va">Auto</span>
+<span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">auto_model_1</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ displacement + horsepower + weight, data = Auto)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
+<span class="co">#&gt; -11.3347  -2.8028  -0.3402   2.2037  16.2409 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)  44.8559357  1.1959200  37.507  &lt; 2e-16 ***</span>
+<span class="co">#&gt; displacement -0.0057688  0.0065819  -0.876  0.38132    </span>
+<span class="co">#&gt; horsepower   -0.0416741  0.0128139  -3.252  0.00125 ** </span>
+<span class="co">#&gt; weight       -0.0053516  0.0007124  -7.513 4.04e-13 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 4.241 on 388 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.707,  Adjusted R-squared:  0.7047 </span>
+<span class="co">#&gt; F-statistic:   312 on 3 and 388 DF,  p-value: &lt; 2.2e-16</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">auto_model_2</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ log(displacement) + log(horsepower) + log(weight), </span>
+<span class="co">#&gt;     data = Auto)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
+<span class="co">#&gt; -11.6539  -2.4232  -0.3147   2.0760  15.2014 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                   Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)        161.495     11.898  13.574  &lt; 2e-16 ***</span>
+<span class="co">#&gt; log(displacement)   -2.353      1.187  -1.982   0.0482 *  </span>
+<span class="co">#&gt; log(horsepower)     -6.929      1.263  -5.487 7.38e-08 ***</span>
+<span class="co">#&gt; log(weight)        -11.835      2.264  -5.228 2.81e-07 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 3.978 on 388 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.7422, Adjusted R-squared:  0.7402 </span>
+<span class="co">#&gt; F-statistic: 372.3 on 3 and 388 DF,  p-value: &lt; 2.2e-16</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">auto_model_3</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ sqrt(displacement) + sqrt(horsepower) + sqrt(weight), </span>
+<span class="co">#&gt;     data = Auto)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;      Min       1Q   Median       3Q      Max </span>
+<span class="co">#&gt; -11.4945  -2.6258  -0.3391   2.1942  15.6793 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                    Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept)        65.76610    2.36880  27.763  &lt; 2e-16 ***</span>
+<span class="co">#&gt; sqrt(displacement) -0.26868    0.18126  -1.482    0.139    </span>
+<span class="co">#&gt; sqrt(horsepower)   -1.11790    0.25795  -4.334 1.87e-05 ***</span>
+<span class="co">#&gt; sqrt(weight)       -0.50813    0.08152  -6.233 1.19e-09 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 4.089 on 388 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.7276, Adjusted R-squared:  0.7255 </span>
+<span class="co">#&gt; F-statistic: 345.4 on 3 and 388 DF,  p-value: &lt; 2.2e-16</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">auto_model_4</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = mpg ~ I(displacement^2) + I(horsepower^2) + I(weight^2), </span>
+<span class="co">#&gt;     data = Auto)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
+<span class="co">#&gt; -10.941  -3.323  -0.771   2.634  17.200 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;                     Estimate Std. Error t value Pr(&gt;|t|)</span>
+<span class="co">#&gt; (Intercept)        3.427e+01  6.017e-01  56.955   &lt;2e-16</span>
+<span class="co">#&gt; I(displacement^2) -3.673e-08  1.483e-05  -0.002   0.9980</span>
+<span class="co">#&gt; I(horsepower^2)   -1.033e-04  5.632e-05  -1.834   0.0674</span>
+<span class="co">#&gt; I(weight^2)       -9.953e-07  1.018e-07  -9.778   &lt;2e-16</span>
+<span class="co">#&gt;                      </span>
+<span class="co">#&gt; (Intercept)       ***</span>
+<span class="co">#&gt; I(displacement^2)    </span>
+<span class="co">#&gt; I(horsepower^2)   .  </span>
+<span class="co">#&gt; I(weight^2)       ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 4.596 on 388 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.6559, Adjusted R-squared:  0.6532 </span>
+<span class="co">#&gt; F-statistic: 246.5 on 3 and 388 DF,  p-value: &lt; 2.2e-16</span></code></pre></div>
+</div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-20" class="exercise"><strong>Exercise 3.10  </strong></span>This question should be answered using the <code>Carseats</code> data set.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Fit a multiple regression model to predict <code>Sales</code> using <code>Price</code>, <code>Urban</code>, and <code>US</code>.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">carseats</span> <span class="op">&lt;-</span> <span class="va">Carseats</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="va">as_factor</span><span class="op">)</span>,
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">ShelveLoc</span>, <span class="op">~</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">.x</span>, <span class="st">"Medium"</span>, after <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">)</span>
+
+<span class="va">carseats_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Sales</span> <span class="op">~</span> <span class="va">Price</span> <span class="op">+</span> <span class="va">Urban</span> <span class="op">+</span> <span class="va">US</span>, data <span class="op">=</span> <span class="va">carseats</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">carseats_model</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Sales ~ Price + Urban + US, data = carseats)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
+<span class="co">#&gt; -6.9206 -1.6220 -0.0564  1.5786  7.0581 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;              Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept) 13.043469   0.651012  20.036  &lt; 2e-16 ***</span>
+<span class="co">#&gt; Price       -0.054459   0.005242 -10.389  &lt; 2e-16 ***</span>
+<span class="co">#&gt; UrbanYes    -0.021916   0.271650  -0.081    0.936    </span>
+<span class="co">#&gt; USYes        1.200573   0.259042   4.635 4.86e-06 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 2.472 on 396 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.2393, Adjusted R-squared:  0.2335 </span>
+<span class="co">#&gt; F-statistic: 41.52 on 3 and 396 DF,  p-value: &lt; 2.2e-16</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Provide an interpretation of each coefficient in the model. Be careful—some of the variables in the model are qualitative!</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>The coefficients can be interpreted as follows:</p>
+<ul>
+<li>The intercept does not make sense to interpret since the car seats are never sold for free.</li>
+<li>A one dollar increase in car seat price is associated with an average decrease in sales by 54 units at rural stores located outside the US.</li>
+<li>Urban stores located outside the US sell 22 fewer car seats on average compared to rural stores located outside the US while holding price fixed.</li>
+<li>Rural stores located in the US sell 1200 more car seats on average compared to rural stores located outside the US while holding price fixed.</li>
+</ul>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Write out the model in equation form, being careful to handle
+the qualitative variables properly.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p><span class="math display">\[
+y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i + \beta_3 x_i + \epsilon_i =
+\begin{cases}
+\beta_0 + \beta_1 x_i + \epsilon_i &amp;
+  \text{if ith location is rural outside US} \\
+\beta_0 + \beta_1 x_i + \beta_2 x_i + \epsilon_i &amp;
+  \text{if ith location is urban outside US} \\
+\beta_0 + \beta_1 x_i + \beta_3 x_i + \epsilon_i &amp;
+  \text{if ith location is rural inside US},
+\end{cases}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\begin{align}
+\beta_0 &amp;= 13.043469 \\
+\beta_1 &amp;= -0.054459 \\
+\beta_2 &amp;= -0.021916 \\
+\beta_3 &amp;= 1.200573.
+\end{align}
+\]</span></p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>For which of the predictors can you reject the null hypothesis <span class="math inline">\(H_0: \beta_j = 0\)</span>?</li>
+</ol>
+<p><em>Answer</em>. Intercept, Price, and US.</p>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>On the basis of your response to the previous question, fit a smaller model that only uses the predictors for which there is evidence of association with the outcome.</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">carseats_model_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Sales</span> <span class="op">~</span> <span class="va">Price</span> <span class="op">+</span> <span class="va">US</span>, data <span class="op">=</span> <span class="va">carseats</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">carseats_model_2</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt; lm(formula = Sales ~ Price + US, data = carseats)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residuals:</span>
+<span class="co">#&gt;     Min      1Q  Median      3Q     Max </span>
+<span class="co">#&gt; -6.9269 -1.6286 -0.0574  1.5766  7.0515 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Coefficients:</span>
+<span class="co">#&gt;             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#&gt; (Intercept) 13.03079    0.63098  20.652  &lt; 2e-16 ***</span>
+<span class="co">#&gt; Price       -0.05448    0.00523 -10.416  &lt; 2e-16 ***</span>
+<span class="co">#&gt; USYes        1.19964    0.25846   4.641 4.71e-06 ***</span>
+<span class="co">#&gt; ---</span>
+<span class="co">#&gt; Signif. codes:  </span>
+<span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Residual standard error: 2.469 on 397 degrees of freedom</span>
+<span class="co">#&gt; Multiple R-squared:  0.2393, Adjusted R-squared:  0.2354 </span>
+<span class="co">#&gt; F-statistic: 62.43 on 2 and 397 DF,  p-value: &lt; 2.2e-16</span></code></pre></div>
+<ol start="6" style="list-style-type: lower-alpha">
+<li>How well do the models in (a) and (e) fit the data?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>The residual standard error and <span class="math inline">\(R^2\)</span> of the models are, respectively, similar and the same. A likelihood ratio test between the two models also shows no difference in the compatibility of the models with the data.</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">carseats_model</span>, <span class="va">carseats_model_2</span>, test <span class="op">=</span> <span class="st">"LRT"</span><span class="op">)</span>
+<span class="co">#&gt; Analysis of Variance Table</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Model 1: Sales ~ Price + Urban + US</span>
+<span class="co">#&gt; Model 2: Sales ~ Price + US</span>
+<span class="co">#&gt;   Res.Df    RSS Df Sum of Sq Pr(&gt;Chi)</span>
+<span class="co">#&gt; 1    396 2420.8                      </span>
+<span class="co">#&gt; 2    397 2420.9 -1  -0.03979   0.9357</span></code></pre></div>
+<ol start="7" style="list-style-type: lower-alpha">
+<li>Using the model from (e), obtain 95% confidence intervals for the coefficient(s).</li>
+</ol>
+<p><em>Answer</em>.</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">carseats_model_2</span><span class="op">)</span>
+<span class="co">#&gt;                   2.5 %      97.5 %</span>
+<span class="co">#&gt; (Intercept) 11.79032020 14.27126531</span>
+<span class="co">#&gt; Price       -0.06475984 -0.04419543</span>
+<span class="co">#&gt; USYes        0.69151957  1.70776632</span></code></pre></div>
+<ol start="8" style="list-style-type: lower-alpha">
+<li>Is there evidence of outliers or high leverage observations in the model from (e)?</li>
+</ol>
+<p><em>Answer</em>.</p>
+<p>As can be seen in the diagnostic plot below, there do not appear to be outliers, but there are at least a few high leverage points.</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">carseats_model_2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">augment</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="co"># The standardized residual returned by augment() is equivalent to the</span>
+  <span class="co"># "internally studentized residuals", which the textbook refers to simply as</span>
+  <span class="co"># "studentized residuals".</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.hat</span>, y <span class="op">=</span> <span class="va">.std.resid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">carseats</span><span class="op">)</span><span class="op">)</span>, nudge_x <span class="op">=</span> <span class="op">-</span><span class="fl">0.001</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"leverage"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="03-linear-regression_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
 </div>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
+<div class="prev"><a href="chapter-2.html"><span class="header-section-number">2</span> Statistical Learning</a></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-3"><span class="header-section-number">3</span> Linear Regression</a></li>
+<li>
+<a class="nav-link" href="#exercises-1"><span class="header-section-number">3.1</span> Exercises</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prerequisites-1">Prerequisites</a></li>
+<li><a class="nav-link" href="#conceptual-1">Conceptual</a></li>
+<li><a class="nav-link" href="#applied-1">Applied</a></li>
+</ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+<li><a id="book-source" href="https://github.com/tidytales/an-introduction-to-statistical-learning/blob/master/03-linear-regression.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/tidytales/an-introduction-to-statistical-learning/edit/master/03-linear-regression.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -459,7 +911,7 @@ data set.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-12-19.</p>
+    <p>"<strong>Self-Study: An Introduction to Statistical Learning</strong>" was written by Michael McCarthy. It was last built on 2021-12-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
