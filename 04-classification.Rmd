@@ -1,0 +1,29 @@
+# Classification {#chapter-4}
+
+Chapter 4 covers several methods that can be used for classification, including:
+
+- Binomial and multinomial logistic regression
+- Linear and quadratic discriminant analysis
+- Naive Bayes
+- KNN classifier
+
+It's worth noting that although the emphasis was on classification, some of these are class probability models; thus, their use for classification based on thresholds goes beyond the model and may not be necessary in practice.
+
+The chapter also introduces generalized linear models more broadly, with particular attention to poisson regression.
+
+## Exercises
+
+### Prerequisites {.unnumbered}
+
+To access the data sets and functions used to complete the Chapter 4 exercises, load the following packages.
+
+```{r prerequisites, message=FALSE}
+library(ISLR2)
+library(tidyverse)
+library(tidymodels)
+# library(skimr)
+# library(GGally)
+# library(patchwork)
+```
+
+### Conceptual {.unnumbered}
