@@ -16,7 +16,7 @@ library(tidyverse)
 library(tidymodels)
 # library(skimr)
 # library(GGally)
-# library(patchwork)
+library(patchwork)
 ```
 
 ### Conceptual {.unnumbered}
@@ -634,3 +634,84 @@ carseats_model_2 %>%
     labs(x = "leverage")
 ```
 :::
+
+::: exercise
+In this problem we will investigate the $t$-statistic for the null hypothesis $H_0: \beta = 0$ in simple linear regression without an intercept. To
+begin, we generate a predictor `x` and a response `y` as follows.
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+y <- 2 * x + rnorm(100)
+```
+
+(a) Perform a simple linear regression of `y` onto `x`, without an intercept. Report the coefficient estimate $\hat \beta$, the standard error of this coefficient estimate, and the $t$-statistic and $p$-value associated with the null hypothesis $H_0: \beta = 0$. Comment on these results.
+
+*Answer*.
+
+```{r}
+lm(y ~ x + 0) %>% 
+  summary()
+```
+
+From the output above we see that the slope of the regression line is 1.9939. The standard error is pretty small so there's good precision for the estimate. The large $t$-statistic and small $p$-value indicate statistical significance.
+
+(b) Now perform a simple linear regression of `x` onto `y` without an intercept, and report the coefficient estimate, its standard error, and the corresponding $t$-statistic and $p$-value associated with the null hypothesis $H_0: \beta = 0$. Comment on these results.
+
+*Answer*.
+
+```{r}
+lm(x ~ y + 0) %>% 
+  summary()
+```
+
+Although the coefficient and standard error are different from the previous model, the $t$-statistic and $p$-value are the same. The reason for this is that it's just the test statistic for the correlation between `x` and `y`, so it doesn't matter which is the response or predictor.
+
+```{r}
+cor.test(x, y)
+```
+
+The slopes between the models are slightly different though since `x` and `y` aren't symmetric, so flipping them will change the slope.
+
+```{r}
+model_a <- ggplot(mapping = aes(x = x, y = y)) +
+  geom_point() +
+  stat_smooth(method = "lm", formula = y ~ x + 0)
+
+model_b <- ggplot(mapping = aes(x = y, y = x)) +
+  geom_point() +
+  stat_smooth(method = "lm", formula = y ~ x + 0)
+
+model_a + model_b
+```
+
+(c) What is the relationship between the results obtained in (a) and (b)?
+
+*Answer*. See above.
+
+(d) Skipping.
+
+(e) Using the results from (d), argue that the t-statistic for the regression of `y` onto `x` is the same as the $t$-statistic for the regression of `x` onto `y`.
+
+*Answer*.
+
+As noted above, the test statistic comes from the correlation test, which is why they're the same.
+
+(f) In R, show that when regression is performed with an intercept,
+the $t$-statistic for $H_0: \beta_1 = 0$ is the same for the regression of `y`
+onto `x` as it is for the regression of `x` onto `y`.
+
+*Answer*.
+
+```{r}
+lm(y ~ x) %>%
+  summary()
+
+lm(x ~ y) %>% 
+  summary()
+```
+
+It's the same as in the model without an intercept too.
+:::
+
+TODO: Questions 12-15
